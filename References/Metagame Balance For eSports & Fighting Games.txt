@@ -1,0 +1,30 @@
+The talk is by Alex Jaffe (data scientist / designer / programmer) at Spry Fox. 
+YouTube
+
+It addresses how to think about metagame balance in competitive games (especially fighting games / eSports)
+
+Key Concepts
+
+Metagame
+	Refers to the strategies and decisions made outside the mechanical rules of a single match, choice of characters, matchup, prediction of opponent pick.
+	
+Balance Strategy Space
+	A healthy competitive game should avoid a dominant strategy that outclasses all others, killing variety and depth.
+	Instead, balance should allow multiple viable strategies, so players can meaningfully choose between them. 
+
+Jaffe introduces a technique called Metagame Bounds, a formal method to measure how healthy or balanced a metagame is.
+
+The method involves using data (win-rates between matchups, usage rates) to compute which strategies are “overpowered,” “underpowered,” or “balanced.”
+
+An example approach, build a pairwise win-rate matrix between strategies ad know each strategy's usage frequency.
+
+Real game environments are dynamic: new patches, new strategies, shifting player preferences, etc.
+
+Not all strategies will fit neatly into such models — some are context dependent, or have nonlinear interactions.
+
+The formal method can point out problems (imbalances) but not always prescribe how to fix them.
+
+The method shows how data + formal models can help designers spot balance issues more objectively, rather than purely relying on intuition or blind playtesting.
+
+Encourages thinking at the meta level: the designer should pay attention not just to how each move or character works in isolation, but to how the entire ecosystem of strategies evolves over time.
+
