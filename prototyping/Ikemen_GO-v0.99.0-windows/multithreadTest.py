@@ -2,6 +2,7 @@ import subprocess
 import concurrent.futures
 from itertools import combinations
 import time
+import sys
 
 import match_log_parser
 
@@ -22,6 +23,9 @@ ROSTER = [
 ]
 
 AI_LEVEL = "8"
+MAX_CONCURRENT =   10   # Tune this to your CPU/RAM capacity
+
+
 
 # Generate all unique matchups (order doesn't matter, no mirror matches)
 matches = [
@@ -51,21 +55,36 @@ def run_match(match, index):
     print(f"[{index:02d}] Finished: {match['p1_name']} vs {match['p2_name']}")
     return match
 
-MAX_CONCURRENT =   10# Tune this to your CPU/RAM capacity
-start_time = time.perf_counter()
-with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_CONCURRENT) as executor:
-    futures = {
-        executor.submit(run_match, match, i + 1): match
-        for i, match in enumerate(matches)
-    }
-    for future in concurrent.futures.as_completed(futures):
-        match = futures[future]
-        try:
-            future.result()
-        except Exception as e:
-            print(f"Error in {match['p1_name']} vs {match['p2_name']}: {e}")
-            
-# for match_info in matches:
-#     match_log_parser.parse_match_log(match_info["log"]) 
+def run_simulation():
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_CONCURRENT) as executor:
+        futures = {
+            executor.submit(run_match, match, i + 1): match
+            for i, match in enumerate(matches)
+        }
+        for future in concurrent.futures.as_completed(futures):
+            match = futures[future]
+            try:
+                future.result()
+            except Exception as e:
+                print(f"Error in {match['p1_name']} vs {match['p2_name']}: {e}")
+                
+    # for match_info in matches:
+    #     match_log_parser.parse_match_log(match_info["log"]) 
 
-print(f"All matches complete, took {time.perf_counter()-start_time:.4f}")
+    
+
+if __name__ == "__main__":
+    arguments = sys.argv
+    script_name = sys.argv[0]  # Name of the script   
+
+    # Checking if an argument is provided before accessing it   
+    if len(sys.argv) > 1:   
+        first_argument = sys.argv[1]  # First argument   
+    else:   
+        first_argument = 1  # No argument provided
+    start_time = time.perf_counter()
+    for i in range(int(first_argument)):
+        run_simulation()
+        match_log_parser.record_data()
+    print(f"All matches complete, took {time.perf_counter()-start_time:.4f}")
