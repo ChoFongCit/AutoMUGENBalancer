@@ -115,7 +115,7 @@ def flush_block(block_lines: list[str], stats: dict) -> list[str]:
             stats["triggers_removed"] += 1   # drop numbered triggers
         else:
             kept_content.append(ln)           # keep everything else inc. triggerall
-
+ 
     # Inject AILevel guard after the last existing triggerall, or after the
     # first real content line if no triggerall lines are present.
     ailevel_line = "triggerall = AILevel != 0\n"
@@ -139,20 +139,30 @@ def flush_block(block_lines: list[str], stats: dict) -> list[str]:
                     break
             kept_content.insert(insert_at, ailevel_line)
         stats["ailevel_injected"] += 1
-
-    # Peel off trailing blank lines AND comment lines so new triggers sit
-    # at the very end of the block, after all real content.
-    while kept_content:
-        last = kept_content[-1].strip()
-        if last == "" or last.startswith(";"):
-            trailing_blanks.insert(0, kept_content.pop())
-        else:
-            break
+ 
+    # Insert new triggers directly after the last triggerall line
+    # so they sit adjacent to the triggerall section, before anything else.
+    last_ta_idx = None
+    for idx, ln in enumerate(kept_content):
+        if TRIGGERALL_RE.match(ln.rstrip("\n")):
+            last_ta_idx = idx
  
     new_triggers = build_trigger_block()
     stats["triggers_added"] += len(new_triggers)
  
-    return kept_content + new_triggers + trailing_blanks
+    if last_ta_idx is not None:
+        insert_at = last_ta_idx + 1
+    else:
+        # No triggerall at all — insert after the first real content line
+        insert_at = 0
+        for idx, ln in enumerate(kept_content):
+            s = ln.strip()
+            if s and not s.startswith(";"):
+                insert_at = idx + 1
+                break
+ 
+    kept_content[insert_at:insert_at] = new_triggers
+    return kept_content
  
  
 def process_lines(lines: list[str], shuffle: bool = False) -> tuple[list[str], dict]:
