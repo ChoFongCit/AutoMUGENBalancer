@@ -1,0 +1,32 @@
+
+
+
+[Info]
+name = "blanka_17"        
+displayname = "BLANKA_17" 
+versiondate = 11,22,2000    
+mugenversion = 1.0
+
+
+
+[Files]
+cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Blanka/cmds/17.cmd
+cns = blanka-AI.cns
+st = blanka-AI.cns
+st0 = aisummary.txt
+stcommon = common1.cns 
+sprite  = blanka.sff   
+anim    = blanka.air   
+sound   = blanka.snd   
+pal1    = blanka4.act  
+pal2    = blanka2.act
+pal3    = blanka3.act
+pal4    = blanka1.act
+pal5    = blanka5.act
+pal6    = blanka6.act
+pal7    = blanka7.act
+pal8    = blanka8.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = blanka_ending.def

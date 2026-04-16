@@ -5,21 +5,23 @@ import time
 import sys
 
 import match_log_parser
+from GA_classes import Individual, CMD_Block
+
 
 IKEMEN_PATH = r"C:\Users\greni\Desktop\works\Year4\Final Year Project\prototyping\Ikemen_GO-v0.99.0-windows\Ikemen_GO.exe"
 
 # Roster - (display name, .def path)
 ROSTER = [
     ("Ryu-AI",   "Ryu/Ryu-AI.def"),
-    ("Ken",      "Ken/Ken.def"),
-    ("Cammy",    "Cammy/Cammy.def"),
-    ("Blanka",   "Blanka/Blanka.def"),
-    ("Dhalsim",  "Dhalsim/Dhalsim.def"),
-    ("Fei-Long", "Fei-Long/Fei-Long.def"),
-    ("Guile",    "Guile/Guile.def"),
-    ("M.Bison",  "M.Bison/M.Bison.def"),
-    ("Sagat",    "Sagat/Sagat.def"),
-    ("Zangief",  "Zangief/Zangief.def"),
+    ("Ken",      "Ken/Ken-AI.def"),
+    ("Cammy",    "Cammy/Cammy-AI.def"),
+    ("Blanka",   "Blanka/Blanka-AI.def"),
+    ("Dhalsim",  "Dhalsim/Dhalsim-AI.def"),
+    ("Fei-Long", "Fei-Long/Fei-Long-AI.def"),
+    ("Guile",    "Guile/Guile-AI.def"),
+    ("M.Bison",  "M.Bison/M.Bison-AI.def"),
+    ("Sagat",    "Sagat/Sagat-AI.def"),
+    ("Zangief",  "Zangief/Zangief-AI.def"),
 ]
 
 AI_LEVEL = "8"

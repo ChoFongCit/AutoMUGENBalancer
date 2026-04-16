@@ -1,9 +1,39 @@
-import re, os, csv
+import re, os, csv, sys
 import json
 from collections import defaultdict
+from pathlib import Path
+
+sys.path.append("../../")
+from GA_classes import Individual, CMD_Block
 
 CSV_PATH = "ML_data/win_rates.csv"
+IKEMEN_PATH = r"C:\Users\greni\Desktop\works\Year4\Final Year Project\prototyping\Ikemen_GO-v0.99.0-windows\Ikemen_GO.exe"
+IKEMEN_DIR = r"C:\Users\greni\Desktop\works\Year4\Final Year Project\prototyping\Ikemen_GO-v0.99.0-windows"
 
+
+K=32
+
+def expected_score(rating_a: float, rating_b: float) -> float:
+    """Expected score for player A against player B."""
+    return 1 / (1 + 10 ** ((rating_b - rating_a) / 400))
+
+def update_elo(winner: Individual, loser: Individual) -> None:
+    """
+    Update Elo ratings in-place after a single match.
+    Call once per match with the winner and loser.
+    """
+    expected_w = expected_score(winner.elo_rating, loser.elo_rating)
+    expected_l = expected_score(loser.elo_rating, winner.elo_rating)
+    winner.elo_rating += K * (1 - expected_w)
+    loser.elo_rating  += K * (0 - expected_l)
+
+def update_elo_draw(ind_a: Individual, ind_b: Individual) -> None:
+    """Update Elo ratings in-place for a draw."""
+    expected_a = expected_score(ind_a.elo_rating, ind_b.elo_rating)
+    expected_b = expected_score(ind_b.elo_rating, ind_a.elo_rating)
+    ind_a.elo_rating += K * (0.5 - expected_a)
+    ind_b.elo_rating += K * (0.5 - expected_b)
+    
 def parse_match_log(log_path):
     with open(log_path, "r") as f:
         content = f.read()
@@ -100,6 +130,40 @@ def process_all_logs():
         if re.match(r"log_.+\.txt$", file):
             log_list.append(parse_match_log(f"logs/{file}"))
     return log_list
+
+def process_character_logs(char: str):
+    log_list = list()
+    curr_dir = Path.cwd()
+    os.chdir(IKEMEN_DIR)
+    
+    for file in os.listdir(f"logs/{char}"):
+        if re.match(r"log_.+\.txt$", file):
+            log_list.append(parse_match_log(f"logs/{char}/{file}"))
+    os.chdir(curr_dir)
+    return log_list
+
+def clean_char_logs(char: str):
+    import shutil
+    curr_dir = Path.cwd()
+    os.chdir(IKEMEN_DIR)
+    if Path(f"logs/{char}").exists():
+        shutil.rmtree(f"logs/{char}")
+    Path.mkdir(f"logs/{char}")
+    os.chdir(curr_dir)
+    pass
+
+def adjust_elo(log_list, population_dict):
+    for entry in log_list:
+        p1_name = entry["p1"]
+        p2_name = entry["p2"]
+        p1_individual = population_dict[p1_name]
+        p2_individual = population_dict[p2_name]
+        if entry["win_team"] == 0:
+            update_elo(winner= p1_individual, loser= p2_individual)
+        else:
+            update_elo(winner=p2_individual, loser= p1_individual)
             
 def record_data():         
     put_in_csv(process_all_logs())
+    
+

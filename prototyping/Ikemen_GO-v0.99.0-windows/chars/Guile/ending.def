@@ -1,0 +1,58 @@
+
+;------------------------------------------------------
+;------------------------------------------------------
+[Info]
+name = "end"
+mugenversion = 1.1        
+localcoord = 1280,720 
+
+[SceneDef]
+spr = ending.sff
+startscene = 0
+
+[Scene 0]
+bgm = ending.mp3
+fadein.time = 10
+fadeout.time = 5
+clearcolor = 0, 0, 0   
+layerall.pos = 0,0
+bg.name = BG0
+end.time = 6000
+
+
+[BG0Def]
+
+[BG0 1]
+type= anim
+actionno = 1
+scalestart =.75,.75
+layerno	= 0
+
+[BG0 1]
+type= anim
+actionno = 2
+start = 0,20
+scalestart =1,1
+layerno	= 1
+
+[BG0 1]
+type= anim
+actionno = 3
+scalestart =1,1
+layerno	= 2
+
+[Begin Action 2]
+0,0, 0,0, 750
+0,1, 0,0, 750
+0,2, 0,0, 750
+0,3, 0,0, 750
+0,4, 0,0, 750
+0,5, 0,0, 750
+0,6, 0,0, 750
+0,7, 0,0, -1
+
+[Begin Action 1]
+-1,0, 0,0, 10
+
+[Begin Action 3]
+-1,0, 0,0, 10

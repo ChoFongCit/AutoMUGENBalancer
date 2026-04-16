@@ -1,0 +1,23 @@
+[Info]
+Name = "SF2'ガイル"
+DisplayName = "GUILE"
+MugenVersion = 04,14,2001
+Author = "MASA"
+Pal.Defaults = 1
+[Files]
+Cmd = char/guile.cmd
+Cns = char/guile2.cns
+St = char/common.st
+St1 = char/action.st
+St2 = char/throw.st
+St3 = char/tech.st
+St4 = char/state.st
+St5 = char/helper2.st;←技表機能を取っ払いたい人用
+;St5 = char/helper.st
+StCommon = common1.cns
+Sprite = char/guile.sff
+Anim = char/guile.air
+Sound = char/guile.snd
+Pal1 = char/color1.act;ダッシュ1P　ターボ2Pカラー
+Pal2 = char/color2.act;ダッシュ2Pカラー
+Pal3 = char/color3.act;ターボ1Pカラー

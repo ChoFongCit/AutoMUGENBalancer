@@ -1,0 +1,559 @@
+;VEGA
+;----------------------------------------------------------------------------------------------------------------------------------------------------
+;super_01A
+[Statedef 2000]
+type = A
+physics = N
+movetype = A
+ctrl = 0
+velset = 0
+anim = 1200
+juggle = 10
+
+[State 3020,SuperPause]
+type = SuperPause
+trigger1 = Time = 0
+time = 30
+anim = 100
+sound = S6,1
+pos = 30,-60
+movetime = 0
+darken = 1
+unhittable = 1
+
+[State 3075,AfterImage]
+type = AfterImage
+trigger1 = Time = 0
+time = 50
+length = 16
+palcolor = 256
+palinvertall = 0
+palbright = 30,30,30
+palcontrast = 100,100,220
+palpostbright = 0, 0, 0
+paladd = 10,10,45
+palmul = .65,.65,.85
+timegap = 2
+framegap = 4
+trans = add1
+
+[State 210,2]
+type = Poweradd
+trigger1 = time = 0
+value = -1000
+
+[State 210,2]
+type = Nothitby
+trigger1 = time >= 0
+value = ,NA
+
+[State 210,2]
+type = velset
+trigger1 = time >= 4
+x = 5
+
+[State 210,2]
+type = velset
+trigger1 = time >= 10
+x = 12
+
+[State 210,2]
+type = veladd
+trigger1 = time = 16
+x = .8
+
+[State 210,2]
+type = velset
+trigger1 = time = 20
+x = 0.1
+
+[State 1002]
+Type = StateTypeSet
+Trigger1 = time > 5
+Value = A
+
+[State 210,2]
+type = HitDef
+trigger1 = animelem = 4 
+trigger2 = animelem = 5
+priority = 5, Hit
+;
+attr = S,SA			;STAND / NORMAL ATTACK
+hitflag = MAF			;MIDDLE ATTACK
+guardflag = M			;GUARD is MIDDLE /L is LOW
+;
+animtype = Medium		;2p ANIM
+air.animtype = Back		;2p ANIM
+ground.type = high
+;
+damage = 60,15
+GivePower = 20
+;
+pausetime = 12,12
+guard.pausetime = 12,12
+;
+ground.slidetime = 15
+ground.hittime = 15
+air.hittime = 5
+;
+guard.hittime = 17
+guard.ctrltime = 17
+;
+ground.velocity = -3,0
+air.velocity = -2,-2
+guard.velocity = -12
+airguard.velocity = -2,-4
+;
+ground.cornerpush.veloff = -5
+guard.cornerpush.veloff = -5
+;
+sparkxy = 10,-45
+;
+hitsound = S2,6
+guardsound = S3,1
+sparkno = 2
+guard.sparkno = 40
+;
+air.fall = 1
+fall = 0
+fall.recover = 0
+
+[State 210,3]
+type = ChangeState
+trigger1 = animtime = 0
+value = 2001
+ctrl = 0
+
+
+
+
+
+
+
+
+[Statedef 2001]
+type = A
+physics = N
+movetype = A
+ctrl = 0
+velset = 0
+anim = 2000
+
+[State 210,2]
+type = Nothitby
+trigger1 = time >= 0
+value = ,NA
+
+[State 210,2]
+type = PlayerPush
+trigger1 = time >= 0 && !MoveHit
+value = 0
+
+[State 210,2]
+type = velset
+trigger1 = time >= 4
+x = 5
+
+[State 210,2]
+type = velset
+trigger1 = time >= 10
+x = 12
+
+[State 210,2]
+type = veladd
+trigger1 = time = 16
+x = .8
+
+[State 210,2]
+type = velset
+trigger1 = time = 20
+x = 0.1
+
+[State 1002]
+Type = StateTypeSet
+Trigger1 = time > 5
+Value = A
+
+[State 210,2]
+type = HitDef
+trigger1 = animelem = 4 
+priority = 5, Hit
+;
+attr = S,SA			;STAND / NORMAL ATTACK
+hitflag = MAF			;MIDDLE ATTACK
+guardflag = M			;GUARD is MIDDLE /L is LOW
+;
+animtype = Medium		;2p ANIM
+air.animtype = Back		;2p ANIM
+ground.type = high
+;
+damage = 60,15
+GivePower = 20
+;
+pausetime = 12,12
+guard.pausetime = 12,12
+;
+ground.slidetime = 15
+ground.hittime = 15
+air.hittime = 5
+;
+guard.hittime = 17
+guard.ctrltime = 17
+;
+ground.velocity = -3,0
+air.velocity = -2,-2
+guard.velocity = -12
+airguard.velocity = -2,-4
+air.juggle = 16
+;
+ground.cornerpush.veloff = -5
+guard.cornerpush.veloff = -5
+;
+sparkxy = 10,-75
+;
+juggle = 10
+hitsound = S2,6
+guardsound = S3,1
+sparkno = 2
+guard.sparkno = 40
+;
+air.fall = 1
+fall = 0
+fall.recover = 0
+
+[State 210,2]
+type = HitDef
+trigger1 = animelem = 5
+priority = 5, Hit
+;
+attr = S,SA			;STAND / NORMAL ATTACK
+hitflag = MAF			;MIDDLE ATTACK
+guardflag = M			;GUARD is MIDDLE /L is LOW
+;
+animtype = Medium		;2p ANIM
+air.animtype = Back		;2p ANIM
+ground.type = high
+;
+damage = 60,15
+GivePower = 20
+;
+pausetime = 12,12
+guard.pausetime = 12,12
+;
+ground.slidetime = 15
+ground.hittime = 15
+air.hittime = 5
+;
+guard.hittime = 17
+guard.ctrltime = 17
+;
+ground.velocity = -3,-5
+air.velocity = -2,-4
+guard.velocity = -12
+airguard.velocity = -2,-4
+;
+ground.cornerpush.veloff = -25
+guard.cornerpush.veloff = -25
+;
+sparkxy = 10,-15
+;
+juggle = 10
+hitsound = S2,6
+guardsound = S3,1
+sparkno = 2
+guard.sparkno = 40
+;
+fall = 1
+fall.recover = 0
+
+[State 210,3]
+type = ChangeState
+trigger1 = animtime = 0
+value = 2002
+ctrl = 0
+
+[Statedef 2002]
+type = S
+physics = S
+movetype = A
+ctrl = 0
+velset = 0
+anim = 2002
+juggle = 15
+
+[State 210,3]
+type = Posset
+trigger1 = time >= 0
+y = 0
+
+[State 210,3]
+type = ChangeState
+trigger1 = time = 7
+value = 0
+ctrl = 1
+
+
+;-----------------------------------------------------------------------------------------------------------
+[Statedef 2100]
+type =A
+physics = N
+movetype = A
+ctrl = 0
+velset = 0
+anim = 2100
+
+[State 3020,SuperPause]
+type = SuperPause
+trigger1 = Time = 0
+time = 30
+anim = 100
+sound = S6,1
+pos = 15,-60
+movetime = 0
+darken = 1
+unhittable = 1
+
+[State 3075,AfterImage]
+type = AfterImage
+trigger1 = Time = 0
+time = 50
+length = 16
+palcolor = 256
+palinvertall = 0
+palbright = 30,30,30
+palcontrast = 100,100,220
+palpostbright = 0, 0, 0
+paladd = 10,10,45
+palmul = .65,.65,.85
+timegap = 2
+framegap = 4
+trans = add1
+
+[State 210,2]
+type = Poweradd
+trigger1 = time = 0
+value = -1000
+
+[State 920,snd]
+type = Playsnd 
+trigger1 = time = 0
+value = 1,0
+
+[State 920,snd]
+type = Nothitby
+trigger1 = time >= 0
+value = SCA
+
+[State 920,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = 2
+
+[State 210,2]
+type = velset
+trigger1 = time >= 0
+x = 3
+
+[State 210,2]
+type = velset
+trigger1 = time >= 4
+y = -10
+
+[State 210,2]
+type = velset
+trigger1 = animtime = 0
+y = 0
+
+[State 210,3]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 2110
+ctrl = 0
+
+[Statedef 2110]
+type = A
+physics = N
+movetype = A
+ctrl = 0
+velset = 0
+anim = 2110
+juggle = 5
+
+[State 920,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = 2
+
+[State 210,2]
+type = velset
+trigger1 = time >= 0
+x = 10
+y = 0
+
+[State 210,3]
+type = posset
+trigger1 = time = 32
+y = 0
+
+[State 1102]
+Type = AssertSpecial
+Trigger1 = 1
+IgnoreHitPause = 1
+Flag = NoShadow
+
+[State 210,3]
+type = playerpush
+trigger1 = time >= 0
+value = 0
+
+[State 210,2]
+type = HitDef
+trigger1 = time = 1 || time = 4 || time = 7 || time =10  || time = 13 || time = 16
+priority = 5, Hit
+;
+attr = S,NA			;STAND / NORMAL ATTACK
+hitflag = MAF			;MIDDLE ATTACK
+guardflag = M			;GUARD is MIDDLE /L is LOW
+;
+animtype = Medium		;2p ANIM
+air.animtype = Back		;2p ANIM
+ground.type = high
+;
+damage = 50,6
+GivePower = 60
+;
+pausetime = 10,10			;5,10
+guard.pausetime = 10,10
+;
+ground.slidetime = 5
+ground.hittime = 5
+air.hittime = 5
+;
+guard.hittime = 17
+guard.ctrltime = 17
+;
+ground.velocity = -2,-5
+air.velocity = -2,-4
+guard.velocity = -2
+airguard.velocity = -2,0
+;
+ground.cornerpush.veloff = -10
+guard.cornerpush.veloff = -10
+;
+sparkxy = 10,-55
+;
+hitsound = S2,3
+guardsound = S3,1
+sparkno = 2
+guard.sparkno = 40
+;
+fall = 1
+fall.recover = 0
+;
+P2stateno = 10155
+
+[State 2000, explod 3]
+type = Explod
+trigger1 = MoveHit
+trigger1 = numexplod(1102) = 0
+anim = 1102
+ID = 1102
+sprpriority = -2
+postype = p2
+pos = 0,0
+bindtime = -1
+supermove = 1
+ownpal = 1
+removetime = 999
+
+[State 2000, level1 SuperPause]
+type = SuperPause
+trigger1 = MoveHit
+time = 10
+movetime = 0
+darken = 0
+unhittable = 0
+supermove = 0
+anim = 9999
+
+[State 210,3]
+type = ChangeState
+trigger1 = time = 32  || ( FrontEdgeBodyDist < 10 && time >20 )
+value = 2120
+ctrl = 0
+
+
+[Statedef 2120]
+type = S
+physics = S
+movetype = A
+ctrl = 0
+velset = 4,0
+anim = 2120
+
+[State 920,Posset]
+type = Posset
+trigger1 = time >= 0
+y = 0
+
+[State 210,3]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;-----------------------------------------------------------------------------------------------------------
+[Statedef 10155]
+type = A
+movetype = H
+physics = N
+velset = 0, 0
+ctrl = 0
+
+;[State 910, 0]
+;type = ChangeAnim2
+;Trigger1 = Time = 0 
+;value = 8003
+
+;[State 910, 0]
+;type = ChangeAnim
+;Trigger1 = Time = 0 
+;value = 8003
+
+;[State 1104]
+;Type = NotHitby
+;Trigger1 = 1
+;value = SCA
+
+[State 1104]
+Type = AssertSpecial
+Trigger1 = 1
+Flag = Invisible
+
+[State 920,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = -1
+
+[State 1104]
+Type = ChangeAnim
+Trigger1 = 1
+IgnoreHitPause = 1
+Value = 5030
+
+[State 1104]
+Type = HitVelSet
+Trigger1 = HitShakeOver && PrevStateNo != 505
+Persistent = 0
+X = 1
+Y = 1
+
+[State 1104]
+Type = VelAdd
+Trigger1 = HitShakeOver
+Y = GetHitVar(YAccel)
+
+[State 1104]
+Type = SelfState
+Trigger1 = Vel Y > 0 &&  Pos Y >= 20
+Value = 5100

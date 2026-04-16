@@ -1,0 +1,261 @@
+;Bison's ending from Super Street Figther 2 Turbo HD Remix.
+;Music from: http://ocremix.org/
+;Created by Parse
+;06/07/2011
+
+[Info]
+localcoord = 1280,720
+
+[SceneDef]
+
+spr = bison_ending.sff
+ 
+
+[Scene 0]
+
+; Fade parameters
+fadein.time = 60
+; Overlay Anims (from 0 to 9)
+layerall.pos = 640,450
+layer1.anim = 1
+layer2.anim = 2
+layer3.anim = 3
+layer5.anim = 5
+layer5.starttime = 20
+
+; Music
+bgm = bison_ending.ogg       ;Filename for music
+bgm.loop = 0
+; Total time
+end.time = 360
+
+;Animation to use for scene 0
+
+
+[Begin Action 1]
+1,1, 0,0, 560
+
+[Begin Action 2]
+1,2, 0,0, 560,, a
+
+[Begin Action 3]
+1,3, 0,0, 560,, a
+
+[Begin Action 5]
+1,5, 0,0, 5,, AS10D0
+1,5, 0,0, 5,, AS60D0
+1,5, 0,0, 5,, AS120D0
+1,5, 0,0, 5,, AS190D0
+1,5, 0,0, 5,, AS220D0
+1,5, 0,0, 280,, AS255D0
+1,5,, 0,0, 5,, AS220D0
+1,5,, 0,0, 5,, AS190D0
+1,5, 0,0, 5,, AS120D0
+1,5,, 0,0, 5,, AS60D0
+1,5,, 0,0, 5,, AS20D0
+1,5, 0,0, -1,, AS0D0
+
+[Scene 1]
+
+; Fade parameters
+; Overlay Anims (from 0 to 9)
+layerall.pos = 640,450
+layer1.anim = 15
+layer2.anim = 16
+layer3.anim = 17
+layer5.anim = 19
+layer5.starttime = 20
+
+; Total time
+end.time = 300
+
+;Animation to use for scene 0
+
+
+[Begin Action 15]
+2,1, 0,0, 300
+
+[Begin Action 16]
+2,2, 0,0, 300,, a
+
+[Begin Action 17]
+2,3, 0,0, 300,, a
+
+[Begin Action 19]
+2,5, 0,0, 5,, AS10D0
+2,5, 0,0, 5,, AS60D0
+2,5, 0,0, 5,, AS120D0
+2,5, 0,0, 5,, AS190D0
+2,5, 0,0, 5,, AS220D0
+2,5, 0,0, 220,, AS255D0
+2,5,, 0,0, 5,, AS220D0
+2,5,, 0,0, 5,, AS190D0
+2,5, 0,0, 5,, AS120D0
+2,5,, 0,0, 5,, AS60D0
+2,5,, 0,0, 5,, AS20D0
+2,5, 0,0, -1,, AS0D0
+
+[Scene 2]
+
+; Fade parameters
+fadeout.time = 30
+; Overlay Anims (from 0 to 9)
+layerall.pos = 640,450
+layer1.anim = 27
+layer2.anim = 28
+layer3.anim = 29
+layer5.anim = 31
+layer5.starttime = 20
+
+
+; Total time
+end.time = 300
+
+;Animation to use for scene 0
+
+
+[Begin Action 27]
+3,1, 0,0, 300
+
+[Begin Action 28]
+3,2, 0,0, 300,, a
+
+[Begin Action 29]
+3,3, 0,0, 300,, a
+
+[Begin Action 31]
+3,5, 0,0, 5,, AS10D0
+3,5, 0,0, 5,, AS60D0
+3,5, 0,0, 5,, AS120D0
+3,5, 0,0, 5,, AS190D0
+3,5, 0,0, 5,, AS220D0
+3,5, 0,0, 220,, AS255D0
+3,5,, 0,0, 5,, AS220D0
+3,5,, 0,0, 5,, AS190D0
+3,5, 0,0, 5,, AS120D0
+3,5,, 0,0, 5,, AS60D0
+3,5,, 0,0, 5,, AS20D0
+3,5, 0,0, -1,, AS0D0
+
+[Scene 3]
+
+; Fade parameters
+fadein.time = 30
+; Overlay Anims (from 0 to 9)
+layerall.pos = 640,450
+layer1.anim = 39
+layer2.anim = 40
+layer3.anim = 41
+layer5.anim = 43
+layer5.starttime = 20
+
+; Total time
+end.time = 300
+
+;Animation to use for scene 0
+
+
+[Begin Action 39]
+4,1, 0,0, 300
+
+[Begin Action 40]
+4,2, 0,0, 300,, a
+
+[Begin Action 41]
+4,3, 0,0, 300,, a
+
+[Begin Action 43]
+4,5, 0,0, 5,, AS10D0
+4,5, 0,0, 5,, AS60D0
+4,5, 0,0, 5,, AS120D0
+4,5, 0,0, 5,, AS190D0
+4,5, 0,0, 5,, AS220D0
+4,5, 0,0, 220,, AS255D0
+4,5,, 0,0, 5,, AS220D0
+4,5,, 0,0, 5,, AS190D0
+4,5, 0,0, 5,, AS120D0
+4,5,, 0,0, 5,, AS60D0
+4,5,, 0,0, 5,, AS20D0
+4,5, 0,0, -1,, AS0D0
+
+[Scene 4]
+
+; Fade parameters
+; Overlay Anims (from 0 to 9)
+layerall.pos = 640,450
+layer1.anim = 49
+layer2.anim = 50
+layer3.anim = 51
+layer5.anim = 53
+layer5.starttime = 20
+
+; Total time
+end.time = 360
+
+;Animation to use for scene 0
+
+
+[Begin Action 49]
+5,1, 0,0, 360
+
+[Begin Action 50]
+5,2, 0,0, 360,, a
+
+[Begin Action 51]
+5,3, 0,0, 360,, a
+
+[Begin Action 53]
+5,5, 0,0, 5,, AS10D0
+5,5, 0,0, 5,, AS60D0
+5,5, 0,0, 5,, AS120D0
+5,5, 0,0, 5,, AS190D0
+5,5, 0,0, 5,, AS220D0
+5,5, 0,0, 280,, AS255D0
+5,5,, 0,0, 5,, AS220D0
+5,5,, 0,0, 5,, AS190D0
+5,5, 0,0, 5,, AS120D0
+5,5,, 0,0, 5,, AS60D0
+5,5,, 0,0, 5,, AS20D0
+5,5, 0,0, -1,, AS0D0
+ 
+
+[Scene 23]
+
+; Fade parameters
+fadeout.time = 60
+; Overlay Anims (from 0 to 9)
+layerall.pos = 640,450
+layer1.anim = 54
+layer2.anim = 55
+layer3.anim = 56
+layer5.anim = 58
+layer5.starttime = 20
+
+; Total time
+end.time = 420
+
+;Animation to use for scene 0
+
+
+[Begin Action 54]
+6,1, 0,0, 420
+
+[Begin Action 55]
+6,2, 0,0, 420,, a
+
+[Begin Action 56]
+6,3, 0,0, 420,, a
+
+[Begin Action 58]
+6,5, 0,0, 5,, AS10D0
+6,5, 0,0, 5,, AS60D0
+6,5, 0,0, 5,, AS120D0
+6,5, 0,0, 5,, AS190D0
+6,5, 0,0, 5,, AS220D0
+6,5, 0,0, 340,, AS255D0
+6,5,, 0,0, 5,, AS220D0
+6,5,, 0,0, 5,, AS190D0
+6,5, 0,0, 5,, AS120D0
+6,5,, 0,0, 5,, AS60D0
+6,5,, 0,0, 5,, AS20D0
+6,5, 0,0, -1,, AS0D0

@@ -1,0 +1,28 @@
+[Info]
+Name = "Guile_12"
+DisplayName = "GUILE_12"
+mugenversion = 1.0
+Author = "MASA"
+Pal.Defaults = 1
+[Files]
+cmd = cmds/12.cmd
+cns = guile-AI.cns
+st = common-AI.st
+st0 = action-AI.st
+st1 = throw-AI.st
+st2 = tech-AI.st
+st3 = state-AI.st
+st4 = helper2-AI.st
+st5 = aisummary.txt
+
+StCommon = common1.cns
+Sprite = guile.sff
+Anim = guile.air
+Sound = guile.snd
+Pal1 = color1.act
+Pal2 = color2.act
+Pal3 = color3.act
+
+[Arcade]
+Intro.Storyboard =
+Ending.Storyboard = ending.def

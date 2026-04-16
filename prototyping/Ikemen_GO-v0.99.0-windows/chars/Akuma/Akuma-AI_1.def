@@ -1,0 +1,31 @@
+[Info]
+Name         ="Gouki_normal_1"
+DisplayName  ="AKUMA_1"
+VersionDate  =05,18,2009
+mugenversion = 1.0
+Author       ="G.D.T"
+Pal.Defaults =1,7
+
+[Files]
+cmd = cmds/01.cmd
+cns = gouki-AI.cns
+st = gouki-AI.cns
+st0 = AI-AI.txt
+st1 = option-AI.txt
+st2 = aisummary.txt
+StCommon = common1.cns
+Sprite  = gouki.sff
+Anim    = gouki.air
+Sound   = gouki.snd
+
+pal1 = act/gouki_4.act
+pal2 = act/gouki_5.act
+pal3 = act/gouki_6.act
+pal4 = act/gouki_1.act
+pal5 = act/gouki_2.act
+Pal6 = act/gouki_3.act
+
+
+[Arcade]
+Intro.Storyboard =
+Ending.Storyboard = ending.def

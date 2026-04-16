@@ -1,0 +1,923 @@
+;SF2_Thawk
+;=======================================================================================================
+;===========================================
+[Statedef 2000]
+type = S
+movetype = A
+physics = S
+velset = 0, 0
+ctrl = 0
+anim = 1200
+
+[State 1200,HitDef]
+type = Hitdef
+trigger1 = Time = 0 && P2bodydist X <= 65 && P2statetype != A && P2statetype != L && statetype != A  
+attr = S, NT		
+getpower = 60
+givepower = 20
+hitflag = MA			;M-
+guardflag = -1			;None
+priority = 3,miss
+sparkno = -1
+p1facing = 1
+p2facing = 1
+p1stateno = 2001
+p2stateno = 2005
+fall = 1
+fall.recover = 0
+
+[State 1200,End]
+type = ChangeState
+trigger1 = time = 1
+value = 200
+
+[Statedef 2001]
+type = S
+movetype = A
+physics = S
+anim = 1201
+velset = 0, 0
+ctrl = 0
+
+[State 1000, playsnd]
+type = Poweradd
+trigger1 = time = 0
+value = -1000
+
+[State 3020,SuperPause]
+type = SuperPause
+trigger1 = Time = 0
+time = 30
+anim = F 30
+sound = S 6,1
+pos = 70,-75
+movetime = 0
+darken = 1
+unhittable = 1
+
+[State 3075,AfterImage]
+type = AfterImage
+trigger1 = Time = 0
+time = 140
+length = 16
+palcolor = 256
+palinvertall = 0
+palbright = 30,30,30
+palcontrast = 100,100,220
+palpostbright = 0, 0, 0
+paladd = 10,10,45
+palmul = .65,.65,.85
+timegap = 2
+framegap = 4
+trans = add1
+
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = 70,0
+time = 5
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = 40,25
+time = 10
+
+[State 1201, changestate]
+type = ChangeState
+trigger1 = animtime = 0
+value = 2002
+
+[Statedef 2002]
+type = A
+movetype = A
+physics = N
+anim = 1202
+velset = 0, 0
+ctrl = 0
+
+[State 501,playsnd]
+type = playerpush
+trigger1 = 1
+value  = 0
+
+[State 501,playsnd]
+type = playsnd
+trigger1 = time = 0
+value = 0,1
+[State 501,playsnd]
+type = playsnd
+trigger1 = time = 45
+value = S5,1
+
+[State 501,velset]
+type = velset
+trigger1 = time>= 0
+x = 2
+y = -9
+[State 501,velset]
+type = velset
+trigger1 = time>= 5
+y = -7
+[State 501,velset]
+type = velset
+trigger1 = time>= 10
+y = -6
+[State 501,velset]
+type = velset
+trigger1 = time>= 15
+y = -2
+[State 501,velset]
+type = velset
+trigger1 = time>= 20
+y = -1
+[State 501,velset]
+type = velset
+trigger1 = time>= 25	;0
+x = 0
+y = 0
+[State 501,velset]
+type = velset
+trigger1 = time>= 30
+y = 5
+[State 501,velset]
+type = velset
+trigger1 = time>= 35
+y = 8
+[State 501,velset]
+type = velset
+trigger1 = time>= 40
+y = 10
+[State 501,velset]
+type = velset
+trigger1 = time>= 45
+y = 0
+x = 0
+
+
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = 30,-60
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = -30,-70
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 3
+pos = -60,-105
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 4
+pos = -35,-145
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 5
+pos = 35,-150
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 6
+pos = 60,-100
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 7
+pos = 30,-80
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 8
+pos = -40,-70
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 9
+pos = -70,-110
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 10
+pos = -40,-150
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 11
+pos = 35,-145
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 12
+pos = 70,-105
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 13
+pos = 40,-75
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 14
+pos = -35,-65
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 15
+pos = -60,-105
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 16
+pos = -40,-140
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 17
+pos = 55,-100
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 18
+pos = 40,-20
+time = 10
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 19
+pos = 40,-20
+time = 10
+
+
+
+[State 1215,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = 1
+
+[State 1215,Gravity]
+type = Gravity
+trigger1 = time >= 25
+
+[State 1220,EnvShake]
+type = EnvShake
+trigger1 = time = 45
+time = 28
+
+[State 1215,ChangeState]
+type = ChangeState
+trigger1 = time = 55
+;trigger1 = Vel Y > 0 && Pos Y >= 30
+value = 2003
+
+[Statedef 2003]
+type = A
+movetype = A
+physics = N
+anim = 1202
+velset = 0, 0
+ctrl = 0
+
+[State 501,playsnd]
+type = playerpush
+trigger1 = 1
+value  = 0
+
+[State 501,playsnd]
+type = playsnd
+trigger1 = time = 0
+value = 0,1
+[State 501,playsnd]
+type = playsnd
+trigger1 = time = 45
+value = S5,1
+
+[State 501,velset]
+type = velset
+trigger1 = time>= 0
+x = 2
+y = -6
+[State 501,velset]
+type = velset
+trigger1 = time>= 5
+y = -4
+[State 501,velset]
+type = velset
+trigger1 = time>= 10
+y = -2
+[State 501,velset]
+type = velset
+trigger1 = time>= 15
+y = -1
+[State 501,velset]
+type = velset
+trigger1 = time>= 20
+y = -1
+[State 501,velset]
+type = velset
+trigger1 = time>= 25	;0
+x = 0
+y = 0
+[State 501,velset]
+type = velset
+trigger1 = time>= 30
+y = 3
+[State 501,velset]
+type = velset
+trigger1 = time>= 35
+y = 5
+[State 501,velset]
+type = velset
+trigger1 = time>= 40
+y = 7
+[State 501,velset]
+type = velset
+trigger1 = time>= 45
+y = 0
+x = 0
+
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 1
+pos = 30,-60
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = -30,-70
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 3
+pos = -60,-105
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 4
+pos = -35,-145
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 5
+pos = 35,-150
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 6
+pos = 60,-100
+time = 3
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 7
+pos = 30,-80
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 8
+pos = -40,-70
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 9
+pos = -70,-110
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 10
+pos = -40,-150
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 11
+pos = 35,-145
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 12
+pos = 70,-105
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 13
+pos = 40,-75
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 14
+pos = -35,-65
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 15
+pos = -60,-105
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 16
+pos = -40,-140
+time = 1
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 17
+pos = 55,-100
+time = 2
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 18
+pos = 40,-20
+time = 10
+[State 1310,TargetBind]
+type = TargetBind
+trigger1 = AnimElem = 19
+pos = 40,-20
+time = 10
+
+[State 1215,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = 1
+
+[State 1215,Gravity]
+type = Gravity
+trigger1 = time >= 25
+
+[State 1220,EnvShake]
+type = EnvShake
+trigger1 = time = 45
+time = 28
+
+[State 1215,ChangeState]
+type = ChangeState
+trigger1 = time = 55
+;trigger1 = Vel Y > 0 && Pos Y >= 30
+value = 2004
+
+[Statedef 2004]
+type = A
+movetype = A
+physics = N
+anim = 1203
+velset = 0, 0
+ctrl = 0
+
+[State 501,velset]
+type = velset
+trigger1 = time>= 0
+x = -4
+y = -6
+[State 501,velset]
+type = velset
+trigger1 = time>= 5
+y = -4
+[State 501,velset]
+type = velset
+trigger1 = time>= 10
+y = -2
+[State 501,velset]
+type = velset
+trigger1 = time>= 15
+y = 3
+[State 501,velset]
+type = velset
+trigger1 = time>= 20
+y = 6
+[State 501,velset]
+type = velset
+trigger1 = time>= 30
+y = 0
+
+[State 1215,ChangeState]
+type = ChangeState
+;trigger1 = time = 25
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 1204
+
+[Statedef 1204]
+type = S
+movetype = A
+physics = N
+anim = 1204
+velset = 0, 0
+ctrl = 0
+
+[State 1215,ChangeState]
+type = PosSet
+trigger1 = time = 0
+y = 0
+
+[State 1215,ChangeState]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;----------------------------------------------------------------------------
+[Statedef 2005]
+type = A
+movetype = H
+physics = N
+anim = 1205
+velset = 0, 0
+ctrl = 0
+
+[State 910, 0]
+type = ChangeAnim2
+Trigger1 = Time = 0 
+value = 1205
+
+[State 910, 0]
+type = ChangeState
+Trigger1 = animtime = 0
+value = 2006
+
+[Statedef 2006]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+
+[State 910, 0]
+type = ChangeAnim2
+Trigger1 = Time = 0 
+value = 1206
+
+[State 910, 0]
+type = PlayerPush
+Trigger1 = Time >= 0 
+value = 0
+
+[State 501,velset]
+type = velset
+trigger1 = time>= 0
+x = 2
+y = -9
+[State 501,velset]
+type = velset
+trigger1 = time>= 5
+y = -7
+[State 501,velset]
+type = velset
+trigger1 = time>= 10
+y = -6
+[State 501,velset]
+type = velset
+trigger1 = time>= 15
+y = -2
+[State 501,velset]
+type = velset
+trigger1 = time>= 20
+y = -1
+[State 501,velset]
+type = velset
+trigger1 = time>= 25	;0
+x = 0
+y = 0
+[State 501,velset]
+type = velset
+trigger1 = time>= 30
+y = 5
+[State 501,velset]
+type = velset
+trigger1 = time>= 35
+y = 8
+[State 501,velset]
+type = velset
+trigger1 = time>= 40
+y = 10
+[State 501,velset]
+type = velset
+trigger1 = time>= 45
+y = 0
+x = 0
+
+[State 1215,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = -1
+
+[State 1215,SprPriority]
+type = lifeAdd
+trigger1 = time= 55
+value = -250
+
+[State 1215,SprPriority]
+type = PosSet
+trigger1 = time = 55
+y = 0
+
+[State 910, 0]
+type = ChangeState
+Trigger1 = time = 55
+value = 2007
+
+;----------------------------------------------------------------------------
+[Statedef 2007]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+
+[State 910, 0]
+type = ChangeAnim2
+Trigger1 = Time = 0 
+value = 1206
+
+[State 910, 0]
+type = PlayerPush
+Trigger1 = Time >= 0 
+value = 0
+
+[State 501,velset]
+type = velset
+trigger1 = time>= 0
+x = 2
+y = -6
+[State 501,velset]
+type = velset
+trigger1 = time>= 5
+y = -4
+[State 501,velset]
+type = velset
+trigger1 = time>= 10
+y = -2
+[State 501,velset]
+type = velset
+trigger1 = time>= 15
+y = -1
+[State 501,velset]
+type = velset
+trigger1 = time>= 20
+y = -1
+[State 501,velset]
+type = velset
+trigger1 = time>= 25	;0
+x = 0
+y = 0
+[State 501,velset]
+type = velset
+trigger1 = time>= 30
+y = 3
+[State 501,velset]
+type = velset
+trigger1 = time>= 35
+y = 5
+[State 501,velset]
+type = velset
+trigger1 = time>= 40
+y = 7
+[State 501,velset]
+type = velset
+trigger1 = time>= 45
+y = 0
+x = 0
+
+[State 1215,SprPriority]
+type = SprPriority
+trigger1 = time >= 0
+value = -1
+
+[State 1215,SprPriority]
+type = lifeAdd
+trigger1 = time= 55
+value = -250
+
+[State 1215,SprPriority]
+type = PosSet
+trigger1 = time = 55
+y = 0
+
+[State 1335,SelfState]
+type = VelSet
+trigger1 = time = 56
+x = -5
+
+[State 1335,SelfState]
+type = SelfState
+trigger1 = time = 56
+value = 5100
+
+;===========================================
+[Statedef 2100]
+type = A
+physics = N
+movetype = A
+ctrl = 0
+velset = 0,0
+anim = 2100
+juggle = 3
+
+[State 1000, playsnd]
+type = Poweradd
+trigger1 = time = 0
+value = -1000
+
+[State 3020,SuperPause]
+type = SuperPause
+trigger1 = Time = 0
+time = 30
+anim = F 30
+sound = S 6,1
+pos = 40,-75
+movetime = 0
+darken = 1
+unhittable = 1
+
+[State 3075,AfterImage]
+type = AfterImage
+trigger1 = Time = 0
+time = 50
+length = 16
+palcolor = 256
+palinvertall = 0
+palbright = 30,30,30
+palcontrast = 100,100,220
+palpostbright = 0, 0, 0
+paladd = 10,10,45
+palmul = .65,.65,.85
+timegap = 2
+framegap = 4
+trans = add1
+
+[State 250,3]
+type = NotHitBy
+trigger1 = time <= 20
+value = SCA
+
+[State 250,3]
+type = PlaySnd
+trigger1 = time = 5
+value = 0,2
+
+[State 250,3]
+type = Posadd
+trigger1 = P2bodydist X >= 150
+trigger1 = time = 10
+y = -60
+[State 250,3]
+type = Posadd
+trigger1 = P2bodydist X = [60,149]
+trigger1 = time = 10
+y = -40
+
+[State 250,3]
+type = VelSet
+trigger1 = time >= 10
+x = 12
+y = 6
+
+[State 210,2]
+type = HitDef
+trigger1 = animelem = 3 || animelem = 4 || animelem =5 || animelem = 6 || animelem = 7
+priority = 5, Hit			;2 for ??, 3 for M/H att, 4 for L att, 5 for super, 6 fot hyper
+;
+attr = S,NA			;STAND / NORMAL ATTACK
+hitflag = MAF			;MIDDLE ATTACK
+guardflag = M			;GUARD is MIDDLE /L is LOW
+;
+animtype = hard	 		;2p ANIM, light", "medium", "hard", "back", "up",    or "diagup"
+air.animtype = up ; = medium			;2p ANIM
+ground.type = high
+;
+numhits = 1
+damage = 70,10
+getpower = 0
+GivePower = 50
+;
+pausetime = 10,10
+guard.pausetime = 12,12
+;
+ground.slidetime = 20
+;
+ground.hittime = 20
+air.hittime = 30
+;
+guard.hittime = 17
+guard.ctrltime =17
+;
+ground.velocity = -3,-5
+air.velocity = -2.5,-6
+guard.velocity = -12
+airguard.velocity = -3,-5
+;
+ground.cornerpush.veloff = -15
+guard.cornerpush.veloff = -15
+;
+sparkxy = -20,-65
+;
+hitsound = S2,3
+guardsound = S3,1
+sparkno = 2
+guard.sparkno = 3
+;
+fall = 1
+fall.recover = 0
+
+[State 250,3]
+type = ChangeState
+trigger1 = movecontact = 1 && animelem = 7
+value = 1002
+ctrl = 0
+
+[State 250,3]
+type = ChangeState
+trigger1 = Vel Y > 0 && Pos Y >= 0
+value = 2101
+ctrl = 0
+
+[Statedef 2101]
+type = S
+physics = N
+movetype = A
+ctrl = 0
+velset = 0,0
+anim = 2101
+juggle = 0
+
+[State 250,3]
+type = PosSet
+trigger1 = time = 0
+y = 0
+
+[State 250,3]
+type = VelSet
+trigger1 = time = 0
+x = 5
+
+[State 250,3]
+type = VelSet
+trigger1 = time >= 9
+x = 1
+
+[State 250,3]
+type = PlaySnd
+trigger1 = time = 9
+value = 0,3
+
+[State 250,3]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[Statedef 2102]
+type = A
+physics = N
+movetype = A
+ctrl = 0
+velset = 0,0
+anim = 2102
+juggle = 0
+
+[State 250,3]
+type = VelSet
+trigger1 = time = 0
+x = -3
+y = -5
+
+[State 250,3]
+type = VelSet
+trigger1 = time >= 10
+x = -2
+y = -1
+[State 250,3]
+type = VelSet
+trigger1 = time >= 15
+x = -1
+y = 2
+[State 250,3]
+type = VelSet
+trigger1 = time >= 20
+y = 5
+[State 250,3]
+type = VelSet
+trigger1 = time >= 25
+y = 8
+
+[State 250,3]
+type = ChangeState
+trigger1 = Pos Y >= 0 && Vel Y > 0
+value = 1003
+ctrl = 0
+
+[Statedef 1003]
+type = S
+physics = N
+movetype = A
+ctrl = 0
+velset = 0,0
+anim = 1204
+juggle = 0
+
+[State 250,3]
+type = PosSet
+trigger1 = time = 0
+y = 0
+
+[State 250,3]
+type = ChangeState
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+

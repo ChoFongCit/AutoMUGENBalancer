@@ -1,0 +1,34 @@
+[Info]
+name ="Sagat_6"
+displayname ="SAGAT_6"
+versiondate =09,03,2008
+mugenversion = 1.0
+author ="Vegeta 20xx"
+pal.defaults =1,2,3,4,5,6
+
+[Files]
+cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Sagat/cmds/06.cmd
+cns = superturbo-AI.cns
+st = superturbo-AI.cns
+st0 = aisummary.txt
+stcommon =common1.cns
+sprite  =superturbo.sff
+anim    =superturbo.air
+sound   =superturbo.snd
+pal1=ssf2t4.act
+pal2=ssf2t5.act
+pal3=ssf2t6.act
+pal4=classic1.act
+pal5=ssf2t2.act
+pal6=ssf2t3.act
+pal7=classic2.act
+pal8=classic2.act
+pal9=classic2.act
+pal10=ssf2t1.act
+pal11=classic1.act
+pal12=classic1.act
+[Arcade]
+intro.storyboard=
+ending.storyboard=ending.def
+
+;----------------

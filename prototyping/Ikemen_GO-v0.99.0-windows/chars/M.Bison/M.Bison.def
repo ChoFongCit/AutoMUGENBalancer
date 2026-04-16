@@ -1,0 +1,37 @@
+[Info]
+name = "VEGA"        				
+displayname = "M.BISON" 
+versiondate = 11,22,2000    
+mugenversion = 11,22,2000
+author = "Fido"         				
+pal.defaults = 6,3,4,2  
+	
+; Files for the player
+[Files]
+cmd     = SF2_vega.cmd
+stcommon= SF2_common1.cns 
+cns     = SF2_normal.st
+st	= SF2_normal.st 
+st1      = SF2_special.cns 
+st2      =SF2_super.cns
+;st3 	= SF2_typer.cns	
+sprite  = SF2_vega.sff 
+anim    = SF2_vega.air 
+sound   = act&sound/SF2_vega.snd 
+pal1    = act&sound/SF2_vega_04.act  
+pal2    = act&sound/SF2_vega_02.act  
+pal3    = act&sound/SF2_vega_03.act  
+pal4    = act&sound/SF2_vega_01.act  
+pal5    = act&sound/SF2_vega_05.act  
+pal6    = act&sound/SF2_vega_06.act  
+pal7    = act&sound/SF2_vega_01.act  
+pal8    = act&sound/SF2_vega_02.act  
+pal9    = act&sound/SF2_vega_03.act  
+pal10   = act&sound/SF2_vega_04.act  
+pal11   = act&sound/SF2_vega_05.act  
+pal12   = act&sound/SF2_vega_06.act  
+
+; Arcade mode
+[Arcade]
+;intro.storyboard = 
+ending.storyboard = bison_ending.def

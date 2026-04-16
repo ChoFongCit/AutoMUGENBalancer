@@ -1,0 +1,36 @@
+[Info]
+Name         ="ken_11"
+DisplayName  ="KEN_11"
+VersionDate  =09,23,2009
+mugenversion = 1.0
+Author       ="G.D.T"
+Pal.Defaults =1,7
+
+[Files]
+cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Ken/cmds/11.cmd
+cns = ken-AI.cns
+st = ken-AI.cns
+st0 = option-AI.txt
+st1 = aisummary.txt
+StCommon =common1.cns
+Sprite  =ken.sff
+Anim    =ken.air
+Sound   =ken.snd
+pal1=act/ken_4.act
+pal2=act/ken_2.act
+pal3=act/ken_3.act
+pal4=act/ken_9.act
+pal5=act/ken_5.act
+pal6=act/ken_6.act
+pal7=act/ken_7.act
+pal8=act/ken_8.act
+pal9=act/ken_9.act
+pal10=act/ken_7.act
+pal11=act/ken_8.act
+pal12=act/ken_1.act
+
+
+
+[Arcade]
+Intro.Storyboard =
+Ending.Storyboard = ken_ending.def

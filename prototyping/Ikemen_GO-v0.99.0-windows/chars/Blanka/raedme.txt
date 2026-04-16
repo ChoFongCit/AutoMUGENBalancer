@@ -1,0 +1,32 @@
+¢º Street Fighter 2 turbo Blanka Mugen version 95%
+¢¹ for conversionworld & sf2 project
+¢¹ made by pji111 (bandana@hanmail.net)
+
+¢º COMMAND
+
+¢¹ Special moves
+[???]
+(close)¡æ Middle Punch
+
+[???]
+¢Ù Strong Punch
+
+
+¢¹ Super moves
+
+[Electric thunder]
+Fast P Ö§öè
+
+[Rolling attack]
+¡ç(30ticks)  ¡æ + P
+
+[Backstep Rolling attack]
+¡ç(30ticks)  ¡æ + K
+
+[Vertical Rolling attack]
+¡é(30ticks)¡è + K
+
+
+¢¹Hyper move
+[???]
+¡ç(30ticks)  ¡æ ¡ç ¡æ + P

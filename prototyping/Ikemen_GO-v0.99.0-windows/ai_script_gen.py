@@ -49,12 +49,12 @@ STATE_HEADER_RE  = re.compile(r"^\s*\[State",                     re.IGNORECASE)
 # ---------------------------------------------------------------------------
 
 def _dist_x() -> str:
-    op  = random.choice(["<", ">", "<=", ">=", "="])
+    op  = random.choice(["<", ">", "<=", ">="])
     val = random.randint(1, 1000)
     return f"P2BodyDist X {op} {val}"
 
 def _dist_y() -> str:
-    op  = random.choice(["<", ">", "<=", ">=", "="])
+    op  = random.choice(["<", ">", "<=", ">="])
     val = random.randint(-1000, 1000)
     return f"P2BodyDist Y {op} {val}"
 
@@ -72,8 +72,8 @@ def _contact() -> str:
 # subset (at least 1, at most all 6), so no trigger type is guaranteed to
 # appear in every block. InGuardDist is just one option among many.
 TRIGGER_POOL = [
-    lambda: f"P2BodyDist X {random.choice(['<', '>', '<=', '>=', '='])} {random.randint(1, 1000)}",
-    lambda: f"P2BodyDist Y {random.choice(['<', '>', '<=', '>=', '='])} {random.randint(-1000, 1000)}",
+    lambda: f"P2BodyDist X {random.choice(['<', '>', '<=', '>='])} {random.randint(1, 1000)}",
+    lambda: f"P2BodyDist Y {random.choice(['<', '>', '<=', '>='])} {random.randint(-1000, 1000)}",
     lambda: "InGuardDist",
     lambda: f"P2MoveType = {random.choice(['A', 'I', 'H'])}",
     lambda: f"P2StateType = {random.choice(['S', 'C', 'A'])}",
@@ -97,24 +97,76 @@ def build_trigger_block() -> list[str]:
  
 TRIGGERALL_RE       = re.compile(r"^\s*triggerall\s*=",  re.IGNORECASE)
 NUMBERED_TRIGGER_RE = re.compile(r"^\s*trigger\d+\s*=", re.IGNORECASE)
+VARSET_TYPE_RE      = re.compile(r"^\s*type\s*=\s*VarSet\b", re.IGNORECASE)
+
+# Trigger lines referencing engine-internal or helper-system functions that
+# are irrelevant (or contradictory) for a standalone ground character.
+# Stripped from both triggerall and trigger# lines.
+#   AILevel   – removed entirely; a clean `triggerall = AILevel != 0` is
+#               re-injected later, so no AI guard is ever lost.
+#   IsHelper / ParentDist / NumHelper / Helper / Parent / RootDist / Root
+#             – helper/parent tree functions; meaningless for a base character.
+#   NumTarget / Target – target-slot functions; unreliable outside helpers.
+SYSTEM_TRIGGER_RE = re.compile(
+    r"^\s*(triggerall|trigger\d+)\s*=.*\b("
+    r"AILevel"
+    r"|IsHelper"
+    r"|ParentDist"
+    r"|NumHelper"
+    r"|Helper"
+    r"|Parent"
+    r"|RootDist"
+    r"|Root"
+    r"|NumTarget"
+    r"|Target"
+    r")\b",
+    re.IGNORECASE,
+)
+
+# Trigger lines using specific var-flag conventions that are character- or
+# screenpack-specific and should not be carried into generated scripts.
+# Currently strips:  triggerall = !var(59)   (and any whitespace variants)
+VAR_FLAG_TRIGGER_RE = re.compile(
+    r"^\s*(triggerall|trigger\d+)\s*=\s*!var\(59\)",
+    re.IGNORECASE,
+)
+
+# value = IFelse(Command=...) blocks are human-player input-routing blocks
+# that select which state to enter based on which button was pressed.
+# They are meaningless for AI-controlled characters and must not be
+# randomised.  Blocks containing this pattern are preserved as-is
+# (same treatment as VarSet blocks).
+IFELSE_COMMAND_VALUE_RE = re.compile(
+    r"^\s*value\s*=\s*IFelse\s*\(.*Command\s*=",
+    re.IGNORECASE,
+)
  
  
-def flush_block(block_lines: list[str], stats: dict) -> list[str]:
+def flush_block(block_lines: list[str], stats: dict) -> list[str] | None:
     """
     Given the collected lines of one [State -1] block (excluding its header):
       - Keep all triggerall lines exactly as-is.
       - Remove all trigger1/2/3... numbered lines.
-      - Append 6 fresh numbered trigger lines at the end (before trailing blanks).
+      - Append fresh numbered trigger lines after the last triggerall.
+      - Return None to signal that the entire block (including its header)
+        should be dropped from the output.
     """
+    if any(VARSET_TYPE_RE.match(ln.rstrip("\n")) for ln in block_lines):
+        return list(block_lines)
+    if any(IFELSE_COMMAND_VALUE_RE.match(ln.rstrip("\n")) for ln in block_lines):
+        stats["ifelse_command_removed"] += 1
+        return None  # drop header + body from output
     kept_content    = []
     trailing_blanks = []
  
     for ln in block_lines:
         raw = ln.rstrip("\n")
         if NUMBERED_TRIGGER_RE.match(raw):
-            stats["triggers_removed"] += 1   # drop numbered triggers
+            stats["triggers_removed"] += 1        # drop numbered triggers
+        elif SYSTEM_TRIGGER_RE.match(raw) or VAR_FLAG_TRIGGER_RE.match(raw):
+            stats["system_triggers_removed"] += 1 # drop system/helper/AILevel/var-flag lines
         else:
-            kept_content.append(ln)           # keep everything else inc. triggerall
+            kept_content.append(ln)               # keep everything else
  
     # Inject AILevel guard after the last existing triggerall, or after the
     # first real content line if no triggerall lines are present.
@@ -180,10 +232,12 @@ def process_lines(lines: list[str], shuffle: bool = False) -> tuple[list[str], d
     [State -1] blocks are shuffled among themselves.
     """
     stats = {
-        "blocks_processed":  0,
-        "triggers_removed":  0,
-        "triggers_added":    0,
-        "ailevel_injected":  0,
+        "blocks_processed":         0,
+        "triggers_removed":         0,
+        "system_triggers_removed":  0,
+        "triggers_added":           0,
+        "ailevel_injected":         0,
+        "ifelse_command_removed":   0,
     }
  
     # ------------------------------------------------------------------
@@ -245,12 +299,14 @@ def process_lines(lines: list[str], shuffle: bool = False) -> tuple[list[str], d
     pre_segments   = [(i, s) for i, s in enumerate(segments) if s[0] == "pre"]
     block_segments = [(i, s) for i, s in enumerate(segments) if s[0] == "block"]
  
-    # Build flushed block lines for each block segment
+    # Build flushed block lines for each block segment.
+    # flush_block returns None for blocks that must be dropped entirely
+    # (e.g. IFelse(Command=...) human-input-routing blocks).
     flushed_blocks = []
     for _, seg in block_segments:
         _, header, body = seg
-        flushed = [header] + flush_block(body, stats)
-        flushed_blocks.append(flushed)
+        result = flush_block(body, stats)
+        flushed_blocks.append([] if result is None else [header] + result)
  
     # Shuffle the flushed blocks if requested (keeps pre-segments in place)
     if shuffle:
@@ -267,11 +323,23 @@ def process_lines(lines: list[str], shuffle: bool = False) -> tuple[list[str], d
  
     return output, stats
  
- 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
- 
+
+def generate_population(input_path: Path, output_dir: Path, size: int) -> list[Path]:
+    """
+    Generate `size` randomised .cmd files from input_path into output_dir.
+    Returns a list of Paths to the generated files.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+    generated = []
+    for i in range(size):
+        output_path = output_dir / f"{i:02d}.cmd"
+        lines = input_path.read_text(encoding="utf-8", errors="replace").splitlines(keepends=True)
+        new_lines, _ = process_lines(lines, shuffle=True)
+        output_path.write_text("".join(new_lines), encoding="utf-8")
+        generated.append(output_path)
+    print(generated)
+    return generated
+
 def main():
     parser = argparse.ArgumentParser(
         description="Replace all triggers in MUGEN [State -1] blocks with randomised allowed triggers.",
@@ -305,8 +373,10 @@ def main():
     print(f"\n--- Summary ---")
     print(f"  [State -1] blocks processed    : {stats['blocks_processed']}")
     print(f"  Trigger lines removed          : {stats['triggers_removed']}")
+    print(f"  System trigger lines removed   : {stats['system_triggers_removed']}")
     print(f"  Trigger lines injected         : {stats['triggers_added']}")
     print(f"  AILevel guards injected        : {stats['ailevel_injected']}")
+    print(f"  IFelse(Command) blocks removed : {stats['ifelse_command_removed']}")
     print(f"  Blocks shuffled                : {args.shuffle}")
  
     if args.dry_run:
@@ -320,7 +390,10 @@ def main():
         fh.writelines(new_lines)
  
     print(f"\nOutput written to: {output_path}")
+    pass
  
  
+random_triggers = build_trigger_block
+
 if __name__ == "__main__":
     main()

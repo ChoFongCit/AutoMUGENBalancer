@@ -1,0 +1,42 @@
+
+
+
+
+
+
+
+[Info]
+name = "dhalsim_3"        				
+displayname = "DHALSIM_3" 
+versiondate = 11,22,2000    
+mugenversion = 1.0
+author = "Fido"         				
+pal.defaults = 6,3,4,2  
+	
+
+[Files]
+cmd = cmds/03.cmd
+cns = add004basic-AI.reb1
+st = add004basic-AI.reb1
+st0 = aisummary.txt
+stcommon=common1.cns
+
+sprite  = SF2_dhalsim.sff 
+anim    = SF2_dhalsim.air 
+sound   = act&sound/SF2_dhalsim.snd 
+pal1    = act&sound/SF2_dhalsim_04.act  
+pal2    = act&sound/SF2_dhalsim_02.act  
+pal3    = act&sound/SF2_dhalsim_03.act  
+pal4    = act&sound/SF2_dhalsim_09.act  
+pal5    = act&sound/SF2_dhalsim_05.act  
+pal6    = act&sound/SF2_dhalsim_06.act  
+pal7    = act&sound/SF2_dhalsim_07.act  
+pal8    = act&sound/SF2_dhalsim_08.act  
+pal9    = act&sound/SF2_dhalsim_01.act  
+pal10   = act&sound/SF2_dhalsim_10.act  
+pal11   = act&sound/SF2_dhalsim_03.act  
+pal12   = act&sound/SF2_dhalsim_06.act  
+
+[Arcade]
+
+ending.storyboard = ending.def

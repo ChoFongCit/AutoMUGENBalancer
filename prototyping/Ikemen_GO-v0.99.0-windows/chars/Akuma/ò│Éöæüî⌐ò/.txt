@@ -1,0 +1,126 @@
+サンプルキャラクター『カンフーマン』に使われている変数のアドレス早見表です。
+何も説明が書いてない部分は未使用。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+■整数の変数■
+
+ Var(0)  = 効果音
+ Var(1)  = 使用中
+ Var(2)  = 空中復帰誘導
+ Var(3)  = hit用
+ Var(4)  = 
+ Var(5)  = 地獄車アニメ用
+ Var(6)  = ボタンの強弱
+ Var(7)  = airコンボ制限1
+ Var(8)  = airコンボ制限2
+ Var(9)  = AI用
+
+ Var(10) = roundstate = 2 time
+ Var(11) = 入力関係
+ Var(12) = mode
+ Var(13) = 
+ Var(14) = 
+ Var(15) = 
+ Var(16) = 
+ Var(17) = 
+ Var(18) = 
+ Var(19) = 
+
+ Var(20) = 1
+ Var(21) = 2
+ Var(22) = 3
+ Var(23) = 4
+ Var(24) = 5
+ Var(25) = 6
+ Var(26) = 7
+ Var(27) = 
+ Var(28) = 
+ Var(29) = 
+
+ Var(30) = p2statetype s
+ Var(31) = p2statetype c
+ Var(32) = p2statetype a
+ Var(33) = 相手起き上がり
+ Var(34) = 
+ Var(35) = 
+ Var(36) = 
+ Var(37) = 
+ Var(38) = 
+ Var(39) = 
+
+ Var(40) = 
+ Var(41) = ブロッキング間隔
+ Var(42) = 動作終了後時間計測
+ Var(43) = 
+ Var(44) = 通常攻撃スカ回避
+ Var(45) = prevstateno
+ Var(46) = ガード間隔
+ Var(47) = get hit間隔
+ Var(48) = hit確認
+ Var(49) = 
+
+ Var(50) = 相手超必判定
+ Var(51) = 超必危険時間
+ Var(52) = reduce damage
+ Var(53) = 特殊行動用
+ Var(54) = 起き上がり時間
+ Var(55) = inguarddist time measure
+ Var(56) = 
+ Var(57) = 
+ Var(58) = 変数(time%50)
+ Var(59) = AI
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+■小数点以下も使える変数■（浮動小数点数を使用）
+
+FVar(0)  = 
+FVar(1)  = 
+FVar(2)  = 
+FVar(3)  = 
+FVar(4)  = 
+FVar(5)  = 
+FVar(6)  = 
+FVar(7)  = 
+FVar(8)  = 
+FVar(9)  = 
+
+FVar(10) =
+FVar(11) = 
+FVar(12) = 
+FVar(13) =
+FVar(14) = 
+FVar(15) = 
+FVar(16) = 
+FVar(17) = 
+FVar(18) = 
+FVar(19) = 
+
+FVar(20) = 
+FVar(21) = 
+FVar(22) = 
+FVar(23) = 
+FVar(24) = 
+FVar(25) = 
+FVar(26) = 
+FVar(27) = 
+FVar(28) = 
+FVar(29) = 
+
+FVar(30) = 
+FVar(31) = 
+FVar(32) = 
+FVar(33) = 
+FVar(34) = 
+FVar(35) = 
+FVar(36) = 
+FVar(37) = 
+FVar(38) = 
+FVar(39) = 
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+■チャンネル■
+
+channel = 0 : 声のチャンネル
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+by ちょっとこ丸

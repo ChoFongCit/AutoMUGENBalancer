@@ -1,0 +1,38 @@
+[Info]
+name = "VEGA_5"        				
+displayname = "M.BISON_5" 
+versiondate = 11,22,2000    
+mugenversion = 1.0
+author = "Fido"         				
+pal.defaults = 6,3,4,2  
+	
+
+[Files]
+cmd = cmds/05.cmd
+stcommon = SF2_common1-AI.cns
+cns = SF2_normal-AI.st
+st = SF2_normal-AI.st
+st0 = SF2_special-AI.cns
+st1 = SF2_super-AI.cns
+st2 = aisummary.txt
+
+sprite  = SF2_vega.sff 
+anim    = SF2_vega.air 
+sound   = act&sound/SF2_vega.snd 
+pal1    = act&sound/SF2_vega_04.act  
+pal2    = act&sound/SF2_vega_02.act  
+pal3    = act&sound/SF2_vega_03.act  
+pal4    = act&sound/SF2_vega_01.act  
+pal5    = act&sound/SF2_vega_05.act  
+pal6    = act&sound/SF2_vega_06.act  
+pal7    = act&sound/SF2_vega_01.act  
+pal8    = act&sound/SF2_vega_02.act  
+pal9    = act&sound/SF2_vega_03.act  
+pal10   = act&sound/SF2_vega_04.act  
+pal11   = act&sound/SF2_vega_05.act  
+pal12   = act&sound/SF2_vega_06.act  
+
+
+[Arcade]
+
+ending.storyboard = bison_ending.def

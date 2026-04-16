@@ -1,0 +1,37 @@
+[Info]
+name = "Thawk_9"        				
+displayname = "T.HAWK_9" 
+versiondate = 11,22,2000    
+mugenversion = 11,22,2000
+author = "Fido"         				
+pal.defaults = 6,3,4,2  
+	
+; Files for the player
+[Files]
+cmd     = cmds/09.cmd
+stcommon= SF2_common1.cns 
+cns     = SF2_normal.st
+st	= SF2_normal.st 
+st1      = SF2_special.cns
+st2      =SF2_super.cns
+st3	= SF2_throw.st
+sprite  = SF2_Thawk2.sff 
+anim    = SF2_Thawk.air 
+sound   = act&sound/SF2_Thawk.snd 
+pal1    = act&sound/SF2_Thawk_04.act  
+pal2    = act&sound/SF2_Thawk_02.act  
+pal3    = act&sound/SF2_Thawk_03.act  
+pal4    = act&sound/SF2_Thawk_01.act  
+pal5    = act&sound/SF2_Thawk_05.act  
+pal6    = act&sound/SF2_Thawk_06.act  
+pal7    = act&sound/SF2_Thawk_01.act  
+pal8    = act&sound/SF2_Thawk_02.act  
+pal9    = act&sound/SF2_Thawk_03.act  
+pal10   = act&sound/SF2_Thawk_04.act  
+pal11   = act&sound/SF2_Thawk_05.act  
+pal12   = act&sound/SF2_Thawk_06.act  
+
+; Arcade mode
+[Arcade]
+;intro.storyboard =
+ending.storyboard = ending.def
