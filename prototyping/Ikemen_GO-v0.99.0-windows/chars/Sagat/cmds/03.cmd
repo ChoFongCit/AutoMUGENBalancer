@@ -430,215 +430,120 @@ time = 1
 
 
 
-[State -1, Stand middle Punch]
+[State -1]
 type = ChangeState
-value = 210
-triggerall = AILevel <= 0
-triggerall = command = "y"
-triggerall = command != "holddown"
-triggerall = p2bodydist x >= 25
+value = 0
+triggerall = Var(55) = 1
+triggerall = statetype = S
+triggerall = P2movetype != A
+triggerall = P2bodydist X >= 100
+triggerall = P2StateNo = 5050  
+triggerall = P2StateNo = 5070  
+triggerall = P2StateNo = 5100  
+triggerall = P2StateNo = 5110  
+triggerall = P2StateNo = 5120  
+triggerall = P2StateNo = 5160 
+triggerall = P2StateNo = 5170  
+triggerall = Random >= 900
 triggerall = AILevel != 0
-trigger1 = P2StateType = S
-trigger2 = P2BodyDist Y <= -148
-trigger3 = P2MoveType = I
-
+trigger1 = P2BodyDist X >= 176
+trigger2 = P2StateType = C
 
 
 [State -1, Tiger Shot]
 type = ChangeState
 value = 1000
-triggerall = AILevel <= 0
 triggerall = command = "shot_x"
 triggerall = numproj = 0
 triggerall = command != "holddown"
 triggerall = AILevel != 0
-trigger1 = MoveContact || MoveGuarded
+trigger1 = P2MoveType = I
 
 
-[State -1]
+[State -1, Tiger Genocide]
 type = ChangeState
-value = 680
-triggerall = AILevel <= 0
-triggerall = command = "a"
-triggerall = command != "holddown"
-triggerall = Vel X = 0
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X >= 556
-trigger2 = P2MoveType = H
-
-
-
-
-[State -1, Jump Strong Punch]
-type = ChangeState
-value = 620
-triggerall = AILevel <= 0
-triggerall = command = "z"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 385
-trigger2 = MoveGuarded
-trigger3 = P2MoveType = A
-trigger4 = P2StateType = S
-trigger5 = InGuardDist
-trigger6 = P2BodyDist Y <= 45
-
-
-
-
-
-[State -1, Stand Light Punch]
-type = ChangeState
-value = 200
-triggerall = AILevel <= 0
-triggerall = command = "x"
-triggerall = command != "holddown"
-triggerall = p2bodydist x >= 20
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y < 677
-
-
-
-[State -1]
-type = ChangeState
-value = 4000
-triggerall = Var(55) = 1
-triggerall = P2statetype = S
-triggerall = power >= 1000
-triggerall = statetype = S
-triggerall = movetype = I
-triggerall = P2BodyDist X = [40,90]
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2StateType = A
-trigger3 = P2BodyDist Y <= -430
-trigger4 = P2MoveType = A
-
-[State -1, Tiger Shot]
-type = ChangeState
-value = 1110
-triggerall = AILevel <= 0
-triggerall = command = "shot_b"
+value = ifelse(palno>6,0,ifelse(palno<=6,4100,1))
+triggerall = command="TigerG_x" || command="TigerG_y" || command="TigerG_z"
 triggerall = numproj = 0
 triggerall = command != "holddown"
+triggerall = power >= 1000
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= -155
-trigger2 = InGuardDist
-trigger3 = P2BodyDist X > 553
-trigger4 = P2MoveType = H
-trigger5 = P2StateType = C
+trigger1 = P2BodyDist X > 189
 
 
-[State -1,]
+[State -1, Jump Light Kick]
 type = ChangeState
-value = 700
-triggerall = AILevel <= 0
-triggerall = Var(55) = 1
-triggerall = StateType = S
-triggerall = (EnemyNear, StateType != A) && (EnemyNear, StateType != C)
-triggerall = MoveType != H
-triggerall = P2life != 0
-triggerall = Random <= 600
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = InGuardDist
-trigger3 = P2BodyDist X > 694
-trigger4 = P2BodyDist Y > 392
-trigger5 = MoveGuarded
-trigger6 = P2StateType = C
-
-[State -1, Stand Strong Punch]
-type = ChangeState
-value = 220
-triggerall = AILevel <= 0
-triggerall = command = "z"
+value = 650
+triggerall = command = "a"
 triggerall = command != "holddown"
-triggerall = p2bodydist x >= 25
-triggerall = AILevel != 0
-trigger1 = P2StateType = S
-trigger2 = P2BodyDist Y < 852
-trigger3 = MoveContact
-
-
-
-[State -1, Tiger Uppercut]
-type = ChangeState
-value = 1400
-triggerall = AILevel <= 0
-triggerall = command = "TigerUpper_y"
-
-triggerall = command != "holddown"
+triggerall = vel X != 0
 triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2BodyDist X >= 366
-trigger3 = P2BodyDist Y <= 550
-trigger4 = MoveContact || MoveGuarded
-trigger5 = P2StateType = A
-trigger6 = P2MoveType = H
-
-
-[State -1]
-type = ChangeState
-value = 40
-triggerall = AILevel <= 0
-triggerall = Var(55) = 1
-triggerall = (StateType != A) && (StateType != L)
-triggerall = (P2MoveType = A) && (P2StateType != A) && (enemy, NumProj >= 1)
-triggerall = StateNo != 40
-triggerall = AILevel != 0
-trigger1 = P2MoveType = I
-trigger2 = P2BodyDist X >= 189
-trigger3 = InGuardDist
-trigger4 = MoveContact || MoveGuarded
-trigger5 = P2BodyDist Y <= -38
-trigger6 = P2StateType = S
-
-[State -1, Crouching Light Punch]
-type = ChangeState
-value = 400
-triggerall = AILevel <= 0
-triggerall = command = "x"
-triggerall = command = "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y <= 309
-trigger2 = InGuardDist
-trigger3 = MoveGuarded
-trigger4 = P2MoveType = H
-trigger5 = P2StateType = C
-trigger6 = P2BodyDist X > 789
-
-
+trigger2 = MoveContact || MoveGuarded
+trigger3 = P2MoveType = I
+trigger4 = P2BodyDist X >= 80
+trigger5 = P2StateType = S
+trigger6 = P2BodyDist Y >= 530
 
 
 
 [State -1]
 type = ChangeState
-value = 800
+value = 132
 triggerall = Var(55) = 1
-triggerall = P2StateType != A
-triggerall = P2movetype = I
-triggerall = statetype = S
-triggerall = movetype = I
-triggerall = P2BodyDist X = [0,20]
-triggerall = P2stateno != 5030
-triggerall = P2stateno != 5020
-triggerall = P2stateno != 5050
-triggerall = p2stateno != 5000
-triggerall = p2stateno != 5001
+triggerall = StateType = A
+triggerall = P2Movetype = A
+triggerall = enemy, NumProj >= 1
+triggerall = random >= 999
 triggerall = AILevel != 0
 trigger1 = P2MoveType = A
-trigger2 = P2BodyDist Y <= 450
-trigger3 = MoveContact || MoveGuarded
 
+[State -1]
+type = ChangeState
+value = 2200
+triggerall = Var(55) = 1
+triggerall = statetype = S
+triggerall = P2bodydist X = [5,60]
+triggerall = random <= 400
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2MoveType = H
+trigger2 = InGuardDist
+trigger3 = P2StateType = C
+trigger4 = P2BodyDist Y <= 516
+trigger5 = MoveGuarded
 
+[State -1]
+type = ChangeState
+value = 450
+triggerall = Var(55) = 1
+triggerall = MoveType != H
+triggerall = statetype = S
+triggerall = P2bodydist X <= 30
+triggerall = P2stateno = 5150
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X > 417
+trigger2 = InGuardDist
+trigger3 = P2MoveType = H
 
+[State -1, Tiger Knee]
+type = ChangeState
+value = 2200
+triggerall = command = "TigerKnee_c"
 
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X <= 146
+trigger2 = InGuardDist
+trigger3 = P2StateType = C
+trigger4 = P2MoveType = A
+trigger5 = MoveContact
 
 
 [State -1]
 type = ChangeState
 value = 1400
-triggerall = AILevel <= 0
 triggerall = Var(55) = 1
 triggerall = statetype = S
 triggerall = P2bodydist X <= 80
@@ -656,115 +561,361 @@ triggerall = P2stateno != 5020
 triggerall = P2stateno != 5050
 triggerall = P2stateno != 5150
 triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 851
+trigger1 = P2BodyDist Y >= 558
+trigger2 = P2MoveType = H
+trigger3 = MoveContact || MoveGuarded
+trigger4 = P2StateType = A
+trigger5 = InGuardDist
+trigger6 = P2BodyDist X < 196
 
-[State -1, Tiger Shot]
+[State -1, Jump middle Kick]
 type = ChangeState
-value = 1120
-triggerall = AILevel <= 0
-triggerall = command = "shot_c"
-triggerall = numproj = 0
+value = 660
+triggerall = command = "b"
 triggerall = command != "holddown"
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y > 471
+trigger1 = P2BodyDist X >= 447
+trigger2 = InGuardDist
+trigger3 = P2BodyDist Y < -516
 
 
 
+
+
+[State -1, Crouching Light Kick]
+type = ChangeState
+value = 450
+triggerall = command = "a"
+triggerall = command = "holddown"
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 569
+trigger2 = P2MoveType = I
+trigger3 = InGuardDist
+trigger4 = MoveGuarded
+trigger5 = P2BodyDist Y < -174
+
+
+
+
+[State -1, Crouching Light Punch]
+type = ChangeState
+value = 400
+triggerall = command = "x"
+triggerall = command = "holddown"
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X > 323
+trigger2 = P2StateType = S
+trigger3 = InGuardDist
+
+
+
+
+
+[State -1, Stand middle Punch]
+type = ChangeState
+value = 210
+triggerall = command = "y"
+triggerall = command != "holddown"
+triggerall = p2bodydist x >= 25
+triggerall = AILevel != 0
+trigger1 = P2MoveType = I
+trigger2 = MoveGuarded
+trigger3 = P2BodyDist Y <= 132
+
+
+
+[State -1, Stand Light Punch]
+type = ChangeState
+value = 200
+triggerall = command = "x"
+triggerall = command != "holddown"
+triggerall = p2bodydist x >= 20
+triggerall = AILevel != 0
+trigger1 = MoveContact
+trigger2 = P2BodyDist Y < 221
+
+
+
+[State -1]
+type = ChangeState
+value = 1300
+triggerall = Var(55) = 1
+triggerall = statetype = S
+triggerall = P2Movetype = A 
+triggerall = P2life != 0
+triggerall = random <= 200
+triggerall = P2StateNo != 5050  
+triggerall = P2StateNo != 5070  
+triggerall = P2StateNo != 5100  
+triggerall = P2StateNo != 5110  
+triggerall = P2StateNo != 5120  
+triggerall = P2StateNo != 5160  
+triggerall = P2StateNo != 5170 
+triggerall = P2stateno != 5030
+triggerall = P2stateno != 5020
+triggerall = P2stateno != 5050
+triggerall = P2stateno != 5150
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 603
+trigger2 = P2BodyDist Y <= -454
+trigger3 = MoveGuarded
+
+[State -1, Jump Light Punch]
+type = ChangeState
+value = 600
+triggerall = command = "x"
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+
+
+
+[State -1, Jump Strong Punch]
+type = ChangeState
+value = 620
+triggerall = command = "z"
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = P2StateType = A
+trigger2 = P2MoveType = H
+trigger3 = P2BodyDist X <= 123
+trigger4 = MoveContact || MoveGuarded
+trigger5 = P2BodyDist Y <= 347
+trigger6 = InGuardDist
+
+
+
+
+
+[State -1,]
+type = ChangeState
+value = 700
+triggerall = Var(55) = 1
+triggerall = StateType = S
+triggerall = (EnemyNear, StateType != A) && (EnemyNear, StateType != C)
+triggerall = MoveType != H
+triggerall = P2life != 0
+triggerall = Random <= 600
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= 564
+trigger2 = InGuardDist
+trigger3 = P2MoveType = H
+trigger4 = MoveContact
+
+[State -1]
+type = ChangeState
+value = 1100
+triggerall = Var(55) = 1
+triggerall = statetype = S
+triggerall = ctrl = 1
+triggerall = random <= 300
+
+
+triggerall = P2StateNo != 5050  
+triggerall = P2StateNo != 5070  
+triggerall = P2StateNo != 5100  
+triggerall = P2StateNo != 5110  
+triggerall = P2StateNo != 5120  
+triggerall = P2StateNo != 5160 
+triggerall = P2StateNo != 5170  
+triggerall = AILevel != 0
+trigger1 = P2MoveType = H
+trigger2 = InGuardDist
+trigger3 = MoveContact || MoveGuarded
+
+
+[State -1]
+type = ChangeState
+value = 2000
+triggerall = Var(55) = 1
+triggerall = statetype = S
+triggerall = P2bodydist X = [5,50]
+triggerall = random <= 400
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 604
+trigger2 = P2StateType = C
+trigger3 = P2MoveType = A
+trigger4 = InGuardDist
+
+[State -1, Stand middle Punch]
+type = ChangeState
+value = 710
+triggerall = command = "y"
+triggerall = command != "holddown"
+triggerall = p2bodydist x < 25
+triggerall = AILevel != 0
+trigger1 = P2StateType = S
+
+
+
+[State -1, Stand Strong Punch]
+type = ChangeState
+value = 720
+triggerall = command = "z"
+triggerall = command != "holddown"
+triggerall = p2bodydist x < 25
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2StateType = A
+trigger3 = P2MoveType = A
+trigger4 = P2BodyDist Y <= -483
+trigger5 = P2BodyDist X > 117
+
+
+
+
+
+
+
+
+[State -1]
+type = ChangeState
+value = 980
+triggerall = Var(55) = 1
+triggerall = StateType != S
+triggerall = StateType != L
+triggerall = P2life != 0
+triggerall = Alive = 1
+triggerall = Random <= 100
+triggerall = Pos Y = [-10,0]
+triggerall = AILevel != 0
+trigger1 = P2MoveType = A
+trigger2 = P2BodyDist Y > 67
+trigger3 = P2BodyDist X < 622
+
+[State -1, Tiger Uppercut]
+type = ChangeState
+value = ifelse(palno>6,1600,ifelse(palno<=6,1500,1))
+triggerall = command = "TigerUpper_z"
+
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2MoveType = A
+trigger3 = P2BodyDist Y >= 370
+trigger4 = MoveContact || MoveGuarded
+trigger5 = P2BodyDist X < 333
+trigger6 = InGuardDist
+
+
+[State -1]
+type = ChangeState
+value = 40
+triggerall = Var(55) = 1
+triggerall = (StateType != A) && (StateType != L)
+triggerall = (P2MoveType = A) && (P2StateType != A) && (enemy, NumProj >= 1)
+triggerall = StateNo != 40
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y >= 393
+
+[State -1, Stand Light Kick]
+type = ChangeState
+value = 250
+triggerall = command = "a"
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = MoveGuarded
+trigger2 = P2MoveType = H
+trigger3 = P2StateType = A
+
+
+
+[State -1, Tiger Knee]
+type = ChangeState
+value = 2000
+triggerall = command = "TigerKnee_a"
+
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 43
+trigger2 = InGuardDist
+trigger3 = P2BodyDist Y < 609
+
+
+[State -1]
+type = ChangeState
+value = 1000
+triggerall = Var(55) = 1
+triggerall = statetype = S
+triggerall = ctrl = 1
+triggerall = random <= 300 
+triggerall = P2StateNo != 5050  
+triggerall = P2StateNo != 5070  
+triggerall = P2StateNo != 5100  
+triggerall = P2StateNo != 5110  
+triggerall = P2StateNo != 5120  
+triggerall = P2StateNo != 5160  
+triggerall = P2StateNo != 5170 
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 166
+trigger2 = P2StateType = C
+trigger3 = MoveGuarded
 
 [State -1, Throw]
 type = ChangeState
 value = 800
-triggerall = AILevel <= 0
 triggerall = command = "y"
 triggerall = statetype = S
 triggerall = ctrl
 triggerall = stateno != 100
 triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = InGuardDist
-trigger3 = P2BodyDist X <= 936
-trigger4 = P2BodyDist Y <= -839
+trigger1 = P2StateType = A
+trigger2 = P2MoveType = I
+
+
+[State -1, Stand Strong Punch]
+type = ChangeState
+value = 220
+triggerall = command = "z"
+triggerall = command != "holddown"
+triggerall = p2bodydist x >= 25
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X > 250
+trigger2 = MoveGuarded
+
+
+
+[State -1, Crouching middle Punch]
+type = ChangeState
+value = 410
+triggerall = command = "y"
+triggerall = command = "holddown"
+triggerall = AILevel != 0
+trigger1 = MoveGuarded
+trigger2 = P2BodyDist Y >= -300
+trigger3 = P2BodyDist X > 637
+trigger4 = P2StateType = S
+trigger5 = P2MoveType = A
+
 
 
 [State -1, Tiger Uppercut]
 type = ChangeState
-value = 1300
-triggerall = AILevel <= 0
-triggerall = command = "TigerUpper_x"
+value = 1400
+triggerall = command = "TigerUpper_y"
 
 triggerall = command != "holddown"
 triggerall = AILevel != 0
-trigger1 = P2StateType = C
+trigger1 = P2StateType = S
 
 
-[State -1, Tiger Shot]
+[State -1, Stand Light Punch]
 type = ChangeState
-value = 1100
-triggerall = AILevel <= 0
-triggerall = command = "shot_a"
-triggerall = numproj = 0
+value = 700
+triggerall = command = "x"
 triggerall = command != "holddown"
+triggerall = p2bodydist x < 20
 triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2StateType = S
-trigger3 = P2MoveType = A
-
-
-[State -1]
-type = ChangeState
-value = 0
-triggerall = Var(55) = 1
-triggerall = statetype = S
-triggerall = P2movetype != A
-triggerall = P2bodydist X >= 100
-triggerall = P2StateNo = 5050  
-triggerall = P2StateNo = 5070  
-triggerall = P2StateNo = 5100  
-triggerall = P2StateNo = 5110  
-triggerall = P2StateNo = 5120  
-triggerall = P2StateNo = 5160 
-triggerall = P2StateNo = 5170  
-triggerall = Random >= 900
-triggerall = AILevel != 0
-trigger1 = MoveContact
-trigger2 = P2BodyDist Y <= 749
-trigger3 = P2StateType = S
-trigger4 = P2MoveType = A
-trigger5 = InGuardDist
-
-
-[State -1, Tiger Knee]
-type = ChangeState
-value = 2200
-triggerall = AILevel <= 0
-triggerall = command = "TigerKnee_c"
-
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2BodyDist Y <= 381
-
-
-[State -1, Jump Strong Kick]
-type = ChangeState
-value = 670
-triggerall = AILevel <= 0
-triggerall = command = "c"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= -174
-
-
-
-
+trigger1 = P2BodyDist Y < -426
+trigger2 = InGuardDist
 
 
 
 [State -1]
 type = ChangeState
 value = 1500
-triggerall = AILevel <= 0
 triggerall = Var(55) = 1
 triggerall = statetype = S
 triggerall = P2bodydist X <= 90
@@ -783,273 +934,70 @@ triggerall = P2stateno != 5020
 triggerall = P2stateno != 5050
 triggerall = P2stateno != 5150
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y < -30
-trigger2 = P2BodyDist X > 799
-trigger3 = InGuardDist
-trigger4 = P2MoveType = A
-trigger5 = P2StateType = C
-trigger6 = MoveContact || MoveGuarded
+trigger1 = P2MoveType = A
 
 [State -1]
 type = ChangeState
-value = 1100
-triggerall = AILevel <= 0
-triggerall = Var(55) = 1
-triggerall = statetype = S
-triggerall = ctrl = 1
-triggerall = random <= 300
+value = 680
+triggerall = command = "a"
+triggerall = command != "holddown"
+triggerall = Vel X = 0
+triggerall = AILevel != 0
+trigger1 = P2StateType = A
+trigger2 = P2MoveType = H
+trigger3 = P2BodyDist X >= 451
+trigger4 = InGuardDist
 
 
-triggerall = P2StateNo != 5050  
-triggerall = P2StateNo != 5070  
-triggerall = P2StateNo != 5100  
-triggerall = P2StateNo != 5110  
-triggerall = P2StateNo != 5120  
-triggerall = P2StateNo != 5160 
-triggerall = P2StateNo != 5170  
+
+
+[State -1, Crouching Strong Punch]
+type = ChangeState
+value = 420
+triggerall = command = "z"
+triggerall = command = "holddown"
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+trigger2 = P2MoveType = I
+
+
+
+[State -1, Crouching middle Kick]
+type = ChangeState
+value = 460
+triggerall = command = "b"
+triggerall = command = "holddown"
 triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2BodyDist Y <= -612
-trigger3 = MoveContact
-trigger4 = P2BodyDist X > 20
-trigger5 = P2StateType = S
-
-
-[State -1]
-type = ChangeState
-value = 131
-triggerall = Var(55) = 1
-triggerall = StateType != A
-triggerall = P2Statetype = C
-triggerall = P2Movetype = A
-triggerall = enemy, NumProj >= 1
-triggerall = random >= 999
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 180
-trigger2 = P2StateType = S
-trigger3 = MoveContact || MoveGuarded
-
-[State -1]
-type = ChangeState
-value = 132
-triggerall = Var(55) = 1
-triggerall = StateType = A
-triggerall = P2Movetype = A
-triggerall = enemy, NumProj >= 1
-triggerall = random >= 999
-triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-trigger2 = MoveContact
-trigger3 = P2BodyDist Y >= -517
-trigger4 = P2BodyDist X >= 253
-trigger5 = InGuardDist
-
-[State -1]
-type = ChangeState
-value = 980
-triggerall = Var(55) = 1
-triggerall = StateType != S
-triggerall = StateType != L
-triggerall = P2life != 0
-triggerall = Alive = 1
-triggerall = Random <= 100
-triggerall = Pos Y = [-10,0]
-triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = P2MoveType = A
-trigger3 = MoveGuarded
-trigger4 = P2BodyDist X > 468
-
-[State -1, Tiger Knee]
-type = ChangeState
-value = 2000
-triggerall = AILevel <= 0
-triggerall = command = "TigerKnee_a"
-
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X >= 88
-trigger2 = MoveContact || MoveGuarded
-
-
-[State -1, Standing Strong Kick]
-type = ChangeState
-value = 270
-triggerall = AILevel <= 0
-triggerall = command = "c"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = P2StateType = S
-trigger2 = InGuardDist
-trigger3 = P2BodyDist X <= 606
-trigger4 = MoveContact
-trigger5 = P2MoveType = H
-trigger6 = P2BodyDist Y <= -716
+trigger2 = P2BodyDist Y >= 48
+trigger3 = P2BodyDist X < 199
+trigger4 = MoveContact || MoveGuarded
+trigger5 = P2MoveType = I
 
 
 
 [State -1, Tiger Shot]
 type = ChangeState
-value = 1020
-triggerall = AILevel <= 0
-triggerall = command = "shot_z"
+value = 1100
+triggerall = command = "shot_a"
 triggerall = numproj = 0
 triggerall = command != "holddown"
 triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 34
+trigger1 = P2MoveType = I
 trigger2 = P2StateType = C
 
 
-[State -1, Tiger Knee]
+[State -1, Tiger Shot]
 type = ChangeState
-value = 2100
-triggerall = AILevel <= 0
-triggerall = command = "TigerKnee_b"
-
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X <= 191
-
-
-[State -1, Jump middle Kick]
-type = ChangeState
-value = 660
-triggerall = AILevel <= 0
-triggerall = command = "b"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = InGuardDist
-
-
-
-
-
-[State -1, Tiger Genocide]
-type = ChangeState
-value = ifelse(palno>6,0,ifelse(palno<=6,4100,1))
-triggerall = AILevel <= 0
-triggerall = command="TigerG_x" || command="TigerG_y" || command="TigerG_z"
+value = 1110
+triggerall = command = "shot_b"
 triggerall = numproj = 0
 triggerall = command != "holddown"
-triggerall = power >= 1000
 triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2BodyDist Y >= -740
-trigger3 = P2BodyDist X >= 502
-
-
-[State -1]
-type = ChangeState
-value = 2000
-triggerall = AILevel <= 0
-triggerall = Var(55) = 1
-triggerall = statetype = S
-triggerall = P2bodydist X = [5,50]
-triggerall = random <= 400
-triggerall = ctrl
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X <= 141
-trigger2 = InGuardDist
-
-[State -1, Crouching middle Kick]
-type = ChangeState
-value = 460
-triggerall = AILevel <= 0
-triggerall = command = "b"
-triggerall = command = "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y > -735
-trigger2 = P2MoveType = H
-
-
-
-[State -1]
-type = ChangeState
-value = 450
-triggerall = AILevel <= 0
-triggerall = Var(55) = 1
-triggerall = MoveType != H
-triggerall = statetype = S
-triggerall = P2bodydist X <= 30
-triggerall = P2stateno = 5150
-triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = MoveContact || MoveGuarded
-trigger3 = P2BodyDist Y < -685
-trigger4 = P2MoveType = H
-
-[State -1, Crouching Light Kick]
-type = ChangeState
-value = 450
-triggerall = AILevel <= 0
-triggerall = command = "a"
-triggerall = command = "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X > 121
-
-
-
-
-[State -1, Stand middle Kick]
-type = ChangeState
-value = 260
-triggerall = AILevel <= 0
-triggerall = command = "b"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y > -149
-trigger2 = P2StateType = S
-trigger3 = MoveGuarded
-trigger4 = P2BodyDist X < 135
-trigger5 = InGuardDist
-trigger6 = P2MoveType = I
-
-
-
-[State -1, Jump middle Punch]
-type = ChangeState
-value = 610
-triggerall = AILevel <= 0
-triggerall = command = "y"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y <= -250
-trigger2 = P2BodyDist X < 314
-trigger3 = P2StateType = S
-trigger4 = InGuardDist
-
-
-
-[State -1, Crouching Strong Kick]
-type = ChangeState
-value = 470
-triggerall = AILevel <= 0
-triggerall = command = "c"
-triggerall = command = "holddown"
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2StateType = S
-trigger3 = P2BodyDist X > 639
-trigger4 = P2BodyDist Y <= -746
-
-
-
-[State -1, Tiger Uppercut]
-type = ChangeState
-value = ifelse(palno>6,1600,ifelse(palno<=6,1500,1))
-triggerall = AILevel <= 0
-triggerall = command = "TigerUpper_z"
-
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = P2StateType = A
-trigger2 = InGuardDist
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2BodyDist Y >= -968
-trigger5 = P2BodyDist X <= 669
+trigger2 = P2StateType = C
+trigger3 = P2BodyDist Y < 516
+trigger4 = P2BodyDist X >= 313
 
 
 [State -1]
@@ -1062,232 +1010,214 @@ triggerall = P2statetype != C
 triggerall = enemy, NumProj >= 1
 triggerall = Random >= 999
 triggerall = AILevel != 0
-trigger1 = P2MoveType = I
-
-[State -1, Stand Light Kick]
-type = ChangeState
-value = 250
-triggerall = AILevel <= 0
-triggerall = command = "a"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2MoveType = H
-trigger3 = P2BodyDist X <= 778
-trigger4 = MoveContact || MoveGuarded
-trigger5 = P2BodyDist Y <= -779
-trigger6 = P2StateType = S
 
-
-
-[State -1, Stand Strong Punch]
+[State -1]
 type = ChangeState
-value = 720
-triggerall = AILevel <= 0
-triggerall = command = "z"
-triggerall = command != "holddown"
-triggerall = p2bodydist x < 25
+value = 800
+triggerall = Var(55) = 1
+triggerall = P2StateType != A
+triggerall = P2movetype = I
+triggerall = statetype = S
+triggerall = movetype = I
+triggerall = P2BodyDist X = [0,20]
+triggerall = P2stateno != 5030
+triggerall = P2stateno != 5020
+triggerall = P2stateno != 5050
+triggerall = p2stateno != 5000
+triggerall = p2stateno != 5001
 triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = InGuardDist
-trigger3 = P2MoveType = A
+trigger1 = MoveGuarded
+trigger2 = P2BodyDist X >= 259
+trigger3 = P2MoveType = I
 
 
 
-
-
-
-
-
-[State -1, Jump Light Punch]
-type = ChangeState
-value = 600
-triggerall = AILevel <= 0
-triggerall = command = "x"
-triggerall = command != "holddown"
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2MoveType = H
-trigger3 = P2StateType = A
-trigger4 = P2BodyDist X > 402
 
 
 
 [State -1]
 type = ChangeState
 value = 670
-triggerall = AILevel <= 0
 triggerall = Var(55) = 1
 triggerall = MoveType != H
 triggerall = statetype = A
 triggerall = P2bodydist X <= 30
 triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y >= 50
-trigger4 = P2StateType = A
-trigger5 = P2BodyDist X > 428
-trigger6 = MoveContact
+trigger1 = P2BodyDist X < 212
+trigger2 = P2StateType = C
 
 
-[State -1, Stand middle Punch]
+[State -1, Jump middle Punch]
 type = ChangeState
-value = 710
-triggerall = AILevel <= 0
+value = 610
 triggerall = command = "y"
 triggerall = command != "holddown"
-triggerall = p2bodydist x < 25
 triggerall = AILevel != 0
-trigger1 = MoveContact || MoveGuarded
-trigger2 = P2BodyDist Y < 336
-trigger3 = P2BodyDist X < 976
-trigger4 = P2MoveType = H
-trigger5 = P2StateType = C
+trigger1 = P2StateType = S
+trigger2 = P2MoveType = H
+trigger3 = P2BodyDist X <= 514
 
 
 
-[State -1, Crouching Strong Punch]
+[State -1, Standing Strong Kick]
 type = ChangeState
-value = 420
-triggerall = AILevel <= 0
-triggerall = command = "z"
-triggerall = command = "holddown"
+value = 270
+triggerall = command = "c"
+triggerall = command != "holddown"
 triggerall = AILevel != 0
-trigger1 = P2BodyDist X <= 689
+trigger1 = MoveGuarded
+trigger2 = P2MoveType = H
+trigger3 = InGuardDist
+trigger4 = P2BodyDist Y <= 112
 
 
 
 [State -1]
 type = ChangeState
-value = 1000
-triggerall = AILevel <= 0
+value = 4000
 triggerall = Var(55) = 1
+triggerall = P2statetype = S
+triggerall = power >= 1000
 triggerall = statetype = S
-triggerall = ctrl = 1
-triggerall = random <= 300 
-triggerall = P2StateNo != 5050  
-triggerall = P2StateNo != 5070  
-triggerall = P2StateNo != 5100  
-triggerall = P2StateNo != 5110  
-triggerall = P2StateNo != 5120  
-triggerall = P2StateNo != 5160  
-triggerall = P2StateNo != 5170 
+triggerall = movetype = I
+triggerall = P2BodyDist X = [40,90]
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y > -703
-trigger2 = MoveGuarded
-trigger3 = P2BodyDist X > 642
+trigger1 = P2BodyDist Y < 576
+trigger2 = MoveContact || MoveGuarded
 
 [State -1, Tiger Shot]
 type = ChangeState
-value = 1010
-triggerall = AILevel <= 0
-triggerall = command = "shot_y"
+value = 1020
+triggerall = command = "shot_z"
 triggerall = numproj = 0
 triggerall = command != "holddown"
 triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-trigger2 = InGuardDist
-trigger3 = MoveContact
-trigger4 = P2StateType = C
-trigger5 = P2BodyDist Y < -54
-
-
-[State -1, Crouching middle Punch]
-type = ChangeState
-value = 410
-triggerall = AILevel <= 0
-triggerall = command = "y"
-triggerall = command = "holddown"
-triggerall = AILevel != 0
-trigger1 = MoveContact
-
+trigger1 = P2StateType = C
 
 
 [State -1]
 type = ChangeState
-value = 1300
-triggerall = AILevel <= 0
+value = 131
 triggerall = Var(55) = 1
-triggerall = statetype = S
-triggerall = P2Movetype = A 
-triggerall = P2life != 0
-triggerall = random <= 200
-triggerall = P2StateNo != 5050  
-triggerall = P2StateNo != 5070  
-triggerall = P2StateNo != 5100  
-triggerall = P2StateNo != 5110  
-triggerall = P2StateNo != 5120  
-triggerall = P2StateNo != 5160  
-triggerall = P2StateNo != 5170 
-triggerall = P2stateno != 5030
-triggerall = P2stateno != 5020
-triggerall = P2stateno != 5050
-triggerall = P2stateno != 5150
+triggerall = StateType != A
+triggerall = P2Statetype = C
+triggerall = P2Movetype = A
+triggerall = enemy, NumProj >= 1
+triggerall = random >= 999
 triggerall = AILevel != 0
-trigger1 = P2BodyDist X > 100
+trigger1 = P2BodyDist X < 286
+trigger2 = P2MoveType = A
+trigger3 = P2BodyDist Y <= 551
+
+[State -1, Tiger Shot]
+type = ChangeState
+value = 1120
+triggerall = command = "shot_c"
+triggerall = numproj = 0
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 259
 trigger2 = P2MoveType = A
 trigger3 = InGuardDist
-trigger4 = MoveGuarded
-trigger5 = P2BodyDist Y > -418
-trigger6 = P2StateType = C
+trigger4 = MoveContact
+trigger5 = P2StateType = S
+
+
+
 
 [State -1]
 type = ChangeState
 value = 2100
-triggerall = AILevel <= 0
 triggerall = Var(55) = 1
 triggerall = statetype = S
 triggerall = P2bodydist X = [5,55]
 triggerall = random <= 400
 triggerall = ctrl
 triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2StateType = A
-trigger3 = P2MoveType = I
+trigger1 = InGuardDist
+trigger2 = MoveContact || MoveGuarded
+trigger3 = P2StateType = C
 
-[State -1]
+[State -1, Crouching Strong Kick]
 type = ChangeState
-value = 2200
-triggerall = AILevel <= 0
-triggerall = Var(55) = 1
-triggerall = statetype = S
-triggerall = P2bodydist X = [5,60]
-triggerall = random <= 400
-triggerall = ctrl
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X >= 30
-trigger2 = MoveGuarded
-trigger3 = P2BodyDist Y < -701
-trigger4 = InGuardDist
-trigger5 = P2StateType = A
-
-[State -1, Jump Light Kick]
-type = ChangeState
-value = 650
-triggerall = AILevel <= 0
-triggerall = command = "a"
-triggerall = command != "holddown"
-triggerall = vel X != 0
+value = 470
+triggerall = command = "c"
+triggerall = command = "holddown"
 triggerall = AILevel != 0
 trigger1 = P2MoveType = I
+trigger2 = P2BodyDist Y >= -532
+
+
+
+[State -1, Tiger Knee]
+type = ChangeState
+value = 2100
+triggerall = command = "TigerKnee_b"
+
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X <= 127
 trigger2 = P2StateType = S
 trigger3 = InGuardDist
-trigger4 = MoveContact || MoveGuarded
+trigger4 = MoveGuarded
 
 
-
-[State -1, Stand Light Punch]
+[State -1, Jump Strong Kick]
 type = ChangeState
-value = 700
-triggerall = AILevel <= 0
-triggerall = command = "x"
+value = 670
+triggerall = command = "c"
 triggerall = command != "holddown"
-triggerall = p2bodydist x < 20
+triggerall = AILevel != 0
+trigger1 = MoveGuarded
+trigger2 = P2StateType = C
+trigger3 = P2BodyDist X >= 477
+trigger4 = P2MoveType = A
+trigger5 = InGuardDist
+trigger6 = P2BodyDist Y >= 246
+
+
+
+
+
+
+
+[State -1, Stand middle Kick]
+type = ChangeState
+value = 260
+triggerall = command = "b"
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = MoveContact
+trigger2 = P2BodyDist X >= 545
+trigger3 = P2StateType = C
+trigger4 = P2MoveType = H
+
+
+
+[State -1, Tiger Shot]
+type = ChangeState
+value = 1010
+triggerall = command = "shot_y"
+triggerall = numproj = 0
+triggerall = command != "holddown"
 triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2BodyDist X > 596
-trigger3 = P2BodyDist Y <= 993
-trigger4 = P2StateType = A
 
+
+[State -1, Tiger Uppercut]
+type = ChangeState
+value = 1300
+triggerall = command = "TigerUpper_x"
+
+triggerall = command != "holddown"
+triggerall = AILevel != 0
+trigger1 = P2StateType = S
+trigger2 = P2BodyDist X < 576
+trigger3 = P2MoveType = A
+trigger4 = MoveContact || MoveGuarded
+trigger5 = InGuardDist
+trigger6 = P2BodyDist Y <= -617
 
 

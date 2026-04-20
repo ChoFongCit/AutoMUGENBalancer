@@ -1,5 +1,3 @@
-from pathlib import Path
-import pandas as pd
 import re
 
 TARGET_WINRATE = 0.50
@@ -17,6 +15,8 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from extract_moves import extract_moves
+from sklearn.ensemble import GradientBoostingRegressor
+from xgboost import XGBRegressor
 
 # Winrates from your match runner results
 # { character_name: winrate_0_to_1 }
@@ -101,7 +101,7 @@ data = data.fillna(0)   # characters missing a category get 0
 
 X = data.drop(columns=["winrate"])
 y = data["winrate"]
-from xgboost import XGBRegressor
+
 
 model = XGBRegressor(
     n_estimators=100,
@@ -186,8 +186,6 @@ def compute_adjustment(field, current_value, gap_pct, direction):
         delta = round(scale * gap_pct) * (1 if direction == "buff" else -1)
         new_val = current_value + delta
         return max(1, new_val)    # frames can't go below 1
-    
-    import re
 
 def adjust_cns_damage(cns_path, state_id, multiplier):
     """Scale the damage value in a specific Statedef's HitDef."""

@@ -164,6 +164,8 @@ def adjust_elo(log_list, population_dict):
             update_elo(winner=p2_individual, loser= p1_individual)
             
 def record_data():         
-    put_in_csv(process_all_logs())
+    put_in_csv(process_character_logs("SHAP"))
     
+
+
 

@@ -7,7 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from GA import main
 
 
-SIZE = 10
+SIZE = 5
 GENERATIONS = 2
 if __name__ == "__main__":
     # Default args for Ryu — override any by passing CLI flags as normal

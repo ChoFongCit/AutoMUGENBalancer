@@ -34,7 +34,7 @@ matches = [
     {
         "p1_name": p1[0], "p1_char": p1[1],
         "p2_name": p2[0], "p2_char": p2[1],
-        "log": f"logs/log_{p1[0]}_vs_{p2[0]}.txt"
+        "log": f"logs/SHAP/log_{p1[0]}_vs_{p2[0]}.txt"
     }
     for p1, p2 in combinations(ROSTER, 2)
 ]

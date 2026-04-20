@@ -1,8 +1,5 @@
-external/script/main.lua:1499: ./chars/Guile/cmds/00.cmd:213:
-IFelse(Command="x", IFelse(Command="holddown"||Var(10)=2, 300, IFelse(P2Dist X>(84*Const(Size.XScale))&&Var(10),201,200)), IFelse(Command="holddown"||Var(10)=2, 330, 230))[State -1]
-value: Invalid data: [
+external/script/main.lua:371: <game end>
 stack traceback:
-	[G]: in function 'game'
-	external/script/main.lua:1499: in function 'f_commandLine'
-	external/script/main.lua:1508: in main chunk
+	[G]: in function 'refresh'
+	external/script/main.lua:371: in main chunk
 	[G]: ?

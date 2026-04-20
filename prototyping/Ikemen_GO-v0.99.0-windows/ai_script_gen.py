@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 mugen_ai_replace.py
 -------------------
@@ -38,6 +37,27 @@ from pathlib import Path
 TRIGGER_LINE_RE  = re.compile(r"^\s*(triggerall|trigger\d+)\s*=", re.IGNORECASE)
 STATE_MINUS1_RE  = re.compile(r"^\s*\[State\s+-1",               re.IGNORECASE)
 STATE_HEADER_RE  = re.compile(r"^\s*\[State",                     re.IGNORECASE)
+IHP_RE         = re.compile(r"^\s*ignorehitpause\s*=", re.IGNORECASE)
+VARSET_TYPE_RE = re.compile(r"^\s*type\s*=\s*VarSet\b", re.IGNORECASE)
+IFELSE_COMMAND_VALUE_RE = re.compile(
+    r"^\s*value\s*=\s*IFelse\s*\(.*Command\s*=",
+    re.IGNORECASE,
+)
+SYSTEM_TRIGGER_RE = re.compile(
+    r"^\s*(triggerall|trigger\d+)\s*=.*\b("
+    r"AILevel|IsHelper|ParentDist|NumHelper|Helper"
+    r"|Parent|RootDist|Root|NumTarget|Target"
+    r")\b",
+    re.IGNORECASE,
+)
+VAR_FLAG_TRIGGER_RE = re.compile(
+    r"^\s*(triggerall|trigger\d+)\s*=\s*!var\(59\)",
+    re.IGNORECASE,
+)
+COMMAND_TRIGGER_RE = re.compile(
+    r"^\s*(triggerall|trigger\d+)\s*=\s*[^=]*\bcommand\b",
+    re.IGNORECASE,
+)
  
  
 # ---------------------------------------------------------------------------
@@ -50,12 +70,12 @@ STATE_HEADER_RE  = re.compile(r"^\s*\[State",                     re.IGNORECASE)
 
 def _dist_x() -> str:
     op  = random.choice(["<", ">", "<=", ">="])
-    val = random.randint(1, 1000)
+    val = random.randint(0, 640)
     return f"P2BodyDist X {op} {val}"
 
 def _dist_y() -> str:
     op  = random.choice(["<", ">", "<=", ">="])
-    val = random.randint(-1000, 1000)
+    val = random.randint(-640, 640)
     return f"P2BodyDist Y {op} {val}"
 
 def _move_type() -> str:
@@ -72,8 +92,8 @@ def _contact() -> str:
 # subset (at least 1, at most all 6), so no trigger type is guaranteed to
 # appear in every block. InGuardDist is just one option among many.
 TRIGGER_POOL = [
-    lambda: f"P2BodyDist X {random.choice(['<', '>', '<=', '>='])} {random.randint(1, 1000)}",
-    lambda: f"P2BodyDist Y {random.choice(['<', '>', '<=', '>='])} {random.randint(-1000, 1000)}",
+    lambda: f"P2BodyDist X {random.choice(['<', '>', '<=', '>='])} {random.randint(0, 640)}",
+    lambda: f"P2BodyDist Y {random.choice(['<', '>', '<=', '>='])} {random.randint(-640, 640)}",
     lambda: "InGuardDist",
     lambda: f"P2MoveType = {random.choice(['A', 'I', 'H'])}",
     lambda: f"P2StateType = {random.choice(['S', 'C', 'A'])}",
@@ -144,77 +164,97 @@ IFELSE_COMMAND_VALUE_RE = re.compile(
  
 def flush_block(block_lines: list[str], stats: dict) -> list[str] | None:
     """
-    Given the collected lines of one [State -1] block (excluding its header):
-      - Keep all triggerall lines exactly as-is.
-      - Remove all trigger1/2/3... numbered lines.
-      - Append fresh numbered trigger lines after the last triggerall.
-      - Return None to signal that the entire block (including its header)
-        should be dropped from the output.
+    Process one [State -1] block body (header line excluded):
+
+      1. Return block unchanged if it is a VarSet block (AI flag housekeeping).
+      2. Return None to drop the block if it contains an IFelse(Command=...)
+         value line (human input-routing block, irrelevant for AI).
+      3. Otherwise:
+         a. Strip all numbered trigger lines.
+         b. Strip system/helper/AILevel/var(59) triggerall lines.
+         c. Inject `triggerall = AILevel != 0` after the last triggerall.
+         d. Insert fresh random trigger lines immediately after the last triggerall.
+         e. Re-attach ignorehitpause cleanly before any trailing blanks/comments.
+
+    Returns the processed line list, or None if the block should be dropped.
     """
+
+    # --- Guard 1: preserve VarSet blocks untouched -------------------------
     if any(VARSET_TYPE_RE.match(ln.rstrip("\n")) for ln in block_lines):
         return list(block_lines)
+
+    # --- Guard 2: drop human input-routing blocks --------------------------
     if any(IFELSE_COMMAND_VALUE_RE.match(ln.rstrip("\n")) for ln in block_lines):
         stats["ifelse_command_removed"] += 1
-        return None  # drop header + body from output
-    kept_content    = []
-    trailing_blanks = []
- 
+        return None
+
+    # --- Step 1: filter lines ----------------------------------------------
+    kept:     list[str] = []
+    ihp_lines: list[str] = []   # ignorehitpause lines — repositioned later
+
     for ln in block_lines:
         raw = ln.rstrip("\n")
         if NUMBERED_TRIGGER_RE.match(raw):
-            stats["triggers_removed"] += 1        # drop numbered triggers
+            stats["triggers_removed"] += 1
         elif SYSTEM_TRIGGER_RE.match(raw) or VAR_FLAG_TRIGGER_RE.match(raw):
-            stats["system_triggers_removed"] += 1 # drop system/helper/AILevel/var-flag lines
+            stats["system_triggers_removed"] += 1
+        elif IHP_RE.match(raw):
+            ihp_lines.append(ln)          # collect for later reattachment
         else:
-            kept_content.append(ln)               # keep everything else
- 
-    # Inject AILevel guard after the last existing triggerall, or after the
-    # first real content line if no triggerall lines are present.
+            kept.append(ln)
+
+    # --- Step 2: inject AILevel guard --------------------------------------
     ailevel_line = "triggerall = AILevel != 0\n"
-    already_has = any(
+    already_has  = any(
         re.search(r"triggerall\s*=\s*ailevel\s*!=\s*0", ln, re.IGNORECASE)
-        for ln in kept_content
+        for ln in kept
     )
     if not already_has:
-        last_ta_idx = None
-        for idx, ln in enumerate(kept_content):
-            if TRIGGERALL_RE.match(ln.rstrip("\n")):
-                last_ta_idx = idx
-        if last_ta_idx is not None:
-            kept_content.insert(last_ta_idx + 1, ailevel_line)
+        last_ta = next(
+            (i for i in range(len(kept) - 1, -1, -1)
+             if TRIGGERALL_RE.match(kept[i].rstrip("\n"))),
+            None,
+        )
+        if last_ta is not None:
+            kept.insert(last_ta + 1, ailevel_line)
         else:
-            insert_at = 0
-            for idx, ln in enumerate(kept_content):
-                s = ln.strip()
-                if s and not s.startswith(";"):
-                    insert_at = idx + 1
-                    break
-            kept_content.insert(insert_at, ailevel_line)
+            # No triggerall present — insert after first real content line
+            insert_at = next(
+                (i + 1 for i, ln in enumerate(kept)
+                 if ln.strip() and not ln.strip().startswith(";")),
+                0,
+            )
+            kept.insert(insert_at, ailevel_line)
         stats["ailevel_injected"] += 1
- 
-    # Insert new triggers directly after the last triggerall line
-    # so they sit adjacent to the triggerall section, before anything else.
-    last_ta_idx = None
-    for idx, ln in enumerate(kept_content):
-        if TRIGGERALL_RE.match(ln.rstrip("\n")):
-            last_ta_idx = idx
- 
+
+    # --- Step 3: insert new triggers after last triggerall -----------------
     new_triggers = build_trigger_block()
     stats["triggers_added"] += len(new_triggers)
- 
-    if last_ta_idx is not None:
-        insert_at = last_ta_idx + 1
+
+    last_ta = next(
+        (i for i in range(len(kept) - 1, -1, -1)
+         if TRIGGERALL_RE.match(kept[i].rstrip("\n"))),
+        None,
+    )
+    if last_ta is not None:
+        trigger_insert = last_ta + 1
     else:
-        # No triggerall at all — insert after the first real content line
-        insert_at = 0
-        for idx, ln in enumerate(kept_content):
-            s = ln.strip()
-            if s and not s.startswith(";"):
-                insert_at = idx + 1
-                break
- 
-    kept_content[insert_at:insert_at] = new_triggers
-    return kept_content
+        trigger_insert = next(
+            (i + 1 for i, ln in enumerate(kept)
+             if ln.strip() and not ln.strip().startswith(";")),
+            0,
+        )
+    kept[trigger_insert:trigger_insert] = new_triggers
+
+    # --- Step 4: reattach ignorehitpause before trailing blanks/comments ---
+    # Peel trailing blank/comment lines off the end
+    trailer: list[str] = []
+    while kept and (kept[-1].strip() == "" or kept[-1].strip().startswith(";")):
+        trailer.insert(0, kept.pop())
+
+    # ignorehitpause goes here, then the trailer is restored
+    return kept + ihp_lines + trailer
+
  
  
 def process_lines(lines: list[str], shuffle: bool = False) -> tuple[list[str], dict]:

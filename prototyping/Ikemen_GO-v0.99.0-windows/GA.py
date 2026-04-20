@@ -43,14 +43,19 @@ TRIGGERALL_RE       = re.compile(r"^\s*triggerall\s*=",  re.IGNORECASE)
 STATE_MINUS1_RE     = re.compile(r"^\s*\[State\s+-1",    re.IGNORECASE)
 STATE_HEADER_RE     = re.compile(r"^\s*\[State",          re.IGNORECASE)
      
+IHP_RE = re.compile(r"^\s*ignorehitpause\s*=", re.IGNORECASE)
+
 def _body_to_block(header: str, body: list[str]) -> CMD_Block:
-    """Split raw block body into preamble / triggers / trailer."""
     preamble_raw: list[str] = []
     triggers:     list[str] = []
+    ihp_lines:    list[str] = []
 
     for ln in body:
-        if NUMBERED_TRIGGER_RE.match(ln.rstrip("\n")):
+        raw = ln.rstrip("\n")
+        if NUMBERED_TRIGGER_RE.match(raw):
             triggers.append(ln)
+        elif IHP_RE.match(raw):
+            ihp_lines.append(ln)    # pull ignorehitpause out separately
         else:
             preamble_raw.append(ln)
 
@@ -63,7 +68,7 @@ def _body_to_block(header: str, body: list[str]) -> CMD_Block:
             break
 
     return CMD_Block(header=header, preamble=preamble_raw,
-                 triggers=triggers, trailer=trailer)
+                     triggers=triggers, ihp_lines=ihp_lines, trailer=trailer)
 
 
 def patch_def(def_path, cmd_dir, out_dir):

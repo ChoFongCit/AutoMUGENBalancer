@@ -5,33 +5,27 @@ from dataclasses import dataclass, field
 # ---------------------------------------------------------------------------
 # Block — unit of genetic material
 # ---------------------------------------------------------------------------
+        
 @dataclass
 class CMD_Block:
-    """
-    One [State -1] block split into four parts.
-    Only `triggers` is modified by genetic operations.
-
-        header    — the [State -1, ...] line
-        preamble  — type=, value=, triggerall=, ignorehitpause=, etc.
-        triggers  — numbered trigger1/2/3... lines  <- the gene
-        trailer   — trailing blank / comment lines
-    """
-    header:   str
-    preamble: list[str]
-    triggers: list[str]
-    trailer:  list[str]
+    header:    str
+    preamble:  list[str]
+    triggers:  list[str]
+    ihp_lines: list[str]   # add this
+    trailer:   list[str]
 
     def to_lines(self) -> list[str]:
-        return [self.header] + self.preamble + self.triggers + self.trailer
+        # ignorehitpause now sits after triggers, before trailer
+        return [self.header] + self.preamble + self.triggers + self.ihp_lines + self.trailer
 
     def clone(self):
         return CMD_Block(
-            header   = self.header,
-            preamble = list(self.preamble),
-            triggers = list(self.triggers),
-            trailer  = list(self.trailer),
+            header    = self.header,
+            preamble  = list(self.preamble),
+            triggers  = list(self.triggers),
+            ihp_lines = list(self.ihp_lines),
+            trailer   = list(self.trailer),
         )
-        
         
 def assemble_cmd(segments: list, blocks: list[CMD_Block]) -> list[str]:
     """Reconstruct file lines from segments with current block contents."""

@@ -1,0 +1,47 @@
+
+
+
+
+[Info]
+name = "KungFuMan_14"        
+displayname = "KungFuMan_14" 
+versiondate = 09,30,2009    
+mugenversion = 1.0          
+author = "Elecbyte"         
+pal.defaults = 1,2,3,4      
+                            
+localcoord = 320,240        
+
+
+[Files]
+cmd = cmds/14.cmd
+cns = kfm-AI.cns
+st = kfm-AI.cns
+st0 = movelist-AI.dat
+st1 = aisummary.txt
+stcommon = common1.cns      
+sprite  = kfm.sff           
+anim    = kfm.air           
+sound   = kfm.snd           
+ai      = kfm.ai            
+movelist = movelist.dat     
+
+
+[Palette Keymap]
+x = 1 
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+
+
+
+
+
+
+
+
+[Arcade]
+intro.storyboard = intro.def
+ending.storyboard = ending.def

@@ -649,6 +649,71 @@ time = 1
 
 [Statedef -1]
 
+[State -1, 2500]
+type = ChangeState
+value = 2500
+triggerall = command = "special_01A" &&  statetype != A && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+
+
+
+[State -1, 330]
+type = ChangeState
+value = 330
+triggerall = var(25) = 1 && p2bodydist X <= 100 && statetype != A && movetype = H && P2statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= -267
+trigger2 = InGuardDist
+trigger3 = P2BodyDist X > 120
+trigger4 = P2StateType = S
+
+
+
+[State -1];°o˜OËö´ÆÝÝ´ŸÊHˆ¨ûÜÊUƒæˆ¤
+type = ChangeState
+triggerall = P2stateno != 1301
+triggerall = statetype != A && var(25) = 1 && movetype != H && ctrl = 1 && P2MoveType = A
+triggerall = P2BodyDist X <= 200 && P2statetype = S && random <= 50			;ÑZô¼ˋ¥ˆþÛè
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2BodyDist X > 66
+trigger3 = P2MoveType = I
+trigger4 = MoveContact || MoveGuarded
+trigger5 = InGuardDist
+;
+;
+value = 120
+
+;walk AI
+[State -1, 300]
+type = ChangeState
+value = 300
+triggerall = command = "x" && command = "holddown" &&  statetype = C
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= -338
+trigger2 = MoveContact || MoveGuarded
+trigger3 = P2StateType = A
+
+[State -1, 305]
+type = ChangeState
+value = 305
+triggerall = command = "y" && command = "holddown" &&  statetype = C
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= 527
+trigger2 = MoveGuarded
+trigger3 = P2BodyDist X > 433
+trigger4 = P2StateType = S
+
+
+[State -1, 350]
+type = ChangeState
+value = 350
+triggerall = command = "z" && statetype = A && vel X != 0
+triggerall = AILevel != 0
+trigger1 = P2MoveType = H
+
+
 [State -1,AI]
 type = VarSet
 trigger1 = Command = "ai"
@@ -687,631 +752,24 @@ var(25) = 1
 
 
 
-[State -1, 3000]
-type = ChangeState
-value = 3000
-triggerall = command = "hyper_01" &&  statetype != A && power >= 1000
-triggerall = AILevel != 0
-trigger1 = MoveContact
-trigger2 = P2MoveType = I
-trigger3 = P2BodyDist X < 181
-trigger4 = P2StateType = C
-trigger5 = P2BodyDist Y < -159
-
-
-
-[State -1, throw]
-type = ChangeState
-value = 1820
-triggerall = statetype != A && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = P2StateType = A
-
-
-
-
-[State -1, throw]
-type = ChangeState
-value = 570
-triggerall = statetype = C && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y > -421
-trigger4 = P2BodyDist X <= 577
-trigger5 = MoveContact || MoveGuarded
-
-
-[State -1, auto];°o˜OËö´ÆÝÝ´ŸÊHˆ¨ûÜÊUƒæˆ¤
-type = ChangeState
-triggerall = P2stateno != 1301
-triggerall = statetype != A && var(25) = 1 && movetype != H && ctrl = 1 && P2MoveType = A
-triggerall = P2BodyDist X <= 200 && P2statetype = S			;ÑZô¼ˋ¥ˆþÛè
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = MoveGuarded
-trigger3 = P2BodyDist X < 507
-;
-value = 120							;ÇNûÜÊU¿w°ó´ƒ¢m
-
-[State -1, 351]
-type = ChangeState
-value = 381
-triggerall = command = "y" && statetype = A && vel X = 0 && command = "holdup"
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = MoveGuarded
-trigger3 = InGuardDist
-trigger4 = P2StateType = S
-
-
-[State -1, 1302]
-type = ChangeState
-value = 1302
-triggerall = command = "special_04C" &&  statetype != A
-triggerall = AILevel != 0
-trigger1 = P2MoveType = I
-
-
-
-[State -1, 14444]
-type = ChangeState
-triggerall = AILevel != 0
-trigger1 = MoveContact || MoveGuarded
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y >= -101
-trigger4 = P2StateType = S
-trigger5 = P2MoveType = I
-trigger6 = P2BodyDist X < 78
-value = 14444
-
-[State -1, 370]
-type = ChangeState
-value = 370
-triggerall = command = "x" && statetype = A && vel X = 0
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2MoveType = H
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2StateType = C
-trigger5 = P2BodyDist Y > -762
-trigger6 = P2BodyDist X <= 714
-
-
-[State -1, 336]
-type = ChangeState
-value = 405
-triggerall = command = "b" && statetype != A && command != "holddown" && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X >= 519
-trigger2 = P2MoveType = A
-trigger3 = P2BodyDist Y >= -483
-
-
-[State -1, 210]
-type = ChangeState
-value = 210
-triggerall = command = "z" && command != "holddown" && p2bodydist X <= 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = P2StateType = A
-trigger2 = P2BodyDist X >= 128
-trigger3 = P2BodyDist Y <= -938
-trigger4 = P2MoveType = I
-
-
-[State -1, 1300]
-type = ChangeState
-value = 1300
-triggerall = command = "special_04A" &&  statetype != A
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X >= 218
-trigger2 = P2MoveType = I
-trigger3 = InGuardDist
-trigger4 = P2StateType = A
-trigger5 = P2BodyDist Y > -684
-trigger6 = MoveGuarded
-
-
-
-[State -1, 320]
-type = ChangeState
-value = 320
-triggerall = command = "a" && command = "holddown" 
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 614
-
-
-[State -1, 300]
-type = ChangeState
-value = 300
-triggerall = command = "x" && command = "holddown" &&  statetype = C
-triggerall = AILevel != 0
-trigger1 = MoveContact || MoveGuarded
-
-[State -1, 1010]
-type = ChangeState
-value = 1020
-triggerall = command = "special_01B" &&  statetype != A && var(14) = 0
-triggerall = AILevel != 0
-trigger1 = MoveContact || MoveGuarded
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y >= 536
-trigger4 = P2MoveType = A
-
-
-
-[State -1, 330]
-type = ChangeState
-value = 330
-triggerall = var(25) = 1 && p2bodydist X <= 100 && statetype != A && movetype = H && P2statetype != A
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-
-
-
-[State -1, 325]
-type = ChangeState
-value = 325
-triggerall = var(25) = 1 && p2bodydist X <= 80 && statetype != A && movetype = H && P2statetype != A
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2BodyDist Y < -448
-trigger3 = P2BodyDist X > 990
-trigger4 = InGuardDist
-
-
-[State -1, 200]
-type = ChangeState
-value = 200
-triggerall = command = "x" && command != "holddown" && p2bodydist X <= 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2BodyDist X > 894
-trigger3 = P2BodyDist Y < 229
-trigger4 = P2MoveType = A
-
-
-[State -1]
-type = ChangeState
-value = 950
-triggerall = statetype = A && ctrl && Pos Y < -40
-triggerall = AILevel != 0
-trigger1 = P2MoveType = I
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y <= 54
-trigger4 = P2BodyDist X >= 366
-trigger5 = P2StateType = S
-
-
-
-[State -1, throw]
-type = ChangeState
-value = 500
-triggerall = statetype = S && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y < 357
-trigger2 = P2BodyDist X < 1000
-
-
 [State -1, 245]
 type = ChangeState
 value = 245
 triggerall = command = "y" && command != "holddown" && p2bodydist X > 25 && statetype = S
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= -879
-trigger2 = P2BodyDist X > 483
+trigger1 = P2BodyDist Y > -439
+trigger2 = P2StateType = A
+
+
+[State -1]
+type = ChangeState
+value = 900
+triggerall = statetype = A && ctrl && Pos Y < -40
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2MoveType = A
 trigger3 = P2StateType = A
-
-
-[State -1, 355]
-type = ChangeState
-value = 355
-triggerall = command = "a" && statetype = A && vel X != 0
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2BodyDist Y > -701
-trigger3 = P2MoveType = A
-trigger4 = InGuardDist
-
-
-[State -1, throw]
-type = ChangeState
-value = 560
-triggerall = statetype = S && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = InGuardDist
-trigger3 = P2StateType = A
-trigger4 = P2BodyDist Y > -368
-trigger5 = P2BodyDist X <= 65
-trigger6 = MoveGuarded
-
-
-[State -1, throw]
-type = ChangeState
-value = 510
-triggerall = statetype = S && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = P2StateType = C
-trigger3 = P2BodyDist X < 679
-trigger4 = MoveContact
-trigger5 = InGuardDist
-trigger6 = P2BodyDist Y > -53
-
-
-[State -1, 2000]
-type = ChangeState
-value = 2000
-triggerall = command = "super_01" &&  statetype != A && power >= 1000 && var(14) = 1 && var(25) <= 0
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-
-
-
-
-
-[State -1, 1200]
-type = ChangeState
-value = 1200
-triggerall = command = "special_03A" &&  statetype != A 
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = P2BodyDist Y >= 105
-trigger3 = InGuardDist
-trigger4 = P2BodyDist X >= 862
-trigger5 = MoveContact
-trigger6 = P2StateType = S
-
-
-
-[State -1, 230]
-type = ChangeState
-value = 230
-triggerall = command = "c" && command != "holddown" && p2bodydist X <= 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X <= 71
-
-
-
-
-[State -1, 336]
-type = ChangeState
-value = 356
-triggerall = command = "a" && statetype = A && vel X != 0 && command = "holddown"
-triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-trigger2 = P2BodyDist X <= 326
-trigger3 = InGuardDist
-trigger4 = P2BodyDist Y > 246
-
-
-[State -1, 390]
-type = ChangeState
-value = 390
-triggerall = command = "b" && statetype = A && vel X = 0
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= -322
-trigger2 = MoveGuarded
-trigger3 = P2BodyDist X > 144
-
-; JUMP HK
-[State -1, 360]
-type = ChangeState
-value = 360
-triggerall = command = "b" && statetype = A && vel X != 0
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = P2StateType = C
-trigger3 = MoveGuarded
-trigger4 = P2BodyDist X >= 925
-trigger5 = InGuardDist
-trigger6 = P2BodyDist Y < 441
-
-
-[State -1, 2500]
-type = ChangeState
-value = 2500
-triggerall = command = "special_01A" &&  statetype != A && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= -298
-trigger2 = P2BodyDist X > 515
-trigger3 = InGuardDist
-trigger4 = P2MoveType = I
-trigger5 = P2StateType = A
-
-
-
-[State -1, 1700]
-type = ChangeState
-value = 1710
-triggerall = command = "special_06B" &&  statetype != A && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = MoveContact
-trigger2 = InGuardDist
-
-
-SPECIAL_06_C
-[State -1, 1700]
-type = ChangeState
-value = 1700
-triggerall = command = "special_06A" &&  statetype != A && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2StateType = A
-trigger3 = P2BodyDist Y < 91
-
-
-SPECIAL_06_B
-[State -1, 340]
-type = ChangeState
-value = 340
-triggerall = command = "x" && statetype = A && vel X != 0
-triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = InGuardDist
-
-
-[State -1, 1000]
-type = ChangeState
-value = 1000
-triggerall = command = "special_01A" &&  statetype != A && var(14) = 0
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = P2BodyDist X > 372
-trigger3 = InGuardDist
-trigger4 = MoveContact
-
-
-[State -1, 310]
-type = ChangeState
-value = 310
-triggerall = command = "z" && command = "holddown" &&  statetype = C
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2BodyDist X > 510
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2StateType = S
-trigger5 = P2MoveType = A
-trigger6 = P2BodyDist Y < -417
-
-
-[State -1, 2600]
-type = ChangeState
-value = 2600
-triggerall = command = "special_01B" &&  statetype != A && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2StateType = S
-trigger3 = MoveGuarded
-trigger4 = P2BodyDist Y <= 200
-trigger5 = P2BodyDist X <= 519
-trigger6 = P2MoveType = A
-
-
-
-
-[State -1, 350]
-type = ChangeState
-value = 350
-triggerall = command = "z" && statetype = A && vel X != 0
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= 291
-trigger2 = MoveContact
-trigger3 = P2BodyDist X >= 562
-
-
-[State -1, 1700]
-type = ChangeState
-value = 1720
-triggerall = command = "special_06C" &&  statetype != A && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y < -115
-trigger2 = P2MoveType = H
-trigger3 = P2BodyDist X >= 768
-trigger4 = InGuardDist
-
-
-
-
-[State -1, 380]
-type = ChangeState
-value = 380
-triggerall = command = "z" && statetype = A && vel X = 0
-triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-trigger2 = P2StateType = A
-trigger3 = InGuardDist
-
-
-[State -1, 1000]
-type = ChangeState
-value = 1000
-triggerall = random <= 40 && var(25) = 1 &&  statetype != A && movetype != H && ctrl && P2stateno != [5100,5300]
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X > 625
-trigger2 = InGuardDist
-trigger3 = P2StateType = S
-
-
-[State -1, 200]
-type = ChangeState
-value = 200
-triggerall = var(25) = 1 && p2bodydist X <= 10 && statetype != A && movetype = H && P2stateno != [5100,5300]
-triggerall = AILevel != 0
-trigger1 = P2MoveType = I
-trigger2 = MoveContact || MoveGuarded
-trigger3 = P2BodyDist X < 513
-
-
-[State -1, 240]
-type = ChangeState
-value = 240
-triggerall = var(25) = 1 && p2bodydist X > 25 && statetype != A && movetype = H && P2stateno != [5100,5300]
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y <= -949
-trigger2 = P2BodyDist X > 886
-trigger3 = P2MoveType = I
-
-
-[State -1, 1200]
-type = ChangeState
-value = 1200
-triggerall = var(25) = 1 &&  statetype != A & P2statetype != A && movetype != H && P2stateno != [5100,5300]
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 450
-trigger2 = InGuardDist
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2BodyDist Y <= 970
-trigger5 = P2MoveType = A
-
-
-
-[State -1, 375]
-type = ChangeState
-value = 375
-triggerall = command = "y" && statetype = A && vel X = 0
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X <= 632
-trigger2 = P2BodyDist Y <= -764
-trigger3 = MoveContact
-trigger4 = P2StateType = A
-trigger5 = P2MoveType = A
-trigger6 = InGuardDist
-
-
-[State -1, 1600]
-type = ChangeState
-value = 2800
-triggerall = command = "special_05A" &&  statetype != A && var(14) = 1
-triggerall = AILevel != 0
-trigger1 = P2StateType = S
-
-
-
-SPECIAL_06_A
-[State -1];°o˜OËö´ÆÝÝ´ŸÊHˆ¨ûÜÊUƒæˆ¤
-type = ChangeState
-triggerall = P2stateno != 1301
-triggerall = statetype != A && var(25) = 1 && movetype != H && ctrl = 1 && P2MoveType = A
-triggerall = P2BodyDist X <= 200 && P2statetype = S && random <= 50			;ÑZô¼ˋ¥ˆþÛè
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 24
-trigger2 = P2StateType = A
-trigger3 = InGuardDist
-trigger4 = P2MoveType = A
-trigger5 = P2BodyDist Y >= -940
-;
-;
-value = 120
-
-;walk AI
-[State -1, 220]
-type = ChangeState
-value = 220
-triggerall = command = "a" && command != "holddown" && p2bodydist X <= 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = P2StateType = A
-trigger2 = MoveGuarded
-trigger3 = P2BodyDist Y < -552
-trigger4 = P2MoveType = I
-trigger5 = InGuardDist
-
-
-[State -1, 260]
-type = ChangeState
-value = 260
-triggerall = command = "a" && command != "holddown" && p2bodydist X > 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = P2MoveType = I
-trigger2 = P2BodyDist Y >= -251
-
-
-[State -1, 330]
-type = ChangeState
-value = 330
-triggerall = command = "c" && command = "holddown" &&  statetype = C
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y >= -407
-trigger2 = P2StateType = A
-trigger3 = MoveContact || MoveGuarded
-trigger4 = InGuardDist
-trigger5 = P2MoveType = H
-trigger6 = P2BodyDist X <= 523
-
-
-[State -1, 361]
-type = ChangeState
-value = 361
-triggerall = command = "b" && statetype = A && vel X != 0 && command = "holddown"
-triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = InGuardDist
-trigger3 = P2BodyDist X <= 119
-trigger4 = P2BodyDist Y > 795
-trigger5 = MoveGuarded
-
-
-[State -1, 385]
-type = ChangeState
-value = 385
-triggerall = command = "a" && statetype = A && vel X = 0
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 736
-
-; JUMP MK
-[State -1, 205]
-type = ChangeState
-value = 205
-triggerall = var(25) = 1 && p2bodydist X <= 15 && statetype != A && movetype = H && P2statetype != A
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y <= 174
-trigger2 = InGuardDist
-
-
-[State -1, 250]
-type = ChangeState
-value = 250
-triggerall = command = "z" && command != "holddown" && p2bodydist X > 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = MoveContact || MoveGuarded
-trigger2 = P2BodyDist Y >= 839
-trigger3 = P2StateType = C
-trigger4 = P2BodyDist X <= 434
-
-
-[State -1, 351]
-type = ChangeState
-value = 381
-triggerall = command = "z" && statetype = A && vel X = 0 && command = "holdup"
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-
-
-[State -1, 44444]
-type = ChangeState
-triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-value = 44444
-
-
-[State -1, 240]
-type = ChangeState
-value = 240
-triggerall = command = "x" && command != "holddown" && p2bodydist X > 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 957
-
-
-[State -1, throw]
-type = ChangeState
-value = 1810
-triggerall = statetype != A && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = InGuardDist
-trigger2 = P2BodyDist X > 435
-trigger3 = P2MoveType = H
-trigger4 = P2StateType = A
+trigger4 = P2BodyDist Y > -421
 
 
 [State -1, 205]
@@ -1319,61 +777,12 @@ type = ChangeState
 value = 205
 triggerall = command = "y" && command != "holddown" && p2bodydist X <= 25 && statetype = S
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y <= 51
+trigger1 = InGuardDist
 trigger2 = P2MoveType = I
-trigger3 = P2BodyDist X < 621
-
-
-[State -1, 1100]
-type = ChangeState
-value = 1100
-triggerall = var(25) = 1 &&  statetype !=A && movetype != H && P2statetype != A && P2stateno != [5100,5300]
-triggerall = AILevel != 0
-trigger1 = MoveContact
-trigger2 = InGuardDist
-trigger3 = P2BodyDist X > 969
-trigger4 = P2StateType = C
-trigger5 = P2MoveType = I
-
-
-[state -1,bak]
-type = ChangeState
-triggerall = ctrl = 1 && movetype != H && random <= 10
-triggerall = AILevel != 0
-trigger1 = P2StateType = A
-trigger2 = P2MoveType = I
-trigger3 = P2BodyDist X < 123
-trigger4 = InGuardDist
-trigger5 = MoveGuarded
-trigger6 = P2BodyDist Y >= -469
-value = 20
-
-
-
-
-
-
-
-[State -1, 305]
-type = ChangeState
-value = 305
-triggerall = command = "y" && command = "holddown" &&  statetype = C
-triggerall = AILevel != 0
-trigger1 = P2MoveType = A
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y >= 955
+trigger3 = P2BodyDist Y < -36
 trigger4 = MoveContact
 trigger5 = P2StateType = S
-
-
-[State -1, throw]
-type = ChangeState
-value = 1800
-triggerall = statetype != A && ctrl && stateno != 100
-triggerall = AILevel != 0
-trigger1 = P2BodyDist Y <= -627
-trigger2 = MoveContact
-trigger3 = InGuardDist
+trigger6 = P2BodyDist X >= 518
 
 
 [State -1, 3000]
@@ -1382,37 +791,464 @@ value = 3000
 triggerall = P2bodydist X <= 30 && P2stateno != [40,55]
 triggerall = var(25) = 1 &&  statetype != A && power >= 1000 && P2statetype != A && P2stateno != [5100,5300]
 triggerall = AILevel != 0
-trigger1 = P2MoveType = H
-trigger2 = P2StateType = A
-trigger3 = P2BodyDist X >= 477
+trigger1 = P2MoveType = A
+trigger2 = P2BodyDist X <= 293
+trigger3 = P2BodyDist Y >= 414
+
+
+
+[State -1, throw]
+type = ChangeState
+value = 520
+triggerall = statetype = S && ctrl && stateno != 100
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2BodyDist X < 579
+
+
+[State -1, auto];°o˜OËö´ÆÝÝ´ŸÊHˆ¨ûÜÊUƒæˆ¤
+type = ChangeState
+triggerall = P2stateno != 1301
+triggerall = statetype != A && var(25) = 1 && movetype != H && ctrl = 1 && P2MoveType = A
+triggerall = P2BodyDist X <= 200 && P2statetype = S			;ÑZô¼ˋ¥ˆþÛè
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2BodyDist X > 340
+trigger3 = MoveGuarded
+trigger4 = InGuardDist
+;
+value = 120							;ÇNûÜÊU¿w°ó´ƒ¢m
+
+[State -1, 14444]
+type = ChangeState
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 125
+trigger2 = P2BodyDist Y >= -184
+trigger3 = P2StateType = A
 trigger4 = MoveGuarded
-trigger5 = P2BodyDist Y > -179
+value = 14444
+
+[State -1, 360]
+type = ChangeState
+value = 360
+triggerall = command = "b" && statetype = A && vel X != 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y < 517
+trigger2 = InGuardDist
+
+
+[State -1, 1110]
+type = ChangeState
+value = 1110
+triggerall = command = "special_02B" &&  statetype != A
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+trigger2 = P2BodyDist Y > -352
+
+
+
+
+[State -1]
+type = ChangeState
+value = 950
+triggerall = statetype = A && ctrl && Pos Y < -40
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y < 545
+trigger2 = P2MoveType = I
+trigger3 = InGuardDist
+trigger4 = P2BodyDist X <= 14
+
+
+
+[State -1, 1600]
+type = ChangeState
+value = 2800
+triggerall = command = "special_05A" &&  statetype != A && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = P2StateType = S
+trigger2 = MoveContact || MoveGuarded
+trigger3 = InGuardDist
+
+
+
+SPECIAL_06_A
+[State -1, 250]
+type = ChangeState
+value = 250
+triggerall = command = "z" && command != "holddown" && p2bodydist X > 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X <= 445
+trigger2 = InGuardDist
+trigger3 = P2StateType = S
+
+
+[State -1, 1302]
+type = ChangeState
+value = 1302
+triggerall = command = "special_04C" &&  statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 351
+trigger2 = P2MoveType = H
+
+
+
+[state -1,walk]
+type = ChangeState
+triggerall = ctrl = 1 && movetype != H && random <= 60
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = MoveContact
+trigger3 = P2StateType = A
+value = 20
+
+[State -1, 336]
+type = ChangeState
+value = 405
+triggerall = command = "b" && statetype != A && command != "holddown" && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y > -69
+trigger2 = P2BodyDist X > 601
+
+
+[State -1, 351]
+type = ChangeState
+value = 381
+triggerall = command = "y" && statetype = A && vel X = 0 && command = "holdup"
+triggerall = AILevel != 0
+trigger1 = P2StateType = S
+trigger2 = P2BodyDist Y > -92
+trigger3 = MoveContact || MoveGuarded
+trigger4 = InGuardDist
+trigger5 = P2MoveType = A
+
+
+[State -1, 325]
+type = ChangeState
+value = 325
+triggerall = var(25) = 1 && p2bodydist X <= 80 && statetype != A && movetype = H && P2statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X > 366
+trigger2 = P2MoveType = H
+
+
+[State -1, 351]
+type = ChangeState
+value = 381
+triggerall = command = "z" && statetype = A && vel X = 0 && command = "holdup"
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2MoveType = H
+trigger3 = P2BodyDist Y < -415
+trigger4 = MoveGuarded
+trigger5 = P2BodyDist X >= 174
+trigger6 = InGuardDist
+
+
+[State -1, 1700]
+type = ChangeState
+value = 1700
+triggerall = command = "special_06A" &&  statetype != A && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+trigger2 = P2BodyDist X >= 209
+trigger3 = P2BodyDist Y > -626
+
+
+SPECIAL_06_B
+[State -1, throw]
+type = ChangeState
+value = 1800
+triggerall = statetype != A && ctrl && stateno != 100
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X > 433
+trigger2 = P2MoveType = I
+trigger3 = InGuardDist
+
+
+[State -1, 210]
+type = ChangeState
+value = 210
+triggerall = command = "z" && command != "holddown" && p2bodydist X <= 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = P2MoveType = H
+trigger2 = P2BodyDist Y < -150
+trigger3 = InGuardDist
+trigger4 = P2StateType = S
+trigger5 = P2BodyDist X >= 515
+
+
+[State -1, 2600]
+type = ChangeState
+value = 2600
+triggerall = command = "special_01B" &&  statetype != A && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2BodyDist X <= 522
+trigger3 = P2MoveType = A
+trigger4 = P2StateType = C
+
+
+
+
+[state -1,bak]
+type = ChangeState
+triggerall = ctrl = 1 && movetype != H && random <= 10
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2BodyDist X <= 10
+trigger3 = P2MoveType = I
+value = 20
+
+
+
+
+
+
+
+[State -1, throw]
+type = ChangeState
+value = 500
+triggerall = statetype = S && ctrl && stateno != 100
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 234
+trigger2 = InGuardDist
+trigger3 = P2MoveType = H
+trigger4 = P2StateType = A
+trigger5 = P2BodyDist Y >= 110
+trigger6 = MoveContact
+
+
+[State -1, 270]
+type = ChangeState
+value = 270
+triggerall = command = "c" && command != "holddown" && p2bodydist X > 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2BodyDist Y < 436
+trigger3 = P2BodyDist X > 530
+trigger4 = P2StateType = S
+
+
+
+[State -1, 200]
+type = ChangeState
+value = 200
+triggerall = command = "x" && command != "holddown" && p2bodydist X <= 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = P2MoveType = A
+trigger2 = InGuardDist
+trigger3 = MoveContact || MoveGuarded
+
+
+[State -1, 1200]
+type = ChangeState
+value = 1200
+triggerall = command = "special_03A" &&  statetype != A 
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y < 580
+trigger2 = P2MoveType = A
+trigger3 = MoveContact || MoveGuarded
+trigger4 = P2StateType = S
+trigger5 = P2BodyDist X >= 367
 trigger6 = InGuardDist
 
 
 
-[State -1, 205]
+[State -1, 351]
 type = ChangeState
-value = 320
-triggerall = var(25) = 1 && p2bodydist X <= 30 && statetype != A && movetype = H && P2statetype != A
+value = 351
+triggerall = command = "z" && statetype = A && vel X != 0 && command = "holddown"
+triggerall = AILevel != 0
+trigger1 = P2MoveType = A
+trigger2 = P2BodyDist X >= 151
+trigger3 = P2BodyDist Y >= -514
+trigger4 = P2StateType = S
+
+
+[State -1, 380]
+type = ChangeState
+value = 380
+triggerall = command = "z" && statetype = A && vel X = 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 254
+
+
+[State -1, 200]
+type = ChangeState
+value = 200
+triggerall = var(25) = 1 && p2bodydist X <= 10 && statetype != A && movetype = H && P2stateno != [5100,5300]
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= -81
+trigger2 = InGuardDist
+trigger3 = MoveGuarded
+
+
+[State -1, 1000]
+type = ChangeState
+value = 1000
+triggerall = random <= 40 && var(25) = 1 &&  statetype != A && movetype != H && ctrl && P2stateno != [5100,5300]
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+
+
+[State -1, 225]
+type = ChangeState
+value = 225
+triggerall = command = "b" && command != "holddown" && p2bodydist X <= 25 && statetype = S
 triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2MoveType = A
-trigger3 = P2StateType = S
-trigger4 = P2BodyDist X >= 16
-trigger5 = P2BodyDist Y <= -641
+trigger2 = P2MoveType = H
+trigger3 = P2BodyDist Y <= 310
+trigger4 = MoveContact
+trigger5 = P2StateType = S
 
 
-[State -1, 1301]
+[State -1, 395]
 type = ChangeState
-value = 1301
-triggerall = command = "special_04B" &&  statetype != A
+value = 395
+triggerall = command = "c" && statetype = A && vel X = 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X >= 86
+trigger2 = InGuardDist
+
+
+;==========================================================================================
+;==========================================================================================
+;Auto Guard Ê@₤ŠÙnˋþÎb state -1 ˆ¤°äÊWÎš¡m
+[State -1, 375]
+type = ChangeState
+value = 375
+triggerall = command = "y" && statetype = A && vel X = 0
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2MoveType = H
+trigger3 = MoveContact
+
+
+[State -1, 265]
+type = ChangeState
+value = 265
+triggerall = command = "b" && command != "holddown" && p2bodydist X > 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X <= 341
+trigger2 = P2MoveType = I
+trigger3 = P2StateType = A
+trigger4 = InGuardDist
+trigger5 = MoveGuarded
+trigger6 = P2BodyDist Y < -111
+
+
+[State -1, 240]
+type = ChangeState
+value = 240
+triggerall = var(25) = 1 && p2bodydist X > 25 && statetype != A && movetype = H && P2stateno != [5100,5300]
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2StateType = S
+trigger3 = P2BodyDist Y >= -603
+
+
+[State -1, 220]
+type = ChangeState
+value = 220
+triggerall = command = "a" && command != "holddown" && p2bodydist X <= 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = P2StateType = A
+trigger2 = MoveContact
+trigger3 = P2MoveType = I
+trigger4 = InGuardDist
+trigger5 = P2BodyDist Y >= -617
+trigger6 = P2BodyDist X < 160
+
+
+[State -1, 230]
+type = ChangeState
+value = 230
+triggerall = command = "c" && command != "holddown" && p2bodydist X <= 25 && statetype = S
 triggerall = AILevel != 0
 trigger1 = InGuardDist
 trigger2 = P2MoveType = I
-trigger3 = P2BodyDist X <= 834
-trigger4 = P2StateType = A
-trigger5 = MoveGuarded
+trigger3 = P2BodyDist Y <= 549
+trigger4 = MoveContact || MoveGuarded
+trigger5 = P2BodyDist X <= 290
+
+
+
+
+[State -1, 385]
+type = ChangeState
+value = 385
+triggerall = command = "a" && statetype = A && vel X = 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y > -462
+trigger2 = InGuardDist
+trigger3 = MoveContact
+
+; JUMP MK
+[State -1, 205]
+type = ChangeState
+value = 205
+triggerall = var(25) = 1 && p2bodydist X <= 15 && statetype != A && movetype = H && P2statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y >= 199
+trigger2 = P2BodyDist X < 125
+trigger3 = P2MoveType = A
+
+
+[State -1, 320]
+type = ChangeState
+value = 320
+triggerall = command = "a" && command = "holddown" 
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= 538
+trigger2 = InGuardDist
+trigger3 = P2MoveType = H
+trigger4 = MoveContact || MoveGuarded
+trigger5 = P2StateType = A
+
+
+[State -1, 370]
+type = ChangeState
+value = 370
+triggerall = command = "x" && statetype = A && vel X = 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= -49
+trigger2 = InGuardDist
+trigger3 = P2BodyDist X >= 478
+trigger4 = P2StateType = C
+trigger5 = MoveContact
+
+
+[State -1, 1100]
+type = ChangeState
+value = 1100
+triggerall = var(25) = 1 &&  statetype !=A && movetype != H && P2statetype != A && P2stateno != [5100,5300]
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y < -508
+trigger2 = P2StateType = A
+trigger3 = P2MoveType = I
+trigger4 = P2BodyDist X > 326
+trigger5 = MoveContact
+
+
+[State -1, 3000]
+type = ChangeState
+value = 3000
+triggerall = command = "hyper_01" &&  statetype != A && power >= 1000
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+trigger2 = P2BodyDist Y <= -591
+trigger3 = P2StateType = S
+trigger4 = P2BodyDist X >= 512
+
+
+
+[State -1, 1010]
+type = ChangeState
+value = 1020
+triggerall = command = "special_01B" &&  statetype != A && var(14) = 0
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
 
 
 
@@ -1421,69 +1257,57 @@ type = ChangeState
 value = 410
 triggerall = command = "z" && command = "holdfwd" && p2bodydist X <= 25 && statetype = S
 triggerall = AILevel != 0
-trigger1 = MoveContact
-trigger2 = P2MoveType = I
-trigger3 = P2StateType = S
-trigger4 = InGuardDist
+trigger1 = InGuardDist
 
 
 
-[State -1]
+[State -1, 336]
 type = ChangeState
-value = 900
-triggerall = statetype = A && ctrl && Pos Y < -40
+value = 356
+triggerall = command = "a" && statetype = A && vel X != 0 && command = "holddown"
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y < 933
+trigger1 = P2BodyDist Y <= -337
 trigger2 = InGuardDist
-trigger3 = P2StateType = S
-trigger4 = P2MoveType = A
+trigger3 = P2MoveType = H
+trigger4 = MoveContact
 
 
-[State -1, 345]
+[State -1, 1300]
 type = ChangeState
-value = 345
-triggerall = command = "y" && statetype = A && vel X != 0
-triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = InGuardDist
-
-
-[State -1, 365]
-type = ChangeState
-value = 365
-triggerall = command = "c" && statetype = A && vel X != 0
+value = 1300
+triggerall = var(25) = 1 &&  P2statetype != A && statetype != A && movetype != H && P2stateno != [5100,5300]
 triggerall = AILevel != 0
 trigger1 = InGuardDist
-trigger2 = P2StateType = S
-trigger3 = P2MoveType = A
-trigger4 = P2BodyDist Y >= -453
-trigger5 = P2BodyDist X <= 667
 
 
-
-
-[State -1, 395]
+SPECIAL_05_A
+[State -1, throw]
 type = ChangeState
-value = 395
-triggerall = command = "c" && statetype = A && vel X = 0
+value = 560
+triggerall = statetype = S && ctrl && stateno != 100
 triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 896
-trigger2 = P2MoveType = A
-trigger3 = InGuardDist
-trigger4 = P2BodyDist Y >= 60
-trigger5 = MoveContact || MoveGuarded
+trigger1 = P2MoveType = I
 
 
-;==========================================================================================
-;==========================================================================================
-;Auto Guard Ê@₤ŠÙnˋþÎb state -1 ˆ¤°äÊWÎš¡m
+[State -1, 240]
+type = ChangeState
+value = 240
+triggerall = command = "x" && command != "holddown" && p2bodydist X > 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X > 213
+
+
 [State -1, 1100]
 type = ChangeState
 value = 1100
 triggerall = command = "special_02A" &&  statetype !=A
 triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2StateType = A
+trigger1 = P2StateType = A
+trigger2 = P2BodyDist Y > -228
+trigger3 = P2MoveType = A
+trigger4 = InGuardDist
+trigger5 = P2BodyDist X > 162
+trigger6 = MoveContact || MoveGuarded
 
 
 
@@ -1493,15 +1317,50 @@ value = 325
 triggerall = command = "b" && command = "holddown" &&  statetype = C
 triggerall = AILevel != 0
 trigger1 = MoveGuarded
+trigger2 = P2StateType = C
+trigger3 = InGuardDist
+trigger4 = P2BodyDist Y <= -588
 
 
-[State -1, 265]
+[State -1, 1301]
 type = ChangeState
-value = 265
-triggerall = command = "b" && command != "holddown" && p2bodydist X > 25 && statetype = S
+value = 1301
+triggerall = command = "special_04B" &&  statetype != A
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y > -263
-trigger2 = P2StateType = S
+trigger1 = MoveContact
+trigger2 = P2BodyDist Y > -393
+
+
+
+[State -1, 1200]
+type = ChangeState
+value = 1200
+triggerall = var(25) = 1 &&  statetype != A & P2statetype != A && movetype != H && P2stateno != [5100,5300]
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2BodyDist Y <= 353
+trigger3 = P2MoveType = A
+trigger4 = P2BodyDist X >= 581
+
+
+
+[State -1, 361]
+type = ChangeState
+value = 361
+triggerall = command = "b" && statetype = A && vel X != 0 && command = "holddown"
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y <= 596
+
+
+[State -1, throw]
+type = ChangeState
+value = 1810
+triggerall = statetype != A && ctrl && stateno != 100
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y > 524
+trigger2 = MoveContact || MoveGuarded
+trigger3 = P2StateType = A
+trigger4 = P2BodyDist X > 179
 
 
 [State -1, throw]
@@ -1509,84 +1368,217 @@ type = ChangeState
 value = 580
 triggerall = statetype = C && ctrl && stateno != 100
 triggerall = AILevel != 0
-trigger1 = P2StateType = S
-trigger2 = P2BodyDist X > 861
-trigger3 = InGuardDist
+trigger1 = InGuardDist
 
 
 
 
 
-[State -1, 225]
+[State -1, 310]
 type = ChangeState
-value = 225
-triggerall = command = "b" && command != "holddown" && p2bodydist X <= 25 && statetype = S
+value = 310
+triggerall = command = "z" && command = "holddown" &&  statetype = C
 triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2BodyDist Y >= 697
+trigger1 = InGuardDist
+trigger2 = P2BodyDist Y <= -301
+trigger3 = P2MoveType = H
+trigger4 = MoveGuarded
+trigger5 = P2BodyDist X >= 56
+
+
+[State -1, 1700]
+type = ChangeState
+value = 1710
+triggerall = command = "special_06B" &&  statetype != A && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2MoveType = I
+trigger3 = MoveContact
+
+
+SPECIAL_06_C
+[State -1, 330]
+type = ChangeState
+value = 330
+triggerall = command = "c" && command = "holddown" &&  statetype = C
+triggerall = AILevel != 0
+trigger1 = P2StateType = A
+trigger2 = MoveContact || MoveGuarded
+trigger3 = P2BodyDist X >= 495
+trigger4 = P2BodyDist Y <= -92
+trigger5 = P2MoveType = A
+trigger6 = InGuardDist
+
+
+[State -1, 260]
+type = ChangeState
+value = 260
+triggerall = command = "a" && command != "holddown" && p2bodydist X > 25 && statetype = S
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2BodyDist X < 380
 trigger3 = P2MoveType = I
-trigger4 = P2StateType = S
-trigger5 = InGuardDist
+trigger4 = P2BodyDist Y < -607
+trigger5 = P2StateType = C
+trigger6 = MoveGuarded
 
 
-[State -1, 1110]
+[State -1, throw]
 type = ChangeState
-value = 1110
-triggerall = command = "special_02B" &&  statetype != A
+value = 510
+triggerall = statetype = S && ctrl && stateno != 100
 triggerall = AILevel != 0
-trigger1 = P2BodyDist X < 367
-trigger2 = P2StateType = A
-trigger3 = P2BodyDist Y > 671
+trigger1 = P2MoveType = I
+trigger2 = InGuardDist
+
+
+[State -1, 345]
+type = ChangeState
+value = 345
+triggerall = command = "y" && statetype = A && vel X != 0
+triggerall = AILevel != 0
+trigger1 = P2MoveType = I
+trigger2 = InGuardDist
+trigger3 = P2BodyDist Y <= 125
 trigger4 = MoveContact || MoveGuarded
-
-
 
 
 [State -1, 1300]
 type = ChangeState
 value = 1300
-triggerall = var(25) = 1 &&  P2statetype != A && statetype != A && movetype != H && P2stateno != [5100,5300]
+triggerall = command = "special_04A" &&  statetype != A
 triggerall = AILevel != 0
-trigger1 = P2MoveType = I
+trigger1 = MoveContact || MoveGuarded
 
 
-SPECIAL_05_A
+
+[State -1, 1700]
+type = ChangeState
+value = 1720
+triggerall = command = "special_06C" &&  statetype != A && var(14) = 1
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y < -386
+trigger2 = InGuardDist
+trigger3 = P2StateType = S
+trigger4 = P2BodyDist X < 47
+trigger5 = P2MoveType = I
+trigger6 = MoveContact
+
+
+
+
+[State -1, 205]
+type = ChangeState
+value = 320
+triggerall = var(25) = 1 && p2bodydist X <= 30 && statetype != A && movetype = H && P2statetype != A
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+trigger2 = InGuardDist
+trigger3 = P2MoveType = A
+trigger4 = P2BodyDist Y >= -283
+trigger5 = P2StateType = S
+
+
 [State -1, throw]
 type = ChangeState
-value = 520
-triggerall = statetype = S && ctrl && stateno != 100
+value = 570
+triggerall = statetype = C && ctrl && stateno != 100
 triggerall = AILevel != 0
-trigger1 = P2StateType = S
+trigger1 = P2BodyDist Y <= 327
+trigger2 = P2MoveType = H
+trigger3 = P2BodyDist X >= 173
+trigger4 = MoveContact || MoveGuarded
+trigger5 = InGuardDist
+trigger6 = P2StateType = C
 
 
-[State -1, 351]
+[State -1, 390]
 type = ChangeState
-value = 351
-triggerall = command = "z" && statetype = A && vel X != 0 && command = "holddown"
+value = 390
+triggerall = command = "b" && statetype = A && vel X = 0
+triggerall = AILevel != 0
+trigger1 = P2MoveType = H
+trigger2 = P2BodyDist X <= 488
+trigger3 = P2BodyDist Y > 174
+
+; JUMP HK
+[State -1, 355]
+type = ChangeState
+value = 355
+triggerall = command = "a" && statetype = A && vel X != 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y >= 99
+trigger2 = MoveGuarded
+
+
+[State -1, 365]
+type = ChangeState
+value = 365
+triggerall = command = "c" && statetype = A && vel X != 0
+triggerall = AILevel != 0
+trigger1 = MoveContact || MoveGuarded
+trigger2 = P2BodyDist Y <= 404
+trigger3 = InGuardDist
+
+
+
+
+[State -1, throw]
+type = ChangeState
+value = 1820
+triggerall = statetype != A && ctrl && stateno != 100
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2BodyDist X >= 556
+trigger3 = MoveContact || MoveGuarded
+trigger4 = P2StateType = C
+trigger5 = P2BodyDist Y > 210
+trigger6 = P2MoveType = I
+
+
+
+
+[State -1, 340]
+type = ChangeState
+value = 340
+triggerall = command = "x" && statetype = A && vel X != 0
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y >= -549
+trigger2 = InGuardDist
+trigger3 = MoveContact || MoveGuarded
+trigger4 = P2StateType = S
+
+
+[State -1, 2000]
+type = ChangeState
+value = 2000
+triggerall = command = "super_01" &&  statetype != A && power >= 1000 && var(14) = 1 && var(25) <= 0
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = MoveGuarded
+trigger3 = P2BodyDist Y <= 11
+trigger4 = P2BodyDist X >= 64
+
+
+
+
+
+[State -1, 44444]
+type = ChangeState
 triggerall = AILevel != 0
 trigger1 = P2MoveType = I
-trigger2 = P2BodyDist Y >= -105
-trigger3 = P2StateType = A
-trigger4 = P2BodyDist X > 626
+value = 44444
 
 
-[state -1,walk]
+[State -1, 1000]
 type = ChangeState
-triggerall = ctrl = 1 && movetype != H && random <= 60
+value = 1000
+triggerall = command = "special_01A" &&  statetype != A && var(14) = 0
 triggerall = AILevel != 0
-trigger1 = P2BodyDist Y < 32
-value = 20
-
-[State -1, 270]
-type = ChangeState
-value = 270
-triggerall = command = "c" && command != "holddown" && p2bodydist X > 25 && statetype = S
-triggerall = AILevel != 0
-trigger1 = P2StateType = S
-trigger2 = P2MoveType = A
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2BodyDist Y >= 400
-trigger5 = InGuardDist
-
+trigger1 = P2StateType = C
+trigger2 = MoveContact
+trigger3 = InGuardDist
+trigger4 = P2BodyDist Y >= -218
+trigger5 = P2BodyDist X < 291
 
 
