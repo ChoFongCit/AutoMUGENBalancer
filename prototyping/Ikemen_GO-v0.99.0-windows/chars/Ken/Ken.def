@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 Cmd     =ken.cmd
-Cns     =ken.cns
-St      =ken.cns
+Cns     =ken-AI-balanced.cns
+St      =ken-AI-balanced.cns
 StCommon =common1.cns
 Sprite  =ken.sff
 Anim    =ken.air

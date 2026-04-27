@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 cmd = ken-AI.cmd
-cns = ken-AI.cns
-st = ken-AI.cns
+cns = ken-AI-balanced.cns
+st = ken-AI-balanced.cns
 st0 = option-AI.txt
 st1 = aisummary.txt
 StCommon =common1.cns

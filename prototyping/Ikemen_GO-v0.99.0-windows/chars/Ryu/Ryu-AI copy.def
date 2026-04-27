@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 cmd = ryu-AI.cmd
-cns = ryu-AI.cns
-st = ryu-AI.cns
+cns = ryu-AI-balanced.cns
+st = ryu-AI-balanced.cns
 st0 = option-AI.txt
 st1 = aisummary.txt
 StCommon =common1.cns

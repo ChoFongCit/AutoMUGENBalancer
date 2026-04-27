@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 Cmd     =cammy.cmd
-Cns     =cammy.cns
-St      =cammy.cns
+Cns     =cammy-AI.cns
+St      =cammy-AI.cns
 st1=option.txt
 StCommon =common1.cns
 Sprite  =cammy.sff

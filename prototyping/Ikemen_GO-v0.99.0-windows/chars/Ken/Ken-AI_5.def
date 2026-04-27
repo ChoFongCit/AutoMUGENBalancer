@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Ken/cmds/05.cmd
-cns = ken-AI.cns
-st = ken-AI.cns
+cns = ken-AI-balanced.cns
+st = ken-AI-balanced.cns
 st0 = option-AI.txt
 st1 = aisummary.txt
 StCommon =common1.cns

@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 Cmd     =gouki.cmd
-Cns     =gouki.cns
-St      =gouki.cns
+Cns     =gouki-AI-balanced.cns
+St      =gouki-AI-balanced.cns
 StCommon =common1.cns
 Sprite  =gouki.sff
 Anim    =gouki.air

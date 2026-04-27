@@ -512,50 +512,65 @@ ignorehitpause = 1
 
 
 
-[State -1, ジャンプ強パンチ]
+[State -1, 遠距離立ち中キック]
 type = ChangeState
-value = 360
-triggerall = roundstate = 2
-triggerall = command = "z"
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2MoveType = A
-trigger2 = MoveGuarded
-trigger3 = InGuardDist
-trigger4 = P2BodyDist Y >= 261
-
-
-[State -1, 遠距離立ち弱キック]
-type = ChangeState
-value = 250
+value = 260
 triggerall = roundstate = 2
 triggerall = command != "holddown"
 triggerall = statetype != A
 triggerall = ctrl
 triggerall = AILevel != 0
+trigger1 = P2MoveType = I
+trigger2 = InGuardDist
+trigger3 = P2BodyDist Y >= -114
+trigger4 = MoveContact
+trigger5 = P2BodyDist X > 545
 ignorehitpause = 0
-trigger1 = P2BodyDist Y > 267
-trigger2 = MoveGuarded
-trigger3 = P2MoveType = A
-trigger4 = P2BodyDist X >= 349
-trigger5 = P2StateType = C
-trigger6 = InGuardDist
 
 
 [State -1]
 type = ChangeState
-value = 1300
+value = 3000
 triggerall = roundstate = 2
-triggerall = Command = "hooligan1" || Command = "hooligan2" || Command = "hooligan3"
+triggerall = power >= 3000
+triggerall = (Command = "spin1" || Command = "spin2" || Command = "spin3") ||Command = "recovery"
 triggerall = statetype != A
 triggerall = AILevel != 0
-ignorehitpause = 0
 trigger1 = InGuardDist
-trigger2 = P2StateType = S
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2MoveType = I
-trigger5 = P2BodyDist X >= 150
+trigger2 = P2BodyDist X > 43
+trigger3 = MoveGuarded
+ignorehitpause = 0
 
+
+
+[State -1, 垂直ジャンプ中キック]
+type = ChangeState
+value = 370
+triggerall = roundstate = 2
+triggerall = command = "b"
+triggerall = AILevel != 0
+trigger1 = P2MoveType = A
+trigger2 = InGuardDist
+trigger3 = MoveContact || MoveGuarded
+ignorehitpause = 0
+
+;------------------------------------------------------------------------------
+[State -1, 近距離立ち中キック]
+type = ChangeState
+value = 255
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-13*const(size.xscale)),ceil(13*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2MoveType = H
+trigger3 = MoveGuarded
+trigger4 = InGuardDist
+trigger5 = P2BodyDist Y >= 471
+trigger6 = P2BodyDist X >= 453
+ignorehitpause = 0
 
 
 [State -1, 近距離立ち中キック]
@@ -567,144 +582,228 @@ triggerall = statetype != A
 triggerall = P2BodyDist X = [ceil(-30*const(size.xscale)),ceil(30*const(size.xscale))]
 triggerall = ctrl
 triggerall = AILevel != 0
+trigger1 = InGuardDist
 ignorehitpause = 0
-trigger1 = MoveContact || MoveGuarded
-trigger2 = P2BodyDist Y >= 509
-trigger3 = P2StateType = A
-trigger4 = P2BodyDist X > 374
-trigger5 = P2MoveType = H
-trigger6 = InGuardDist
 
 
-[State -1, ジャンプ中パンチ]
+[State -1, 近距離立ち弱パンチ]
 type = ChangeState
-value = 355
+value = 205
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-24*const(size.xscale)),ceil(24*const(size.xscale))]
+triggerall = AILevel != 0
+trigger1 = P2MoveType = I
+trigger2 = InGuardDist
+trigger3 = P2BodyDist Y > 447
+ignorehitpause = 0
+
+
+[State -1, 斜めジャンプ中パンチ]
+type = null
+value = 420
 triggerall = roundstate = 2
 triggerall = command = "y"
+triggerall = Vel X
 triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = MoveContact
+trigger1 = MoveContact || MoveGuarded
 trigger2 = InGuardDist
 trigger3 = P2MoveType = I
-
-
-[State -1, 遠距離立ち強パンチ]
-type = ChangeState
-value = 220
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
+trigger4 = P2BodyDist X > 363
 ignorehitpause = 0
-trigger1 = InGuardDist
-trigger2 = P2MoveType = H
-trigger3 = MoveContact
-trigger4 = P2BodyDist X < 270
-
-
-[State -1, 近距離立ち中キック]
-type = ChangeState
-value = 255
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = P2BodyDist X = [ceil(-13*const(size.xscale)),ceil(13*const(size.xscale))]
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = InGuardDist
-trigger2 = P2BodyDist Y <= -225
-trigger3 = P2BodyDist X > 29
-trigger4 = P2MoveType = H
-trigger5 = MoveContact
-trigger6 = P2StateType = S
 
 
 [State -1]
 type = ChangeState
-value = 900
+value = 1300
 triggerall = roundstate = 2
-triggerall = statetype = S
-triggerall = P2MoveType != H
-triggerall = P2StateNo != [150,155]
-triggerall = (p2statetype = S) || (p2statetype = C)
-triggerall = p2bodydist X = [-15,ceil(33*const(size.xscale))]
-triggerall = command = "holdfwd" || command = "holdback"
-triggerall = ctrl
-triggerall = AILevel != 0
-trigger1 = P2StateType = C
-trigger2 = MoveContact
-trigger3 = P2BodyDist Y > -376
-
-
-
-
-
-[State -1, 遠距離立ち弱キック]
-type = ChangeState
-value = 250
-triggerall = roundstate = 2
-triggerall = command != "holddown"
+triggerall = Command = "hooligan1" || Command = "hooligan2" || Command = "hooligan3"
 triggerall = statetype != A
-triggerall = ctrl
 triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 271
 ignorehitpause = 0
-trigger1 = P2BodyDist X < 334
-trigger2 = P2StateType = C
-trigger3 = P2BodyDist Y >= -114
+
+
+
+[State -1]
+type = ChangeState
+value = 1300
+triggerall = roundstate = 2
+triggerall = Command = "hooligan1" || Command = "hooligan2" || Command = "hooligan3"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 271
+ignorehitpause = 0
+
+
+
+[State -1, 斜めジャンプ中パンチ]
+type = null
+value = 420
+triggerall = roundstate = 2
+triggerall = command = "y"
+triggerall = Vel X
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y < -126
+trigger2 = P2BodyDist X >= 303
+trigger3 = P2StateType = S
 trigger4 = P2MoveType = I
-trigger5 = MoveContact
-
-
-[State -1, 遠距離立ち弱キック]
-type = ChangeState
-value = 250
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
 ignorehitpause = 0
-trigger1 = P2StateType = C
 
 
-[State -1, 近距離立ち中キック]
+[State -1, 近距離立ち強パンチ]
 type = ChangeState
-value = 255
+value = 225
 triggerall = roundstate = 2
 triggerall = command != "holddown"
 triggerall = statetype != A
 triggerall = P2BodyDist X = [ceil(-13*const(size.xscale)),ceil(13*const(size.xscale))]
 triggerall = ctrl
 triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist Y < 496
-
-
-[State -1, 遠距離立ち弱パンチ]
-type = ChangeState
-value = 200
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist Y < -258
-
-
-[State -1, 遠距離立ち強パンチ]
-type = ChangeState
-value = 220
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2StateType = S
-trigger2 = P2BodyDist Y <= 162
+trigger1 = MoveGuarded
+trigger2 = InGuardDist
 trigger3 = P2MoveType = H
+trigger4 = P2BodyDist X > 291
+ignorehitpause = 0
+
+
+[State -1, 近距離立ち中キック]
+type = ChangeState
+value = 265
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-30*const(size.xscale)),ceil(30*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = InGuardDist
+trigger3 = P2BodyDist Y < 124
+trigger4 = P2MoveType = A
+ignorehitpause = 0
+
+
+[State -1, 近距離立ち中パンチ]
+type = ChangeState
+value = 215
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-63*const(size.xscale)),ceil(63*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = MoveContact
+trigger3 = P2BodyDist X <= 549
+trigger4 = P2MoveType = A
+trigger5 = P2BodyDist Y <= -365
+ignorehitpause = 0
+
+
+[State -1, 近距離立ち中キック]
+type = ChangeState
+value = 265
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-30*const(size.xscale)),ceil(30*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2MoveType = I
+trigger2 = MoveContact
+trigger3 = P2StateType = S
+trigger4 = InGuardDist
+trigger5 = P2BodyDist X <= 500
+trigger6 = P2BodyDist Y > 467
+ignorehitpause = 0
+
+
+[State -1, 垂直ジャンプ弱キック]
+type = ChangeState
+value = 365
+triggerall = roundstate = 2
+triggerall = command = "a"
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y > -358
+trigger2 = MoveContact || MoveGuarded
+trigger3 = P2StateType = S
+trigger4 = P2BodyDist X < 522
+trigger5 = P2MoveType = H
+trigger6 = InGuardDist
+ignorehitpause = 0
+
+;------------------------------------------------------------------------------
+[State -1, 遠距離立ち中キック]
+type = ChangeState
+value = 260
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X < 311
+trigger2 = MoveContact
+trigger3 = P2BodyDist Y > -502
+trigger4 = P2StateType = C
+trigger5 = InGuardDist
+trigger6 = P2MoveType = A
+ignorehitpause = 0
+
+
+[State -1, 垂直ジャンプ中キック]
+type = ChangeState
+value = 370
+triggerall = roundstate = 2
+triggerall = command = "b"
+triggerall = AILevel != 0
+trigger1 = P2StateType = S
+ignorehitpause = 0
+
+;------------------------------------------------------------------------------
+[State -1, しゃがみ中キック]
+type = ChangeState
+value = 325
+triggerall = roundstate = 2
+triggerall = command = "holddown"
+triggerall = statetype != A
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2BodyDist X <= 608
+trigger2 = P2MoveType = H
+trigger3 = InGuardDist
+trigger4 = MoveContact || MoveGuarded
+ignorehitpause = 0
+
+
+[State -1, 近距離立ち強キック]
+type = ChangeState
+value = 275
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-30*const(size.xscale)),ceil(30*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = P2MoveType = I
+ignorehitpause = 0
+
+
+[State -1, 近距離立ち強パンチ]
+type = ChangeState
+value = 225
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-13*const(size.xscale)),ceil(13*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = MoveGuarded
+trigger2 = InGuardDist
+trigger3 = P2MoveType = H
+trigger4 = P2BodyDist X > 291
+ignorehitpause = 0
 
 
 [State -1, 遠距離立ち強パンチ]
@@ -715,11 +814,25 @@ triggerall = command != "holddown"
 triggerall = statetype != A
 triggerall = ctrl
 triggerall = AILevel != 0
-ignorehitpause = 0
 trigger1 = InGuardDist
-trigger2 = P2MoveType = H
-trigger3 = MoveContact
-trigger4 = P2BodyDist X < 270
+trigger2 = P2StateType = A
+trigger3 = P2BodyDist X >= 411
+trigger4 = MoveGuarded
+trigger5 = P2BodyDist Y <= 480
+ignorehitpause = 0
+
+
+[State -1, しゃがみ弱キック]
+type = ChangeState
+value = 320
+triggerall = roundstate = 2
+triggerall = command = "holddown"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = MoveGuarded
+ignorehitpause = 0
+
 
 
 [State -1, しゃがみ強キック]
@@ -730,248 +843,126 @@ triggerall = command = "holddown"
 triggerall = statetype != A
 triggerall = ctrl
 triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = MoveGuarded
+trigger3 = P2BodyDist X >= 441
+trigger4 = P2BodyDist Y >= -563
+trigger5 = P2StateType = A
+trigger6 = P2MoveType = H
 ignorehitpause = 0
-trigger1 = P2BodyDist Y < -164
-trigger2 = InGuardDist
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2MoveType = H
 
 
-[State -1, 遠距離立ち弱キック]
+[State -1, 近距離立ち中キック]
 type = ChangeState
-value = 250
+value = 265
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-30*const(size.xscale)),ceil(30*const(size.xscale))]
+triggerall = ctrl
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+trigger2 = P2StateType = C
+trigger3 = P2BodyDist Y <= -99
+trigger4 = P2BodyDist X < 347
+ignorehitpause = 0
+
+
+[State -1, 遠距離立ち強パンチ]
+type = ChangeState
+value = 220
 triggerall = roundstate = 2
 triggerall = command != "holddown"
 triggerall = statetype != A
 triggerall = ctrl
 triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist X <= 19
-trigger2 = InGuardDist
-trigger3 = P2BodyDist Y >= -286
-trigger4 = P2StateType = S
-
-
-[State -1, しゃがみ中キック]
-type = ChangeState
-value = 325
-triggerall = roundstate = 2
-triggerall = command = "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist Y >= 448
-
-
-[State -1, 遠距離立ち中パンチ]
-type = ChangeState
-value = 210
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2MoveType = I
-trigger2 = P2BodyDist X >= 225
-trigger3 = P2BodyDist Y < -552
-
-
-[State -1, 垂直ジャンプ弱キック]
-type = ChangeState
-value = 365
-triggerall = roundstate = 2
-triggerall = command = "a"
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2MoveType = A
-trigger2 = P2StateType = S
-
-;------------------------------------------------------------------------------
-[State -1, しゃがみ弱キック]
-type = ChangeState
-value = 320
-triggerall = roundstate = 2
-triggerall = command = "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-
-ignorehitpause = 0
-trigger1 = P2MoveType = A
-trigger2 = P2BodyDist X < 255
-trigger3 = InGuardDist
-trigger4 = MoveContact || MoveGuarded
-trigger5 = P2BodyDist Y >= -396
-trigger6 = P2StateType = S
-
-
-[State -1, 遠距離立ち強キック]
-type = ChangeState
-value = 270
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist X <= 72
-trigger2 = P2MoveType = H
-trigger3 = P2StateType = S
-trigger4 = P2BodyDist Y <= 184
-
-
-
-[State -1, 遠距離立ち強キック]
-type = ChangeState
-value = 270
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist X <= 385
+trigger1 = InGuardDist
 trigger2 = P2StateType = A
-trigger3 = MoveContact || MoveGuarded
-trigger4 = P2BodyDist Y < -523
-
-
-
-[State -1, 垂直ジャンプ弱キック]
-type = ChangeState
-value = 365
-triggerall = roundstate = 2
-triggerall = command = "a"
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2MoveType = A
-trigger2 = P2BodyDist X <= 146
-
-;------------------------------------------------------------------------------
-[State -1, しゃがみ弱キック]
-type = ChangeState
-value = 320
-triggerall = roundstate = 2
-triggerall = command = "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-
-ignorehitpause = 0
-trigger1 = P2MoveType = A
-trigger2 = P2BodyDist X < 255
-trigger3 = InGuardDist
-trigger4 = MoveContact || MoveGuarded
-trigger5 = P2BodyDist Y >= -396
-trigger6 = P2StateType = S
-
-
-[State -1, しゃがみ弱キック]
-type = ChangeState
-value = 320
-triggerall = roundstate = 2
-triggerall = command = "holddown"
-triggerall = statetype != A
-triggerall = AILevel != 0
-
-ignorehitpause = 0
-trigger1 = P2BodyDist Y <= 44
-trigger2 = P2BodyDist X >= 56
-trigger3 = P2StateType = S
+trigger3 = P2BodyDist X >= 411
 trigger4 = MoveGuarded
-trigger5 = P2MoveType = A
-trigger6 = InGuardDist
-
-
-[State -1, 垂直ジャンプ弱キック]
-type = ChangeState
-value = 365
-triggerall = roundstate = 2
-triggerall = command = "a"
-triggerall = AILevel != 0
+trigger5 = P2BodyDist Y <= 480
 ignorehitpause = 0
-trigger1 = P2MoveType = A
-trigger2 = P2BodyDist X <= 146
 
-;------------------------------------------------------------------------------
+
+[State -1, しゃがみ弱パンチ]
+type = ChangeState
+value = 300
+triggerall = roundstate = 2
+triggerall = command = "holddown"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = InGuardDist
+ignorehitpause = 0
+
+
+
+[State -1, しゃがみ弱キック]
+type = ChangeState
+value = 320
+triggerall = roundstate = 2
+triggerall = command = "holddown"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = P2MoveType = I
+trigger2 = MoveGuarded
+trigger3 = InGuardDist
+ignorehitpause = 0
+
+
+
 [State -1]
 type = ChangeState
-value = 900
+value = 1200
 triggerall = roundstate = 2
-triggerall = statetype = S
-triggerall = P2MoveType != H
-triggerall = P2StateNo != [150,155]
-triggerall = (p2statetype = S) || (p2statetype = C)
-triggerall = p2bodydist X = [-15,ceil(33*const(size.xscale))]
-triggerall = command = "holdfwd" || command = "holdback"
-triggerall = ctrl
+triggerall = !NumProj
+triggerall = Command = "accel1" || Command = "accel2" || Command = "accel3"
+triggerall = statetype != A
 triggerall = AILevel != 0
-trigger1 = MoveGuarded
-trigger2 = P2BodyDist X >= 352
-trigger3 = P2StateType = S
+trigger1 = P2BodyDist Y < -347
+ignorehitpause = 0
 
 
 
-
-
-[State -1, 遠距離立ち中キック]
+[State -1, 遠距離立ち強パンチ]
 type = ChangeState
-value = 260
+value = 220
 triggerall = roundstate = 2
 triggerall = command != "holddown"
 triggerall = statetype != A
 triggerall = ctrl
 triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = MoveGuarded
-trigger2 = InGuardDist
-trigger3 = P2StateType = A
-trigger4 = P2BodyDist Y <= 242
-trigger5 = P2BodyDist X <= 452
-trigger6 = P2MoveType = I
-
-
-[State -1, ジャンプ中パンチ]
-type = ChangeState
-value = 355
-triggerall = roundstate = 2
-triggerall = command = "y"
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = MoveContact
-trigger2 = InGuardDist
-trigger3 = P2MoveType = I
-
-
-[State -1, 遠距離立ち弱キック]
-type = ChangeState
-value = 250
-triggerall = roundstate = 2
-triggerall = command != "holddown"
-triggerall = statetype != A
-triggerall = ctrl
-triggerall = AILevel != 0
-ignorehitpause = 0
-trigger1 = P2BodyDist Y > 267
-trigger2 = MoveGuarded
-trigger3 = P2MoveType = A
-trigger4 = P2BodyDist X >= 349
-trigger5 = P2StateType = C
-trigger6 = InGuardDist
-
-
-[State -1, ジャンプ中パンチ]
-type = ChangeState
-value = 355
-triggerall = roundstate = 2
-triggerall = command = "y"
-triggerall = AILevel != 0
-ignorehitpause = 0
 trigger1 = InGuardDist
-trigger2 = P2MoveType = H
+trigger2 = P2MoveType = I
 trigger3 = MoveContact || MoveGuarded
-trigger4 = P2BodyDist Y > -371
-trigger5 = P2StateType = A
+trigger4 = P2BodyDist Y < -610
+trigger5 = P2BodyDist X < 323
+trigger6 = P2StateType = C
+ignorehitpause = 0
+
+
+[State -1, 近距離立ち弱パンチ]
+type = ChangeState
+value = 205
+triggerall = roundstate = 2
+triggerall = command != "holddown"
+triggerall = statetype != A
+triggerall = P2BodyDist X = [ceil(-24*const(size.xscale)),ceil(24*const(size.xscale))]
+triggerall = AILevel != 0
+trigger1 = P2BodyDist Y > -505
+trigger2 = InGuardDist
+ignorehitpause = 0
+
+
+[State -1]
+type = ChangeState
+value = 1100
+triggerall = roundstate = 2
+triggerall = Command = "cannon1" || Command = "cannon2" || Command = "cannon3"
+triggerall = statetype != A
+triggerall = AILevel != 0
+trigger1 = P2StateType = C
+ignorehitpause = 0
+
 
 
 [State -1]
@@ -981,12 +972,9 @@ triggerall = roundstate = 2
 triggerall = Command = "spiral1" || Command = "spiral2" || Command = "spiral3"
 triggerall = statetype != A
 triggerall = AILevel != 0
+trigger1 = P2StateType = C
+trigger2 = MoveGuarded
 ignorehitpause = 0
-trigger1 = MoveGuarded
-trigger2 = P2MoveType = H
-trigger3 = P2StateType = C
-trigger4 = P2BodyDist X < 9
-trigger5 = InGuardDist
 
 
 

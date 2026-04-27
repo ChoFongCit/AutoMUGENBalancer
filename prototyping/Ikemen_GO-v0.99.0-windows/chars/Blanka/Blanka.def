@@ -11,8 +11,8 @@ mugenversion = 11,22,2000   ;Version of M.U.G.E.N character works on
 ; Files for the player
 [Files]
 cmd      = blanka.cmd   ;Command set
-cns     = blanka.cns   ;Constants
-st      = blanka.cns   ;States
+cns     = blanka-AI-balanced.cns   ;Constants
+st      = blanka-AI-balanced.cns   ;States
 stcommon = common1.cns ;Common states
 sprite  = blanka.sff   ;Sprite
 anim    = blanka.air   ;Animation

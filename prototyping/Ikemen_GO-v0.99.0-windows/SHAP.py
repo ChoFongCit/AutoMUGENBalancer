@@ -7,7 +7,19 @@ from pathlib import Path
 import re
 
 
-CSV_PATH = "ML_data/win_rates_placeHolder2.csv"
+CSV_PATH = "ML_data/win_rates.csv"
+
+# Maps chars/ folder name → win_rates.csv character name (lowercase)
+FOLDER_TO_CSV = {
+    "Akuma":    "gouki_normal",
+    "Blanka":   "blanka",
+    "Cammy":    "cammy",
+    "Fei-Long": "feilong",
+    "Ken":      "ken",
+    "Ryu":      "ryu",
+    "Sagat":    "sagat",
+    # "M.Bison": "vega",  # excluded — no single AI.cns file
+}
 
 # ---------------------------------------------------------------------------
 # Damage normalisation — evaluate var(52)=3 (base scaling)
@@ -45,9 +57,9 @@ def aggregate_movelist(csv_path: Path, char_name: str) -> dict:
 
     return {
         'character':         char_name,
-        'dmg_mean':          safe_mean('damage_val'),
-        'dmg_max':           safe_max('damage_val'),
-        'dmg_std':           safe_std('damage_val'),
+        'damage_mean':       safe_mean('damage_val'),
+        'damage_max':        safe_max('damage_val'),
+        'damage_std':        safe_std('damage_val'),
         'startup_mean':      safe_mean('startup'),
         'startup_min':       safe_min('startup'),
         'startup_std':       safe_std('startup'),
@@ -78,20 +90,30 @@ def compute_win_rates(csv_path: str = CSV_PATH) -> pd.DataFrame:
     return pd.DataFrame(results).sort_values("win_rate", ascending=False)
 
 
-def main():
+def compute_shap(win_rates_csv: str = CSV_PATH):
+    """
+    Build features, train model, compute SHAP values.
+
+    Returns
+    -------
+    explainer   : shap.TreeExplainer
+    shap_values : np.ndarray  shape (n_chars, n_features)
+    X           : pd.DataFrame  indexed by lowercase character name
+    y           : pd.Series     indexed by lowercase character name
+    """
     move_csvs = list(Path("ML_data/moves").glob("*_moves.csv"))
 
     rows = []
     for csv_path in move_csvs:
-        char_name = csv_path.stem.replace('_moves', '').lower()
+        folder_name = csv_path.stem.replace('_moves', '')
+        char_name   = FOLDER_TO_CSV.get(folder_name, folder_name).lower()
         rows.append(aggregate_movelist(csv_path, char_name))
 
     features_df = pd.DataFrame(rows)
-    winrates    = compute_win_rates()
+    winrates    = compute_win_rates(win_rates_csv)
 
-    df = features_df.merge(winrates, on='character')
-    # Exclude 'character' and the target — winrates now only has those two columns
-    FEATURE_COLS = [c for c in df.columns if c not in ('character', 'win_rate')]
+    df = features_df.merge(winrates, on='character').set_index('character')
+    FEATURE_COLS = [c for c in df.columns if c != 'win_rate']
 
     X = df[FEATURE_COLS].fillna(0)
     y = df['win_rate']
@@ -101,6 +123,12 @@ def main():
 
     explainer   = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X)
+
+    return explainer, shap_values, X, y
+
+
+def main():
+    explainer, shap_values, X, y = compute_shap()
 
     # Global feature importance
     shap.summary_plot(shap_values, X, plot_type="bar", show=False)
@@ -119,7 +147,7 @@ def main():
     # Per-character force plots saved as PNG
     plots_dir = Path("ML_data/shap_plots")
     plots_dir.mkdir(exist_ok=True)
-    for i, char in enumerate(df['character']):
+    for i, char in enumerate(X.index):
         print(f"\n--- {char} (win_rate={y.iloc[i]:.3f}) ---")
         shap.force_plot(
             explainer.expected_value, shap_values[i], X.iloc[i].round(3),

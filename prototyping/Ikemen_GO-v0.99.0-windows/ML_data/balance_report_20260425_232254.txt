@@ -1,0 +1,174 @@
+==============================================================
+  ROSTER BALANCE REPORT
+  2026-04-25  23:22:56
+==============================================================
+
+  Target win rate  :  50%
+  Adjustment band  :  ±3%
+  Characters processed  :  7
+
+WIN RATE SUMMARY
+──────────────────────────────────────────────────────────────
+  Character       Win Rate       Gap    Action
+  ──────────────────────────────────    ────────
+  Ryu               72.1%    -22.1%    NERF ↓
+  Blanka            64.2%    -14.2%    NERF ↓
+  Akuma             61.5%    -11.5%    NERF ↓
+  Fei-Long          52.5%     -2.5%    OK  ✓
+  Cammy             49.1%     +0.9%    OK  ✓
+  Ken               46.2%     +3.8%    BUFF ↑
+  Sagat              8.0%    +42.0%    BUFF ↑
+
+──────────────────────────────────────────────────────────────
+  BLANKA                                   [NERF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  64.2%   (gap  -14.2%)
+  Output    :  blanka-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            +0.0700   pushing character over-performing
+  dmg_mean                   +0.0144   pushing character over-performing
+  total_frames_mean          +0.0129   pushing character over-performing
+
+  Skipped features:
+    guard_stun_mean           (no target states found)
+    dmg_mean                  (not in FEATURE_TO_MOVE_FIELD)
+    total_frames_mean         (not in FEATURE_TO_MOVE_FIELD)
+
+  No changes were written  (all features skipped or unwritable).
+
+──────────────────────────────────────────────────────────────
+  AKUMA                                    [NERF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  61.5%   (gap  -11.5%)
+  Output    :  gouki-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            +0.0656   pushing character over-performing
+  startup_mean               +0.0092   pushing character over-performing
+  total_frames_mean          +0.0073   pushing character over-performing
+
+  Skipped features:
+    total_frames_mean         (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (3 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+      270  guard_stun        21.0    21.0  guard_stun_mean         
+      220  guard_stun        20.0    20.0  guard_stun_mean         
+      460  startup           18.0    24.0  startup_mean            
+
+──────────────────────────────────────────────────────────────
+  FEI-LONG                                 [BALANCED]
+──────────────────────────────────────────────────────────────
+  Win rate  :  52.5%   (gap  -2.5%)
+  Status    :  Within ±3% band — no changes needed.
+
+──────────────────────────────────────────────────────────────
+  SAGAT                                    [BUFF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  8.0%   (gap  +42.0%)
+  Output    :  superturbo-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            -0.0661   pushing character under-performing
+  startup_mean               -0.0646   pushing character under-performing
+  dmg_mean                   -0.0493   pushing character under-performing
+
+  Skipped features:
+    dmg_mean                  (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (3 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+      200  guard_stun        25.0    26.0  guard_stun_mean         
+      400  guard_stun        25.0    26.0  guard_stun_mean         
+      450  guard_stun        25.0    26.0  guard_stun_mean         
+
+──────────────────────────────────────────────────────────────
+  CAMMY                                    [BALANCED]
+──────────────────────────────────────────────────────────────
+  Win rate  :  49.1%   (gap  +0.9%)
+  Status    :  Within ±3% band — no changes needed.
+
+──────────────────────────────────────────────────────────────
+  KEN                                      [BUFF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  46.2%   (gap  +3.8%)
+  Output    :  ken-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            -0.0761   pushing character under-performing
+  active_mean                -0.0009   pushing character under-performing
+
+  Changes applied  (3 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+      215  active             1.0     1.0  active_mean             
+      350  active             1.0     1.0  active_mean             
+      365  active             1.0     1.0  active_mean             
+
+──────────────────────────────────────────────────────────────
+  RYU                                      [NERF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  72.1%   (gap  -22.1%)
+  Output    :  ryu-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            +0.0970   pushing character over-performing
+  startup_mean               +0.0168   pushing character over-performing
+  dmg_std                    +0.0165   pushing character over-performing
+
+  Skipped features:
+    dmg_std                   (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (5 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+     3100  guard_stun        28.0    27.0  guard_stun_mean         
+      270  guard_stun        21.0    20.0  guard_stun_mean         
+      220  guard_stun        20.0    19.0  guard_stun_mean         
+     1120  startup           30.0    41.0  startup_mean            
+     1100  startup            9.0    20.0  startup_mean            
+
+==============================================================
+  MATCHUP MATRIX  (row wins vs col,  proportion 0-1)
+==============================================================
+                    blanka  Gouki_no   feilong     Sagat     cammy       ken       ryu
+  ──────────────  ────────  ────────  ────────  ────────  ────────  ────────  ────────
+  blanka              —        0.490     0.940     0.760     0.830     0.330     0.500
+  Gouki_normal       0.510      —        0.570     0.980     0.970     0.510     0.150
+  feilong            0.060     0.430      —        0.780     0.760     0.390     0.745
+  Sagat              0.240     0.020     0.220      —        0.000     0.000     0.000
+  cammy              0.170     0.030     0.240     1.000      —        1.000     0.667
+  ken                0.670     0.490     0.610     1.000     0.000      —        0.000
+  ryu                0.500     0.850     0.255     1.000     0.333     1.000      —   
+
+==============================================================
+  NASH EQUILIBRIUM MIXED STRATEGY
+==============================================================
+  Expected game value (v*)  :  -0.0000
+
+  Character             p*    Win Rate
+  ──────────────  ────────  ──────────
+  blanka            0.7463       64.2%
+  ryu               0.2537       72.1%
+  Gouki_normal      0.0000       61.5%
+  feilong          -0.0000       52.5%
+  Sagat             0.0000        8.0%
+  cammy             0.0000       49.1%
+  ken               0.0000       46.2%
+
+==============================================================
+  END OF REPORT
+==============================================================

@@ -101,7 +101,9 @@ def parse_air(air_path: Path) -> dict:
             if re.match(r'Clsn1\s*:', s, re.IGNORECASE):
                 pending_clsn1 = True
             elif re.match(r'^\d+\s*,\s*\d+\s*,\s*-?\d+\s*,\s*-?\d+\s*,\s*-?\d+', s):
-                raw_dur  = int(s.split(',')[4].split(';')[0].strip())
+                dur_str  = s.split(',')[4].split(';')[0].strip()
+                dur_m    = re.match(r'-?\d+', dur_str)
+                raw_dur  = int(dur_m.group()) if dur_m else 1
                 duration = max(1, raw_dur)  # -1 = hold forever -> treat as 1
                 frames.append({'duration': duration, 'has_hitbox': pending_clsn1})
                 pending_clsn1 = False

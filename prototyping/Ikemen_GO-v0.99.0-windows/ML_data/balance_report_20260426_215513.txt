@@ -1,0 +1,179 @@
+==============================================================
+  ROSTER BALANCE REPORT
+  2026-04-26  21:55:14
+==============================================================
+
+  Target win rate  :  50%
+  Adjustment band  :  ±3%
+  Characters processed  :  7
+
+WIN RATE SUMMARY
+──────────────────────────────────────────────────────────────
+  Character       Win Rate       Gap    Action
+  ──────────────────────────────────    ────────
+  Ryu               75.4%    -25.4%    NERF ↓
+  Akuma             62.2%    -12.2%    NERF ↓
+  Blanka            59.3%     -9.3%    NERF ↓
+  Cammy             52.3%     -2.3%    OK  ✓
+  Fei-Long          51.9%     -1.9%    OK  ✓
+  Ken               46.3%     +3.7%    BUFF ↑
+  Sagat              7.2%    +42.8%    BUFF ↑
+
+──────────────────────────────────────────────────────────────
+  BLANKA                                   [NERF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  59.3%   (gap  -9.3%)
+  Output    :  blanka-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            +0.0433   pushing character over-performing
+  startup_mean               +0.0125   pushing character over-performing
+  dmg_mean                   +0.0119   pushing character over-performing
+
+  Skipped features:
+    guard_stun_mean           (no target states found)
+    dmg_mean                  (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (3 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+      231  startup           11.0    16.0  startup_mean            
+      450  startup           10.0    15.0  startup_mean            
+      241  startup            9.0    14.0  startup_mean            
+
+──────────────────────────────────────────────────────────────
+  AKUMA                                    [NERF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  62.2%   (gap  -12.2%)
+  Output    :  gouki-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            +0.0429   pushing character over-performing
+  recovery_max               +0.0159   pushing character over-performing
+  active_mean                +0.0122   pushing character over-performing
+
+  Skipped features:
+    recovery_max              (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (4 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+      270  guard_stun        21.0    21.0  guard_stun_mean         
+      220  guard_stun        20.0    20.0  guard_stun_mean         
+     3100  active            44.0    44.0  active_mean             
+     1120  active            33.0    33.0  active_mean             
+
+──────────────────────────────────────────────────────────────
+  FEI-LONG                                 [BALANCED]
+──────────────────────────────────────────────────────────────
+  Win rate  :  51.9%   (gap  -1.9%)
+  Status    :  Within ±3% band — no changes needed.
+
+──────────────────────────────────────────────────────────────
+  SAGAT                                    [BUFF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  7.2%   (gap  +42.8%)
+  Output    :  superturbo-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  startup_mean               -0.0662   pushing character under-performing
+  dmg_mean                   -0.0573   pushing character under-performing
+  startup_std                -0.0538   pushing character under-performing
+
+  Skipped features:
+    dmg_mean                  (not in FEATURE_TO_MOVE_FIELD)
+    startup_std               (not in FEATURE_TO_MOVE_FIELD)
+
+  No changes were written  (all features skipped or unwritable).
+
+──────────────────────────────────────────────────────────────
+  CAMMY                                    [BALANCED]
+──────────────────────────────────────────────────────────────
+  Win rate  :  52.3%   (gap  -2.3%)
+  Status    :  Within ±3% band — no changes needed.
+
+──────────────────────────────────────────────────────────────
+  KEN                                      [BUFF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  46.3%   (gap  +3.7%)
+  Output    :  ken-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  guard_stun_mean            -0.0401   pushing character under-performing
+  active_mean                -0.0280   pushing character under-performing
+  recovery_max               -0.0104   pushing character under-performing
+
+  Skipped features:
+    recovery_max              (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (3 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+      215  active             1.0     1.0  active_mean             
+      350  active             1.0     1.0  active_mean             
+      365  active             1.0     1.0  active_mean             
+
+──────────────────────────────────────────────────────────────
+  RYU                                      [NERF]
+──────────────────────────────────────────────────────────────
+  Win rate  :  75.4%   (gap  -25.4%)
+  Output    :  ryu-AI-balanced.cns
+
+  Why these changes?  (SHAP contribution to win rate)
+  Feature                       SHAP   Interpretation
+  ────────────────────────  ────────   ────────────────────────────
+  active_mean                +0.0788   pushing character over-performing
+  guard_stun_mean            +0.0509   pushing character over-performing
+  recovery_max               +0.0186   pushing character over-performing
+
+  Skipped features:
+    recovery_max              (not in FEATURE_TO_MOVE_FIELD)
+
+  Changes applied  (5 total)
+    State  Field              Old     New  SHAP Driver             
+  ───────  ──────────────  ──────  ──────  ────────────────────────
+     3100  active            40.0    39.0  active_mean             
+     1120  active            28.0    27.0  active_mean             
+     3100  guard_stun        28.0    27.0  guard_stun_mean         
+      270  guard_stun        21.0    20.0  guard_stun_mean         
+      220  guard_stun        20.0    19.0  guard_stun_mean         
+
+==============================================================
+  MATCHUP MATRIX  (row wins vs col,  proportion 0-1)
+==============================================================
+                    blanka  Gouki_no   feilong     Sagat     cammy       ken       ryu
+  ──────────────  ────────  ────────  ────────  ────────  ────────  ────────  ────────
+  blanka              —        0.490     0.940     0.790     0.790     0.260     0.290
+  Gouki_normal       0.510      —        0.600     0.960     0.940     0.530     0.190
+  feilong            0.060     0.400      —        0.830     0.656     0.430     0.750
+  Sagat              0.210     0.040     0.170      —        0.010     0.000     0.000
+  cammy              0.210     0.060     0.344     0.990      —        1.000     0.600
+  ken                0.740     0.470     0.570     1.000     0.000      —        0.000
+  ryu                0.710     0.810     0.250     1.000     0.400     1.000      —   
+
+==============================================================
+  NASH EQUILIBRIUM MIXED STRATEGY
+==============================================================
+  Expected game value (v*)  :  -0.0000
+
+  Character             p*    Win Rate
+  ──────────────  ────────  ──────────
+  ryu               0.4889       75.4%
+  blanka            0.2778       59.3%
+  feilong           0.2333       51.9%
+  Gouki_normal      0.0000       62.2%
+  Sagat             0.0000        7.2%
+  cammy             0.0000       52.3%
+  ken               0.0000       46.3%
+
+==============================================================
+  END OF REPORT
+==============================================================

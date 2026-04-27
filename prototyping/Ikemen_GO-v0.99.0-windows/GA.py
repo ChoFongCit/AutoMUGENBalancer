@@ -320,6 +320,47 @@ def get_best_individual(population_dict: dict) -> Path:
     print(f"Best individual: {best.name}  (Elo: {best.elo_rating:.1f})")
     return Path(best.cmd_path)
 
+
+def save_generation_champion(population_dict: dict, champions_dir: Path,
+                              generation: int) -> Path:
+    """
+    Copy the best individual's .cmd into champions_dir, named gen<NNN>.cmd.
+    champions_dir should be a single timestamped folder created once per run.
+
+    Returns the path of the saved file.
+    """
+    best     = max(population_dict.values(), key=lambda ind: ind.elo_rating)
+    best_cmd = Path(best.cmd_path)
+    champions_dir.mkdir(parents=True, exist_ok=True)
+    dest = champions_dir / f"gen{generation:03d}.cmd"
+    shutil.copy2(best_cmd, dest)
+    print(f"  [Gen {generation}] Champion saved: {dest}  (Elo: {best.elo_rating:.1f})")
+    return dest
+
+def _current_cmd_from_def(def_path: Path) -> Path | None:
+    """Return the Path currently referenced by 'Cmd =' in the .def, or None."""
+    text = Path(def_path).read_text(encoding="utf-8", errors="replace")
+    m    = re.search(r'^\s*Cmd\s*=\s*(\S+)', text, re.IGNORECASE | re.MULTILINE)
+    return Path(m.group(1)) if m else None
+
+
+def backup_champion_cmd(cmd_path: Path, output_dir: Path) -> Path:
+    """
+    Copy the current champion .cmd (whatever Cmd = points to in the .def, or
+    a direct path) into output_dir/backups/<timestamp>/.
+    Returns the path of the backed-up file.
+    """
+    from datetime import datetime
+    cmd_path   = Path(cmd_path)
+    timestamp  = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_dir = Path(output_dir) / "backups" / timestamp
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    dest = backup_dir / cmd_path.name
+    shutil.copy2(cmd_path, dest)
+    print(f"  [Backup] Champion cmd saved: {dest}")
+    return dest
+
+
 def update_champion_cmd(def_path, champion_cmd_path):
     """
     Overwrites the Cmd field in the original input.def with the champion's
@@ -376,7 +417,11 @@ def main():
     for p in population:
         print(f"{population[p].name} elo: {population[p].elo_rating}")
         
-    generations = int(args.generations)
+    generations   = int(args.generations)
+    from datetime import datetime
+    champions_dir = output_dir / "champions" / datetime.now().strftime("%Y%m%d_%H%M%S")
+    champions_dir.mkdir(parents=True, exist_ok=True)
+
     for gen in range(1, generations + 1):
         print(f"\n--- Generation {gen} ---")
         
@@ -390,6 +435,8 @@ def main():
         for p in population:
             print(f"{population[p].name}  elo: {population[p].elo_rating:.1f}")
 
+        save_generation_champion(population, champions_dir, gen)
+
         if gen < generations:
             population = next_generation(
                 population_dict=population,input_path=input_path ,def_path=def_path,
@@ -397,10 +444,23 @@ def main():
                 generation= gen + 1
             )
             
-    best_cmd = get_best_individual(population)
-    print(f"Champion cmd: {best_cmd}")
-    update_champion_cmd(def_path, best_cmd)
-    return best_cmd
+    from datetime import datetime
+    timestamp    = datetime.now().strftime("%Y%m%d_%H%M")
+    champion_dir = output_dir / timestamp
+    champion_dir.mkdir(parents=True, exist_ok=True)
+
+    best_cmd         = get_best_individual(population)
+    champion_cmd     = champion_dir / best_cmd.name
+    shutil.copy2(best_cmd, champion_cmd)
+
+    # Back up whatever is currently the champion before overwriting
+    current_cmd = _current_cmd_from_def(def_path)
+    if current_cmd and current_cmd.exists():
+        backup_champion_cmd(current_cmd, output_dir)
+
+    print(f"Champion cmd: {champion_cmd}")
+    update_champion_cmd(def_path, champion_cmd)
+    return champion_cmd
     
     
 if __name__ == "__main__":

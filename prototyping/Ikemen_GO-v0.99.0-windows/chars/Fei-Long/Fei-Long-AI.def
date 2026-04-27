@@ -8,8 +8,8 @@ Pal.Defaults =4,1,3,6
 
 [Files]
 cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Fei-Long/cmds/05.cmd
-cns = feilong-AI.cns
-st = feilong-AI.cns
+cns = feilong-AI-balanced.cns
+st = feilong-AI-balanced.cns
 st0 = option-AI.txt
 st1 = aisummary.txt
 StCommon =common1.cns

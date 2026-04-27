@@ -2,11 +2,17 @@ import re, os, csv, sys
 import json
 from collections import defaultdict
 from pathlib import Path
+import shutil
 
 sys.path.append("../../")
 from GA_classes import Individual, CMD_Block
 
-CSV_PATH = "ML_data/win_rates.csv"
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+
+CSV_PATH = f"ML_data/win_rates.csv"
+timestamp_path = f"ML_data/win_rates{timestamp}.csv"
 IKEMEN_PATH = r"C:\Users\greni\Desktop\works\Year4\Final Year Project\prototyping\Ikemen_GO-v0.99.0-windows\Ikemen_GO.exe"
 IKEMEN_DIR = r"C:\Users\greni\Desktop\works\Year4\Final Year Project\prototyping\Ikemen_GO-v0.99.0-windows"
 
@@ -99,6 +105,12 @@ def append_to_matrix(log_list, matrix = {}):
     return matrix
     
     
+def reset_csv():
+    """Delete win_rates.csv so the next run starts with a clean matchup matrix."""
+    if os.path.exists(CSV_PATH):
+        os.remove(CSV_PATH)
+        print(f"[reset] Cleared {CSV_PATH}")
+
 def put_in_csv(log_list):
     results = append_to_matrix(log_list, get_from_csv())
     
@@ -121,7 +133,6 @@ def put_in_csv(log_list):
         writer = csv.DictWriter(file, fieldnames=column_headers)
         writer.writeheader()
         writer.writerows(rows)
-
 
 def process_all_logs():
     log_list = list()
@@ -163,8 +174,19 @@ def adjust_elo(log_list, population_dict):
         else:
             update_elo(winner=p2_individual, loser= p1_individual)
             
-def record_data():         
+def clean_SHAP_logs():
+    import shutil
+    curr_dir = Path.cwd()
+    os.chdir(IKEMEN_DIR)
+    if Path(f"logs/SHAP").exists():
+        shutil.rmtree(f"logs/SHAP")
+    Path.mkdir(f"logs/SHAP")
+    os.chdir(curr_dir)
+    pass
+
+def record_data():  
     put_in_csv(process_character_logs("SHAP"))
+    clean_SHAP_logs()
     
 
 

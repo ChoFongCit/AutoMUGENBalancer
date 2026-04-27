@@ -1,5 +1,8 @@
-external/script/main.lua:371: <game end>
+external/script/json.lua:220: unexpected character '' at line 1 col 1
 stack traceback:
-	[G]: in function 'refresh'
-	external/script/main.lua:371: in main chunk
+	[G]: in function 'error'
+	external/script/json.lua:220: in function 'decode_error'
+	external/script/json.lua:407: in function 'parse'
+	external/script/json.lua:415: in function 'decode'
+	external/script/main.lua:47: in main chunk
 	[G]: ?
