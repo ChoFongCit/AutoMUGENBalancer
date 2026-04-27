@@ -1,8 +1,10 @@
-external/script/json.lua:220: unexpected character '' at line 1 col 1
+external/script/main.lua:713: <game end>
 stack traceback:
-	[G]: in function 'error'
-	external/script/json.lua:220: in function 'decode_error'
-	external/script/json.lua:407: in function 'parse'
-	external/script/json.lua:415: in function 'decode'
-	external/script/main.lua:47: in main chunk
+	[G]: in function 'refresh'
+	external/script/main.lua:713: in function 'f_refresh'
+	.\external\script\start.lua:2245: in function 'f_selectScreen'
+	.\external\script\start.lua:1421: in function 'f'
+	external/script/main.lua:3069: in function 'loop'
+	external/script/main.lua:3189: in function 'loop'
+	external/script/main.lua:4156: in main chunk
 	[G]: ?

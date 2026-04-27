@@ -277,7 +277,7 @@ fadeout.time = 10
 ; Are you trying to add more rows or columns?
 ; As of MUGEN 1.0, the default motif is defined in data/mugen1/system.def.
 ; You can also edit mugen.cfg to select the "big" motif.
-rows = 2
+rows = 5
 columns = 5
 wrapping = 0              ;1 to let cursor wrap around
 pos = 90,170              ;Position to draw to

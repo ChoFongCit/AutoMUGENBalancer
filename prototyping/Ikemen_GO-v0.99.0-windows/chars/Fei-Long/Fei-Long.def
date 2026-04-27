@@ -8,8 +8,8 @@ Pal.Defaults =4,1,3,6
 
 [Files]
 Cmd     =feilong.cmd
-Cns     =feilong-AI-balanced.cns
-St      =feilong-AI-balanced.cns
+Cns     =feilong-AI-balanced-balanced.cns
+St      =feilong-AI-balanced-balanced.cns
 st1=option.txt
 StCommon =common1.cns
 Sprite  =feilong.sff

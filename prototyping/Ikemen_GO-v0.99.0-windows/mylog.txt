@@ -1,121 +1,19 @@
-table: 0xc000d10060 {
-  [match] => table: 0xc000d10060 {
-               [1] => table: 0xc000d100c0 {
-                        [1] => table: 0xc000aa27e0 {
-                                 [name] => "cammy"
-                                 [id] => 56
-                                 [memberNo] => 0
-                                 [selectNo] => 0
-                                 [teamside] => 0
-                                 [life] => 417
-                                 [lifeMax] => 1000
-                                 [winquote] => -1
-                                 [aiLevel] => 1
-                                 [palno] => 1
-                                 [ratiolevel] => 0
-                                 [win] => true
-                                 [winKO] => false
-                                 [winTime] => true
-                                 [winPerfect] => false
-                                 [winSpecial] => false
-                                 [winHyper] => false
-                                 [drawgame] => false
-                                 [ko] => false
-                                 [ko_round_middle] => false
-                               }
-                        [2] => table: 0xc000aa27e0 {
-                                 [name] => "ken"
-                                 [id] => 57
-                                 [memberNo] => 0
-                                 [selectNo] => 1
-                                 [teamside] => 1
-                                 [life] => 414
-                                 [lifeMax] => 1000
-                                 [winquote] => -1
-                                 [aiLevel] => 8
-                                 [palno] => 1
-                                 [ratiolevel] => 0
-                                 [win] => false
-                                 [winKO] => false
-                                 [winTime] => false
-                                 [winPerfect] => false
-                                 [winSpecial] => false
-                                 [winHyper] => false
-                                 [drawgame] => false
-                                 [ko] => false
-                                 [ko_round_middle] => false
-                               }
-                      }
-               [2] => table: 0xc000d100c0 {
-                        [1] => table: 0xc0030512c0 {
-                                 [name] => "cammy"
-                                 [id] => 56
-                                 [memberNo] => 0
-                                 [selectNo] => 0
-                                 [teamside] => 0
-                                 [life] => 342
-                                 [lifeMax] => 1000
-                                 [winquote] => -1
-                                 [aiLevel] => 1
-                                 [palno] => 1
-                                 [ratiolevel] => 0
-                                 [win] => true
-                                 [winKO] => false
-                                 [winTime] => true
-                                 [winPerfect] => false
-                                 [winSpecial] => false
-                                 [winHyper] => false
-                                 [drawgame] => false
-                                 [ko] => false
-                                 [ko_round_middle] => false
-                               }
-                        [2] => table: 0xc0030512c0 {
-                                 [name] => "ken"
-                                 [id] => 57
-                                 [memberNo] => 0
-                                 [selectNo] => 1
-                                 [teamside] => 1
-                                 [life] => 302
-                                 [lifeMax] => 1000
-                                 [winquote] => -1
-                                 [aiLevel] => 8
-                                 [palno] => 1
-                                 [ratiolevel] => 0
-                                 [win] => false
-                                 [winKO] => false
-                                 [winTime] => false
-                                 [winPerfect] => false
-                                 [winSpecial] => false
-                                 [winHyper] => false
-                                 [drawgame] => false
-                                 [ko] => false
-                                 [ko_round_middle] => false
-                               }
-                      }
+table: 0xc000ad2c00 {
+  [match] => table: 0xc000ad2c00 {
              }
-  [scoreRounds] => table: 0xc000d10060 {
-                     [1] => table: 0xc0030517a0 {
-                              [1] => 10600
-                              [2] => 8100
-                            }
-                     [2] => table: 0xc0030517a0 {
-                              [1] => 10800
-                              [2] => 9800
-                            }
+  [scoreRounds] => table: 0xc000ad2c00 {
                    }
-  [timerRounds] => table: 0xc000d10060 {
-                     [1] => 5940
-                     [2] => 5940
+  [timerRounds] => table: 0xc000ad2c00 {
                    }
-  [matchTime] => 11880
+  [matchTime] => 0
   [roundTime] => 5940
-  [winTeam] => 0
-  [lastRound] => 2
+  [winTeam] => -1
+  [lastRound] => 0
   [draws] => 0
-  [p1wins] => 2
+  [p1wins] => 0
   [p2wins] => 0
   [p1tmode] => 0
   [p2tmode] => 0
-  [p1score] => 21400
-  [p2score] => 17900
+  [p1score] => 0
+  [p2score] => 0
 }

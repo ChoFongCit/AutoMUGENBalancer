@@ -8,8 +8,8 @@ pal.defaults =1,2,3,4,5,6
 
 [Files]
 cmd     =superturbo.cmd
-cns     =superturbo-AI-balanced.cns
-st      =superturbo-AI-balanced.cns
+cns     =superturbo-AI-balanced-balanced.cns
+st      =superturbo-AI-balanced-balanced.cns
 stcommon =common1.cns
 sprite  =superturbo.sff
 anim    =superturbo.air

@@ -193,17 +193,22 @@
  ;
  ;Insert your characters below.
 
-kfmZ, stages/kfm.def
+;kfmZ, stages/kfm.def
 Ryu/Ryu.def
-Ken
-Cammy
-Blanka
-Dhalsim
-Fei-Long
-Guile
-M.Bison
-Sagat
-Zangief
+Ken/Ken.def
+Cammy/Cammy.def
+Blanka/Blanka.def
+Fei-Long/Fei-Long.def
+Sagat/Sagat.def
+Akuma/Akuma.def
+og/Ryu/Ryu.def
+og/Ken/Ken.def
+og/Cammy/Cammy.def
+og/Blanka/Blanka.def
+og/Fei-Long/Fei-Long.def
+og/Sagat/Sagat.def
+og/Akuma/Akuma.def
+
 
 randomselect
 

@@ -11,8 +11,8 @@ mugenversion = 1.0
 
 [Files]
 cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Blanka/cmds/12.cmd
-cns = blanka-AI-balanced.cns
-st = blanka-AI-balanced.cns
+cns = blanka-AI-balanced-balanced.cns
+st = blanka-AI-balanced-balanced.cns
 st0 = aisummary.txt
 stcommon = common1.cns 
 sprite  = blanka.sff   
