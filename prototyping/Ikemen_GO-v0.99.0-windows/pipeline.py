@@ -1,6 +1,6 @@
 import shutil
 import match_log_parser
-from multithreadTest import run_simulation, CSV_PATH, timestamp_path
+from Data_collection import run_simulation, CSV_PATH, timestamp_path
 import sys
 import time
 from datetime import datetime
