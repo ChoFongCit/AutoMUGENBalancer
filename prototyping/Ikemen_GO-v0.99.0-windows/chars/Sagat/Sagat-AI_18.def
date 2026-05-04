@@ -8,8 +8,8 @@ pal.defaults =1,2,3,4,5,6
 
 [Files]
 cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Sagat/cmds/18.cmd
-cns = superturbo-AI-balanced-balanced.cns
-st = superturbo-AI-balanced-balanced.cns
+cns = superturbo-AI-balanced.cns
+st = superturbo-AI-balanced.cns
 st0 = aisummary.txt
 stcommon =common1.cns
 sprite  =superturbo.sff

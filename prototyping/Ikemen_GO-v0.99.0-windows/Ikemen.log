@@ -1,10 +1,9 @@
-external/script/main.lua:713: <game end>
+external/script/main.lua:39: 
+File doesn't exist: logs/GATest/log_RyuGen2_vs_RyuGen3.txt
 stack traceback:
-	[G]: in function 'refresh'
-	external/script/main.lua:713: in function 'f_refresh'
-	.\external\script\start.lua:2245: in function 'f_selectScreen'
-	.\external\script\start.lua:1421: in function 'f'
-	external/script/main.lua:3069: in function 'loop'
-	external/script/main.lua:3189: in function 'loop'
-	external/script/main.lua:4156: in main chunk
+	[G]: in function 'panicError'
+	external/script/main.lua:39: in function 'f_fileWrite'
+	external/script/main.lua:264: in function 'f_printTable'
+	external/script/main.lua:1501: in function 'f_commandLine'
+	external/script/main.lua:1508: in main chunk
 	[G]: ?

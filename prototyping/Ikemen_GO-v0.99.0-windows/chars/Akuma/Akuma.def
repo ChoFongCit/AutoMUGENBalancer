@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 Cmd     = gouki.cmd
-Cns     = gouki-AI-balanced-balanced.cns
-St      = gouki-AI-balanced-balanced.cns
+Cns     = gouki-AI-balanced.cns
+St      = gouki-AI-balanced.cns
 St1      = AI.txt
 St2     = option.txt
 StCommon = common1.cns

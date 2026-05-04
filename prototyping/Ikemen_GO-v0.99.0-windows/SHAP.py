@@ -44,32 +44,22 @@ def eval_damage(expr: str) -> float | None:
 def aggregate_movelist(csv_path: Path, char_name: str) -> dict:
     df = pd.read_csv(csv_path)
 
-    df['damage_val'] = df['damage'].apply(eval_damage)
+    df['damage_val'] = pd.to_numeric(df['damage'], errors='coerce')
     df['is_special'] = df['attribute'].str.contains('SA', na=False)
     df['is_hyper']   = df['attribute'].str.contains('HA', na=False)
     df['is_low']     = df['hit_type'].str.lower() == 'low'
     df['is_high']    = df['hit_type'].str.lower() == 'high'
 
     def safe_mean(col): return df[col].dropna().mean() if col in df else np.nan
-    def safe_min(col):  return df[col].dropna().min()  if col in df else np.nan
-    def safe_max(col):  return df[col].dropna().max()  if col in df else np.nan
-    def safe_std(col):  return df[col].dropna().std()  if col in df else np.nan
 
     return {
-        'character':         char_name,
-        'damage_mean':       safe_mean('damage_val'),
-        'damage_max':        safe_max('damage_val'),
-        'damage_std':        safe_std('damage_val'),
-        'startup_mean':      safe_mean('startup'),
-        'startup_min':       safe_min('startup'),
-        'startup_std':       safe_std('startup'),
-        'recovery_mean':     safe_mean('recovery'),
-        'recovery_max':      safe_max('recovery'),
-        'active_mean':       safe_mean('active'),
-        'active_max':        safe_max('active'),
-        'hit_stun_mean':     safe_mean('hit_stun'),
-        'guard_stun_mean':   safe_mean('guard_stun'),
-        'total_frames_mean': safe_mean('total_frames'),
+        'character':       char_name,
+        'damage_mean':     safe_mean('damage_val'),
+        'startup_mean':    safe_mean('startup'),
+        'recovery_mean':   safe_mean('recovery'),
+        'active_mean':     safe_mean('active'),
+        'hit_stun_mean':   safe_mean('hit_stun'),
+        'guard_stun_mean': safe_mean('guard_stun'),
     }
 
 

@@ -1,13 +1,15 @@
 """
 run_extract_all.py
 ------------------
-Runs extract_moves on every character with a single *-AI.cns file under chars/.
-Characters with multiple -AI.cns files are skipped.
-Outputs one CSV per character into ML_data/, named <CharacterFolder>_moves.csv.
+Runs extract_moves on every character folder under chars/.
+Reads whichever .cns the character's .def currently points to (so it always
+reflects the active — possibly balanced — version).
+Outputs one CSV per character into ML_data/moves/, named <CharacterFolder>_moves.csv.
 """
 
 from pathlib import Path
 from extract_moves import extract_moves, write_csv
+from roster_balancer import _active_cns_from_def, CSV_TO_FOLDER
 
 CHARS_DIR = Path("chars")
 OUT_DIR   = Path("ML_data/moves")
@@ -16,27 +18,28 @@ OUT_DIR   = Path("ML_data/moves")
 def main():
     OUT_DIR.mkdir(exist_ok=True)
 
-    cns_files = sorted(CHARS_DIR.rglob("*-AI.cns"))
-    if not cns_files:
-        print(f"No *-AI.cns files found under {CHARS_DIR.resolve()}")
-        return
+    # Only process characters that are in the balancer roster
+    char_folders = sorted(set(CSV_TO_FOLDER.values()))
 
-    by_char = {}
-    for cns_path in cns_files:
-        by_char.setdefault(cns_path.parent, []).append(cns_path)
+    for char_name in char_folders:
+        char_dir = CHARS_DIR / char_name
 
-    for char_dir, cns_list in sorted(by_char.items()):
-        char_name = char_dir.name
-
-        if len(cns_list) > 1:
-            print(f"Skipping {char_name} — {len(cns_list)} AI.cns files")
+        if not char_dir.exists():
+            print(f"Skipping {char_name} — folder not found")
             continue
 
-        cns_path  = cns_list[0]
-        air_files = list(char_dir.glob("*.air"))
-        air_path  = air_files[0] if air_files else None
-        air_label = air_path.name if air_path else "none"
+        cns_path = _active_cns_from_def(char_dir)
+        if cns_path is None or not cns_path.exists():
+            print(f"Skipping {char_name} — could not resolve active .cns from .def")
+            continue
 
+        # Match .air by same stem as active .cns, fall back to any .air
+        air_path = cns_path.with_suffix(".air")
+        if not air_path.exists():
+            air_files = list(char_dir.glob("*.air"))
+            air_path  = air_files[0] if air_files else None
+
+        air_label = air_path.name if air_path else "none"
         print(f"{char_name}/{cns_path.name}  +  {air_label}")
 
         moves   = extract_moves(cns_path, air_path)

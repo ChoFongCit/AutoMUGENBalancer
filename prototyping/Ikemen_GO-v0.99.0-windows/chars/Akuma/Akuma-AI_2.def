@@ -8,8 +8,8 @@ Pal.Defaults =1,7
 
 [Files]
 cmd = C:/Users/greni/Desktop/works/Year4/Final Year Project/prototyping/Ikemen_GO-v0.99.0-windows/chars/Akuma/cmds/02.cmd
-cns = gouki-AI-balanced-balanced.cns
-st = gouki-AI-balanced-balanced.cns
+cns = gouki-AI-balanced.cns
+st = gouki-AI-balanced.cns
 st0 = AI-AI.txt
 st1 = option-AI.txt
 st2 = aisummary.txt

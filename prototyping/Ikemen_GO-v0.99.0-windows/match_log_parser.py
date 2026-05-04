@@ -184,8 +184,8 @@ def clean_SHAP_logs():
     os.chdir(curr_dir)
     pass
 
-def record_data():  
-    put_in_csv(process_character_logs("SHAP"))
+def record_data(csv_path:str = "SHAP"):  
+    put_in_csv(process_character_logs(csv_path))
     clean_SHAP_logs()
     
 

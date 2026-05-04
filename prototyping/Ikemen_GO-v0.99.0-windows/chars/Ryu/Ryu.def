@@ -7,9 +7,9 @@ Author       ="G.D.T"
 Pal.Defaults =1,7
 
 [Files]
-Cmd     =cmds/ryu_replaced.cmd
-Cns     =ryu-AI-balanced-balanced.cns
-St      =ryu-AI-balanced-balanced.cns
+Cmd     =ryu.cmd
+Cns     =ryu-AI-balanced.cns
+St      =ryu-AI-balanced.cns
 StCommon =common1.cns
 Sprite  =ryu.sff
 Anim    =ryu.air

@@ -17,7 +17,6 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from extract_moves import extract_moves
-from sklearn.ensemble import GradientBoostingRegressor
 
 CHARS_DIR  = Path("chars")
 WINRATE_CSV = Path("ML_data/win_rates.csv")
@@ -155,7 +154,14 @@ def select_moves_to_adjust(moves_df, feature, direction):
     if col not in moves_df.columns:
         return []
 
-    vals = pd.to_numeric(moves_df[col], errors="coerce").dropna()
+    if col == "damage":
+        vals = pd.to_numeric(moves_df[col], errors="coerce").dropna()
+    else:
+        vals = pd.to_numeric(moves_df[col], errors="coerce").dropna()
+
+    if vals.empty:
+        return []
+
     if direction == "nerf":
         targets = vals.nlargest(3).index
     else:
@@ -334,12 +340,27 @@ def adjust_cns_damage(cns_path, state_id, multiplier):
     old_block = block_m.group(1)
 
     def replace_damage(m):
-        raw = m.group(1).split(";")[0].strip()
-        # Only replace if it's a plain integer (skip expressions like ceil(...))
-        if re.fullmatch(r"\d+", raw):
-            new_val = round(int(raw) * multiplier)
-            return m.group(0).replace(m.group(1), str(new_val))
-        return m.group(0)   # leave expressions untouched
+        from extract_moves import BASE_DMG_RE, extract_base_damage
+        full_line = m.group(1)   # everything after "damage = " on that line
+        # Skip multi-hit lines
+        if ',' in full_line.split(';')[0]:
+            return m.group(0)
+        current   = extract_base_damage(full_line)
+        if current is None:
+            return m.group(0)   # unparseable — leave untouched
+        new_coeff = max(1, round(current * multiplier))
+
+        coeff_m = BASE_DMG_RE.search(full_line)
+        if coeff_m:
+            # Replace only the coefficient inside the ceil(...) expression
+            new_line = (full_line[:coeff_m.start(1)]
+                        + str(new_coeff)
+                        + full_line[coeff_m.end(1):])
+        else:
+            # Plain integer — replace the whole value
+            new_line = re.sub(r'\d+', str(new_coeff), full_line, count=1)
+
+        return m.group(0).replace(full_line, new_line)
 
     new_block = re.sub(
         r"\bdamage\s*=\s*([^\n]+)", replace_damage, old_block, flags=re.IGNORECASE
@@ -445,10 +466,13 @@ def restore_from_backup(char_dir: Path, timestamp: str = None) -> None:
     print(f"  [RESTORE] Done — {char_dir.name} restored to snapshot {snap_dir.name}")
 
 
-def auto_balance(cns_path, air_path, shap_values, X, y) -> dict:
+def auto_balance(cns_path, air_path, shap_values, X, y,
+                 dry_run: bool = False) -> dict:
     """
     Run balancing for one character.
     Returns a report dict for write_report().
+
+    dry_run=True  →  compute and report changes but write nothing to disk.
     """
     cns_path = Path(cns_path)
     air_path = Path(air_path) if air_path else None
@@ -486,13 +510,20 @@ def auto_balance(cns_path, air_path, shap_values, X, y) -> dict:
     for feature, shap_val in plan["features"].items():
         print(f"    {feature:<22}  SHAP={shap_val:+.4f}")
 
-    backup_files(cns_path, air_path)
-    balanced_cns = cns_path.with_stem(cns_path.stem + "-balanced")
-    shutil.copy2(cns_path, balanced_cns)
+    base_stem    = re.sub(r"(-balanced)+$", "", cns_path.stem, flags=re.IGNORECASE)
+    balanced_cns = cns_path.with_stem(base_stem + "-balanced")
+
+    if dry_run:
+        print(f"  [DRY RUN] Would write: {balanced_cns.name}")
+    else:
+        backup_files(cns_path, air_path)
+        if cns_path.resolve() != balanced_cns.resolve():
+            shutil.copy2(cns_path, balanced_cns)
     report["balanced_cns"] = str(balanced_cns)
     print(f"  Balanced CNS : {balanced_cns.name}")
 
-    moves_df = pd.DataFrame(extract_moves(balanced_cns, air_path))
+    src_cns  = cns_path if dry_run else balanced_cns
+    moves_df = pd.DataFrame(extract_moves(src_cns, air_path))
     print(f"  Moves loaded : {len(moves_df)} attack states")
 
     adjustments_made = 0
@@ -519,10 +550,12 @@ def auto_balance(cns_path, air_path, shap_values, X, y) -> dict:
                 continue
 
             new_val = compute_adjustment(move_field, float(current), gap_pct, plan["direction"])
-            print(f"    State {sid}: {move_field}  {current}  →  {new_val}")
+            tag     = "[DRY RUN] Would set" if dry_run else ""
+            print(f"    State {sid}: {move_field}  {current}  →  {new_val}  {tag}".rstrip())
 
-            written = False
-            if file_type == "cns" and move_field == "damage":
+            if dry_run:
+                written = True   # count as would-be change
+            elif file_type == "cns" and move_field == "damage":
                 multiplier = new_val / float(current)
                 adjust_cns_damage(balanced_cns, sid, multiplier)
                 written = True
@@ -531,6 +564,8 @@ def auto_balance(cns_path, air_path, shap_values, X, y) -> dict:
             elif file_type == "air" and air_path:
                 anim_id = row.get("anim_id", sid)
                 written = adjust_air_frame(air_path, int(anim_id), move_field, new_val)
+            else:
+                written = False
 
             if written:
                 adjustments_made += 1
@@ -543,8 +578,10 @@ def auto_balance(cns_path, air_path, shap_values, X, y) -> dict:
                     "new_val":   new_val,
                 })
 
-    print(f"  Adjustments written : {adjustments_made}")
-    update_def_cns(cns_path.parent, cns_path.name, balanced_cns.name)
+    label = "Would adjust" if dry_run else "Adjustments written"
+    print(f"  {label} : {adjustments_made}")
+    if not dry_run:
+        update_def_cns(cns_path.parent, cns_path.name, balanced_cns.name)
     return report
 
 
@@ -706,10 +743,19 @@ def _active_cns_from_def(char_dir: Path) -> Path | None:
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="MUGEN/Ikemen GO roster balancer")
+    parser.add_argument(
+        "--dry-run", "-n", action="store_true",
+        help="Compute and report changes without writing any files.",
+    )
+    args = parser.parse_args()
+    dry_run = args.dry_run
+
     from SHAP import compute_shap
 
     print("=" * 60)
-    print("  ROSTER BALANCER")
+    print("  ROSTER BALANCER" + ("  [DRY RUN]" if dry_run else ""))
     print("=" * 60)
     print(f"\nTarget win rate : {TARGET_WINRATE:.0%}")
     print(f"Adjustment band : ±{ADJUSTMENT_THRESHOLD:.0%}  (characters within this range are skipped)")
@@ -762,6 +808,7 @@ def main():
             shap_values = sv_char,
             X           = X_char,
             y           = y_char,
+            dry_run     = dry_run,
         )
         if entry:
             report_entries.append(entry)
@@ -783,7 +830,7 @@ def main():
         print(f"  [WARN] Nash equilibrium failed: {exc}")
         nash = None
 
-    report_path = write_report(report_entries, timestamp, nash=nash)
+    report_path = write_report(report_entries, timestamp + ("_dryrun" if dry_run else ""), nash=nash)
     print(f"\n  Report saved : {report_path}")
     print("\n" + "=" * 60)
     print("  Done.")

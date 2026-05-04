@@ -63,11 +63,38 @@ def _get_int(pattern, text):
     return int(nums[0]) if nums else None
 
 
-def parse_damage(damage_str):
-    """Return damage expression stripped of inline comments."""
-    if not damage_str:
+# Matches the base coefficient in expressions like  ceil(28*var(52)/3)
+# Capture group 1 = the coefficient (28 in the example)
+BASE_DMG_RE = re.compile(
+    r'ceil\s*\(\s*(\d+)\s*\*\s*var\s*\(\s*52\s*\)',
+    re.IGNORECASE,
+)
+
+def extract_base_damage(damage_str: str):
+    """
+    Return the numeric base-damage value from a damage expression.
+
+    Handles:
+      - Plain integers          : "28"          → 28
+      - Scaled ceil expressions : "ceil(28*var(52)/3);8c"  → 28
+      - Multi-hit (first value) : "ceil(28*var(52)/3), ceil(14*var(52)/3)" → 28
+      - Unrecognised expressions: None
+    """
+    if not isinstance(damage_str, str) or not damage_str:
         return None
-    return damage_str.split(';')[0].strip()
+    # Skip multi-hit lines (comma-separated values)
+    clean = damage_str.split(';')[0].strip()
+    if ',' in clean:
+        return None
+    first = clean
+    # Try ceil(N*var(52)...) pattern first
+    m = BASE_DMG_RE.search(first)
+    if m:
+        return int(m.group(1))
+    # Fall back: plain integer
+    if re.fullmatch(r'\d+', first):
+        return int(first)
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -150,9 +177,9 @@ def calc_frame_data(frames: list) -> dict:
 # ---------------------------------------------------------------------------
 
 def extract_hitdef_data(hitdef_body: str) -> dict:
-    damage_raw = _get(r'\bdamage\s*=\s*([^\n;]+)', hitdef_body)
+    damage_raw = _get(r'\bdamage\s*=\s*([^\n]+)', hitdef_body)
     return {
-        'damage':     parse_damage(damage_raw),
+        'damage':     extract_base_damage(damage_raw),
         'hit_stun':   _get_int(r'\bground\.hittime\s*=\s*(-?\d+)', hitdef_body),
         'guard_stun': _get_int(r'\bguard\.ctrltime\s*=\s*(-?\d+)', hitdef_body),
         'attribute':  _get(r'\battr\s*=\s*([^\n]+)', hitdef_body),
